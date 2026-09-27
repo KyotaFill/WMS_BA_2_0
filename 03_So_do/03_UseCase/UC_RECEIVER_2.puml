@@ -1,0 +1,10 @@
+@startuml
+left to right direction
+actor "Nhân viên nhận" as RECEIVER
+rectangle "WMS" {
+usecase "UC25 Nháp và phục hồi sau mất LAN" as UC25
+usecase "UC26 In tem và in lại chứng từ" as UC26
+}
+RECEIVER -- UC25
+RECEIVER -- UC26
+@enduml

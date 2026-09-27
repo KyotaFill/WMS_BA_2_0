@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1630" height="890" viewBox="0 0 1630 890">
+<rect x="0" y="0" width="1630" height="890" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="35" y="35" font-family="Tinos,Times New Roman,serif" font-size="24" text-anchor="start" fill="#19344b" font-weight="bold">ERD vật lý / iam / user_role_grant</text>
+<text x="35" y="62" font-family="Tinos,Times New Roman,serif" font-size="13" text-anchor="start" fill="#6b7b8c">WMS / BA 2.0 / 27-09-2026 / DRAFT</text>
+<path d="M650,339 L1130,339" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M650.0,332.0 L664.0,339.0 L650.0,346.0" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M650.0,339.0 L664.0,339.0" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<ellipse cx="674.0" cy="339.0" rx="4.0" ry="4.0" fill="#ffffff" stroke="#19344b" stroke-width="1"/>
+<path d="M1121.0,346.0 L1121.0,332.0" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M1110.0,346.0 L1110.0,332.0" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M650,439 L1130,439" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M650.0,432.0 L664.0,439.0 L650.0,446.0" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M650.0,439.0 L664.0,439.0" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<ellipse cx="674.0" cy="439.0" rx="4.0" ry="4.0" fill="#ffffff" stroke="#19344b" stroke-width="1"/>
+<path d="M1121.0,446.0 L1121.0,432.0" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M1110.0,446.0 L1110.0,432.0" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M650,564 L1130,564" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M650.0,557.0 L664.0,564.0 L650.0,571.0" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M650.0,564.0 L664.0,564.0" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<ellipse cx="674.0" cy="564.0" rx="4.0" ry="4.0" fill="#ffffff" stroke="#19344b" stroke-width="1"/>
+<path d="M1121.0,571.0 L1121.0,557.0" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M1110.0,571.0 L1110.0,557.0" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M650,689 L1130,689" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M650.0,682.0 L664.0,689.0 L650.0,696.0" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M650.0,689.0 L664.0,689.0" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<ellipse cx="674.0" cy="689.0" rx="4.0" ry="4.0" fill="#ffffff" stroke="#19344b" stroke-width="1"/>
+<path d="M1121.0,696.0 L1121.0,682.0" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<ellipse cx="1106.0" cy="689.0" rx="4.0" ry="4.0" fill="#ffffff" stroke="#19344b" stroke-width="1"/>
+<rect x="45" y="95" width="605" height="710" rx="0" fill="#f8fafc" stroke="#879caf" stroke-width="1.3"/>
+<rect x="45" y="95" width="605" height="35" rx="0" fill="#19344b" stroke="#19344b" stroke-width="1.3"/>
+<text x="55" y="119" font-family="Tinos,Times New Roman,serif" font-size="18" text-anchor="start" fill="#ffffff" font-weight="bold">user_role_grant</text>
+<text x="57" y="145" font-family="Tinos,Times New Roman,serif" font-size="16" text-anchor="start" fill="#19344b">PK id : uuid</text>
+<text x="57" y="172" font-family="Tinos,Times New Roman,serif" font-size="16" text-anchor="start" fill="#19344b">scope_kind : varchar(20)</text>
+<text x="57" y="199" font-family="Tinos,Times New Roman,serif" font-size="16" text-anchor="start" fill="#19344b">valid_from : timestamptz</text>
+<text x="57" y="226" font-family="Tinos,Times New Roman,serif" font-size="16" text-anchor="start" fill="#19344b">valid_until ? : timestamptz</text>
+<text x="57" y="253" font-family="Tinos,Times New Roman,serif" font-size="16" text-anchor="start" fill="#19344b">revoked_at ? : timestamptz</text>
+<text x="57" y="335" font-family="Tinos,Times New Roman,serif" font-size="16" text-anchor="start" fill="#19344b">FK user_id : uuid</text>
+<text x="57" y="435" font-family="Tinos,Times New Roman,serif" font-size="16" text-anchor="start" fill="#19344b">FK granted_by : uuid</text>
+<text x="57" y="560" font-family="Tinos,Times New Roman,serif" font-size="16" text-anchor="start" fill="#19344b">FK role_id : uuid</text>
+<text x="57" y="685" font-family="Tinos,Times New Roman,serif" font-size="16" text-anchor="start" fill="#19344b">FK warehouse_id ? : uuid</text>
+<rect x="1130" y="280" width="440" height="210" rx="0" fill="#f8fafc" stroke="#879caf" stroke-width="1.3"/>
+<rect x="1130" y="280" width="440" height="35" rx="0" fill="#19344b" stroke="#19344b" stroke-width="1.3"/>
+<text x="1140" y="304" font-family="Tinos,Times New Roman,serif" font-size="18" text-anchor="start" fill="#ffffff" font-weight="bold">app_user</text>
+<text x="1142" y="342" font-family="Tinos,Times New Roman,serif" font-size="16" text-anchor="start" fill="#19344b">id</text>
+<rect x="1130" y="505" width="440" height="110" rx="0" fill="#f8fafc" stroke="#879caf" stroke-width="1.3"/>
+<rect x="1130" y="505" width="440" height="35" rx="0" fill="#19344b" stroke="#19344b" stroke-width="1.3"/>
+<text x="1140" y="529" font-family="Tinos,Times New Roman,serif" font-size="18" text-anchor="start" fill="#ffffff" font-weight="bold">role</text>
+<text x="1142" y="567" font-family="Tinos,Times New Roman,serif" font-size="16" text-anchor="start" fill="#19344b">id</text>
+<rect x="1130" y="630" width="440" height="110" rx="0" fill="#f8fafc" stroke="#879caf" stroke-width="1.3"/>
+<rect x="1130" y="630" width="440" height="35" rx="0" fill="#19344b" stroke="#19344b" stroke-width="1.3"/>
+<text x="1140" y="654" font-family="Tinos,Times New Roman,serif" font-size="18" text-anchor="start" fill="#ffffff" font-weight="bold">warehouse</text>
+<text x="1142" y="692" font-family="Tinos,Times New Roman,serif" font-size="16" text-anchor="start" fill="#19344b">id</text>
+<rect x="695" y="312" width="385" height="20" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="887.5" y="327" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">tham chiếu qua user_id</text>
+<rect x="695" y="412" width="385" height="20" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="887.5" y="427" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">tham chiếu qua granted_by</text>
+<rect x="695" y="537" width="385" height="20" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="887.5" y="552" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">tham chiếu qua role_id</text>
+<rect x="695" y="662" width="385" height="20" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="887.5" y="677" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">tham chiếu qua warehouse_id</text>
+<text x="35" y="858" font-family="Tinos,Times New Roman,serif" font-size="13" text-anchor="start" fill="#6b7b8c">Ch8 PDF 35-61 | Mỗi entity xuất hiện một lần. ? = nullable. Bảng đích: cột liên quan; trang riêng có đầy đủ cột.</text>
+</svg>

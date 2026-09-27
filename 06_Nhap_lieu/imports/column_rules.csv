@@ -1,0 +1,77 @@
+﻿template,column,type,required,rule
+01_uom,code,text,True,Unique; tối đa 30 ký tự
+01_uom,name,text,True,Tên đơn vị
+01_uom,decimal_places,integer,True,0..6; CAI dùng 0
+02_categories,code,text,True,Unique
+02_categories,name,text,True,Tên nhóm
+02_categories,parent_code,text,False,FK cùng file hoặc DB; không chu kỳ
+03_warehouses,code,text,True,Unique
+03_warehouses,name,text,True,Tên kho
+03_warehouses,address,text,False,Địa chỉ
+03_warehouses,is_active,boolean,True,TRUE/FALSE
+04_locations,code,text,True,Unique toàn hệ thống
+04_locations,warehouse_code,text,True,FK 03_warehouses.code
+04_locations,parent_code,text,False,FK cùng kho; không chu kỳ
+04_locations,name,text,True,Tên vị trí
+04_locations,kind,text,True,GROUP/STORAGE/RECEIVING/QUARANTINE/SHIPPING
+04_locations,is_active,boolean,True,TRUE/FALSE
+05_products,sku,text,True,Unique; giữ mã nguyên văn
+05_products,name,text,True,Tên hàng
+05_products,category_code,text,False,FK 02_categories.code
+05_products,base_uom_code,text,True,FK 01_uom.code
+05_products,tracking,text,True,NONE/LOT/SERIAL
+05_products,expiry_required,boolean,True,TRUE chỉ khi LOT
+05_products,is_active,boolean,True,TRUE/FALSE
+06_product_uom,sku,text,True,FK 05_products.sku
+06_product_uom,uom_code,text,True,FK 01_uom.code
+06_product_uom,factor,decimal,True,">0, tối đa 8 số lẻ; base UOM factor=1"
+06_product_uom,revision,integer,True,>=1; unique sku/uom/revision
+06_product_uom,is_active,boolean,True,Chỉ một revision active mỗi sku/uom
+07_barcodes,barcode,text,True,Unique toàn hệ thống
+07_barcodes,sku,text,True,FK 05_products.sku
+07_barcodes,uom_code,text,True,FK 06_product_uom theo sku/uom/revision
+07_barcodes,revision,integer,True,Phiên bản quy đổi
+07_barcodes,is_active,boolean,True,TRUE/FALSE
+08_partners,code,text,True,Unique
+08_partners,name,text,True,Tên đối tác
+08_partners,is_customer,boolean,True,Ít nhất một trong hai loại TRUE
+08_partners,is_supplier,boolean,True,Ít nhất một trong hai loại TRUE
+08_partners,tax_code,text,False,Giữ số 0 đầu
+08_partners,address,text,False,Địa chỉ
+08_partners,is_active,boolean,True,TRUE/FALSE
+09_lots,sku,text,True,SKU phải tracking LOT
+09_lots,lot_code,text,True,Unique theo SKU
+09_lots,manufactured_on,date,False,YYYY-MM-DD
+09_lots,expires_on,date,False,Bắt buộc nếu expiry_required; >= ngày sản xuất
+10_serials,sku,text,True,SKU phải tracking SERIAL
+10_serials,serial_code,text,True,Unique theo SKU; text
+11_opening,batch_code,text,True,Mã đợt duy nhất; retry không đổi mã
+11_opening,business_date,date,True,YYYY-MM-DD; cutover trong kỳ mở
+11_opening,warehouse_code,text,True,FK kho
+11_opening,location_code,text,True,Vị trí lá cùng kho
+11_opening,sku,text,True,FK SKU
+11_opening,lot_code,text,False,Bắt buộc với LOT
+11_opening,serial_code,text,False,Bắt buộc với SERIAL
+11_opening,quantity_base,decimal,True,">0; SERIAL=1; theo base UOM, tối đa 6 số lẻ"
+12_open_orders,external_number,text,True,Mã hệ thống cũ unique theo kind
+12_open_orders,kind,text,True,PO/SO
+12_open_orders,warehouse_code,text,True,FK kho
+12_open_orders,partner_code,text,True,FK đối tác đúng loại
+12_open_orders,business_date,date,True,YYYY-MM-DD
+12_open_orders,line_no,integer,True,>0 unique trong phiếu
+12_open_orders,sku,text,True,FK SKU
+12_open_orders,uom_code,text,True,Quy đổi active
+12_open_orders,remaining_quantity,decimal,True,>0 lượng chưa thực hiện
+12_open_orders,note,text,False,Tham chiếu nguồn
+13_grants,username,text,True,User phải tồn tại; không chứa mật khẩu
+13_grants,role_code,text,True,FK role
+13_grants,scope_kind,text,True,GLOBAL/WAREHOUSE/ALL_WAREHOUSES
+13_grants,warehouse_code,text,False,Bắt buộc chỉ khi WAREHOUSE
+13_grants,valid_from,datetime,True,ISO8601 có timezone
+13_grants,valid_until,datetime,False,"ISO8601, lớn hơn valid_from"
+13_grants,approval_reference,text,True,Biên bản người thứ hai phê chuẩn
+14_prices,sku,text,True,FK SKU
+14_prices,effective_on,date,True,YYYY-MM-DD; unique theo SKU
+14_prices,amount,decimal,True,>=0; tối đa 4 số lẻ
+14_prices,currency,text,True,VND
+14_prices,source,text,True,Nguồn giá

@@ -1,0 +1,53 @@
+{
+  "total_pages": 358,
+  "sources": [
+    {
+      "file": "Chapter 1_Business Analysis Overview-1.pdf",
+      "pages": 49,
+      "sha256": "706d63b298b3a7dbc1f9aa7c79542f8638d42398341b286cfee28ca2398521b6",
+      "review": "text_and_visual"
+    },
+    {
+      "file": "Chapter02_The Business Context for Business Analysis-1.pdf",
+      "pages": 28,
+      "sha256": "2d1461098352fa1aa0fc66716f63fedc1927742cbb7b85b6d583da9eaaffde84",
+      "review": "text_and_visual"
+    },
+    {
+      "file": "Chapter03_BA Process Model-1.pdf",
+      "pages": 45,
+      "sha256": "f6a5863814662d1246678ee0bb30c0ada4e03204b44248425ec173014cd46a87",
+      "review": "text_and_visual"
+    },
+    {
+      "file": "Chapter04_Investigation Techniques-1.pdf",
+      "pages": 48,
+      "sha256": "873ef09e05989fa1373f6dc1d5ca8096c6b08d16e26f2d9b2c46c794349209d0",
+      "review": "text_and_visual"
+    },
+    {
+      "file": "Chapter05_Stakeholder Management and Analysis-1.pdf",
+      "pages": 41,
+      "sha256": "c3791ca4e63e579485bc62c74c826de2dd25d97d2d4886ce3c4d50e499ea17de",
+      "review": "text_and_visual"
+    },
+    {
+      "file": "Chapter06_Modelling Business Processes-1.pdf",
+      "pages": 53,
+      "sha256": "a5aff62ffbd63a8b5510d63c4c822ad659f8776977a96523ffc153fc64f74a93",
+      "review": "text_and_visual"
+    },
+    {
+      "file": "Chapter07_Establishing, Documenting and Managing Requirement-1.pdf",
+      "pages": 22,
+      "sha256": "016fa7104fd0f2ec107325ae0b528339a20ed8e5872d71226faa2bbe8bc4dd79",
+      "review": "text_and_visual"
+    },
+    {
+      "file": "Chapter08_Modelling Requirements-1.pdf",
+      "pages": 72,
+      "sha256": "e535598232fc391ed2bb3404bb21dcd26a7b999cd6b4bfdbe3df355a30c10406",
+      "review": "text_and_visual"
+    }
+  ]
+}

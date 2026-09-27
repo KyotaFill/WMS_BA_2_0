@@ -1,0 +1,12 @@
+@startuml
+left to right direction
+actor "Người dùng WMS" as USER
+actor "Nhân viên nhận" as RECEIVER
+actor "Nhân viên soạn/xuất" as PICKER
+actor "Quản lý kho" as WAREHOUSE_MANAGER
+actor "Kiểm soát/kế toán" as CONTROLLER
+RECEIVER --|> USER
+PICKER --|> USER
+WAREHOUSE_MANAGER --|> USER
+CONTROLLER --|> USER
+@enduml

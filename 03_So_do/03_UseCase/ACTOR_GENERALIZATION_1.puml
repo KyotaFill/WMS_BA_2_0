@@ -1,0 +1,12 @@
+@startuml
+left to right direction
+actor "Người dùng WMS" as USER
+actor "Quản trị kỹ thuật" as SYSADMIN
+actor "Quản lý danh mục" as MASTER_DATA
+actor "Mua hàng" as BUYER
+actor "Bán hàng" as SELLER
+SYSADMIN --|> USER
+MASTER_DATA --|> USER
+BUYER --|> USER
+SELLER --|> USER
+@enduml

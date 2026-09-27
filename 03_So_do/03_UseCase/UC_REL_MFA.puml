@@ -1,0 +1,10 @@
+@startuml
+left to right direction
+actor "Người dùng" as USER
+rectangle "WMS" {
+usecase "UC01 Đăng nhập và MFA" as UC01
+usecase "UC29 Xác thực yếu tố thứ hai" as UC29
+}
+USER -- UC01
+UC29 ..> UC01 : <<extend>> [MFA bắt buộc]
+@enduml

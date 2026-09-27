@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1630" height="490" viewBox="0 0 1630 490">
+<rect x="0" y="0" width="1630" height="490" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="35" y="35" font-family="Tinos,Times New Roman,serif" font-size="24" text-anchor="start" fill="#19344b" font-weight="bold">ERD vật lý / approval / approval_policy</text>
+<text x="35" y="62" font-family="Tinos,Times New Roman,serif" font-size="13" text-anchor="start" fill="#6b7b8c">WMS / BA 2.0 / 27-09-2026 / DRAFT</text>
+<rect x="45" y="95" width="605" height="208" rx="0" fill="#f8fafc" stroke="#879caf" stroke-width="1.3"/>
+<rect x="45" y="95" width="605" height="35" rx="0" fill="#19344b" stroke="#19344b" stroke-width="1.3"/>
+<text x="55" y="119" font-family="Tinos,Times New Roman,serif" font-size="18" text-anchor="start" fill="#ffffff" font-weight="bold">approval_policy</text>
+<text x="57" y="145" font-family="Tinos,Times New Roman,serif" font-size="16" text-anchor="start" fill="#19344b">PK id : uuid</text>
+<text x="57" y="172" font-family="Tinos,Times New Roman,serif" font-size="16" text-anchor="start" fill="#19344b">document_kind : varchar(30)</text>
+<text x="57" y="199" font-family="Tinos,Times New Roman,serif" font-size="16" text-anchor="start" fill="#19344b">revision : integer</text>
+<text x="57" y="226" font-family="Tinos,Times New Roman,serif" font-size="16" text-anchor="start" fill="#19344b">is_active : boolean</text>
+<text x="35" y="458" font-family="Tinos,Times New Roman,serif" font-size="13" text-anchor="start" fill="#6b7b8c">Ch8 PDF 35-61 | Mỗi entity xuất hiện một lần. ? = nullable. Bảng đích: cột liên quan; trang riêng có đầy đủ cột.</text>
+</svg>

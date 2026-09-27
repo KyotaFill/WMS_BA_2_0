@@ -1,0 +1,25 @@
+@startuml
+actor Operator
+participant "Tkinter Presenter" as UI
+participant "FastAPI Handler" as API
+database PostgreSQL as DB
+Operator -> UI : confirm online
+UI -> UI : persist key + payload in SQLite
+UI -> API : POST command + version + key
+API -> DB : BEGIN / serialize key
+API -> DB : check grant, lock documents / periods / locations
+API -> DB : lock items / balances / reservations
+alt invalid permission, state or insufficient quantity
+ API -> DB : ROLLBACK
+ API --> UI : typed error; keep input
+else valid
+ API -> DB : ledger + balance + reservation + audit + outbox + result
+ API -> DB : COMMIT
+ API --> UI : committed result
+end
+alt response lost
+ UI -> API : GET operation using original key
+ API --> UI : saved result or NOT_FOUND
+ note over UI,API : Retry only same key and execution_key; never a new key for UNKNOWN.
+end
+@enduml

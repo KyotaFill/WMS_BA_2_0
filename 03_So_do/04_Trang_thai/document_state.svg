@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1820" height="1180" viewBox="0 0 1820 1180">
+<rect x="0" y="0" width="1820" height="1180" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="35" y="35" font-family="Tinos,Times New Roman,serif" font-size="24" text-anchor="start" fill="#19344b" font-weight="bold">Trạng thái chứng từ</text>
+<text x="35" y="62" font-family="Tinos,Times New Roman,serif" font-size="13" text-anchor="start" fill="#6b7b8c">WMS / BA 2.0 / 27-09-2026 / DRAFT</text>
+<path d="M290,217 L770,217" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M770,217 L758.0,223.0 L758.0,211.0 Z" stroke="#526d87" fill="#526d87" stroke-width="1.6"/>
+<path d="M810,255 L610,310" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M610,310 L619.9795258155192,301.0328898469247 L623.1614036117718,312.6033545605702 Z" stroke="#526d87" fill="#526d87" stroke-width="1.6"/>
+<path d="M450,310 L290,255" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M290,255 L303.2987178027247,253.22683762630334 L299.39776058059215,264.57507681796176 Z" stroke="#526d87" fill="#526d87" stroke-width="1.6"/>
+<path d="M900,255 L610,850" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M610,850 L609.8640298765719,836.5842811550951 L620.650993001867,841.8417925943147 Z" stroke="#526d87" fill="#526d87" stroke-width="1.6"/>
+<path d="M450,850 L160,255" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M160,255 L170.65099300186702,263.1582074056854 L159.8640298765719,268.41571884490486 Z" stroke="#526d87" fill="#526d87" stroke-width="1.6"/>
+<path d="M260,255 L450,530" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M450,530 L438.24243553197624,523.5378271626129 L448.1151995890954,516.7166447231488 Z" stroke="#526d87" fill="#526d87" stroke-width="1.6"/>
+<path d="M810,255 L610,530" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M610,530 L612.2056438662813,516.7661368023115 L621.9104768779197,523.824197174412 Z" stroke="#526d87" fill="#526d87" stroke-width="1.6"/>
+<path d="M530,385 L530,530" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M530,530 L524.0,518.0 L536.0,518.0 Z" stroke="#526d87" fill="#526d87" stroke-width="1.6"/>
+<path d="M530,850 L530,605" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M530,605 L536.0,617.0 L524.0,617.0 Z" stroke="#526d87" fill="#526d87" stroke-width="1.6"/>
+<path d="M640,887 L1000,887" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M1000,887 L988.0,893.0 L988.0,881.0 Z" stroke="#526d87" fill="#526d87" stroke-width="1.6"/>
+<path d="M1220,887 L1450,887" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M1450,887 L1438.0,893.0 L1438.0,881.0 Z" stroke="#526d87" fill="#526d87" stroke-width="1.6"/>
+<path d="M530,925 L530,1060 L1570,1060 L1570,925" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M1570,925 L1576.0,937.0 L1564.0,937.0 Z" stroke="#526d87" fill="#526d87" stroke-width="1.6"/>
+<path d="M1100,850 L1100,750 L1170,750 L1170,850" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M1170,850 L1164.0,838.0 L1176.0,838.0 Z" stroke="#526d87" fill="#526d87" stroke-width="1.6"/>
+<rect x="70" y="180" width="220" height="75" rx="10" fill="#edf4fa" stroke="#879caf" stroke-width="1.3"/>
+<text x="180.0" y="223.5" font-family="Tinos,Times New Roman,serif" font-size="20" text-anchor="middle" fill="#19344b" font-weight="bold">DRAFT</text>
+<rect x="770" y="180" width="220" height="75" rx="10" fill="#edf4fa" stroke="#879caf" stroke-width="1.3"/>
+<text x="880.0" y="223.5" font-family="Tinos,Times New Roman,serif" font-size="20" text-anchor="middle" fill="#19344b" font-weight="bold">SUBMITTED</text>
+<rect x="420" y="310" width="220" height="75" rx="10" fill="#edf4fa" stroke="#879caf" stroke-width="1.3"/>
+<text x="530.0" y="353.5" font-family="Tinos,Times New Roman,serif" font-size="20" text-anchor="middle" fill="#19344b" font-weight="bold">REJECTED</text>
+<rect x="420" y="530" width="220" height="75" rx="10" fill="#edf4fa" stroke="#879caf" stroke-width="1.3"/>
+<text x="530.0" y="573.5" font-family="Tinos,Times New Roman,serif" font-size="20" text-anchor="middle" fill="#19344b" font-weight="bold">CANCELLED</text>
+<rect x="420" y="850" width="220" height="75" rx="10" fill="#edf4fa" stroke="#879caf" stroke-width="1.3"/>
+<text x="530.0" y="893.5" font-family="Tinos,Times New Roman,serif" font-size="20" text-anchor="middle" fill="#19344b" font-weight="bold">APPROVED</text>
+<rect x="1000" y="850" width="220" height="75" rx="10" fill="#edf4fa" stroke="#879caf" stroke-width="1.3"/>
+<text x="1110.0" y="893.5" font-family="Tinos,Times New Roman,serif" font-size="20" text-anchor="middle" fill="#19344b" font-weight="bold">PARTIAL</text>
+<rect x="1450" y="850" width="240" height="75" rx="10" fill="#edf4fa" stroke="#879caf" stroke-width="1.3"/>
+<text x="1570.0" y="893.5" font-family="Tinos,Times New Roman,serif" font-size="20" text-anchor="middle" fill="#19344b" font-weight="bold">COMPLETED</text>
+<rect x="470" y="185" width="95" height="22" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="517.5" y="202" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">submit</text>
+<rect x="665" y="272" width="85" height="22" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="707.5" y="289" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">reject</text>
+<rect x="310" y="245" width="65" height="22" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="342.5" y="262" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">edit</text>
+<rect x="790" y="700" width="100" height="22" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="840.0" y="717" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">approve final</text>
+<rect x="160" y="690" width="75" height="22" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="197.5" y="707" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">revise</text>
+<rect x="270" y="445" width="80" height="22" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="310.0" y="462" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">cancel</text>
+<rect x="645" y="440" width="80" height="22" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="685.0" y="457" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">cancel</text>
+<rect x="546" y="440" width="80" height="22" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="586.0" y="457" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">cancel</text>
+<rect x="546" y="700" width="80" height="22" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="586.0" y="717" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">cancel</text>
+<rect x="730" y="853" width="135" height="22" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="797.5" y="870" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">post partial</text>
+<rect x="1250" y="853" width="150" height="22" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="1325.0" y="870" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">finish / close</text>
+<rect x="970" y="1025" width="110" height="22" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="1025.0" y="1042" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">post full</text>
+<rect x="1080" y="714" width="110" height="22" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="1135.0" y="731" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">post next</text>
+<text x="35" y="1148" font-family="Tinos,Times New Roman,serif" font-size="13" text-anchor="start" fill="#6b7b8c">COMPLETED giữ lịch sử. Đảo bằng chứng từ REVERSAL mới. Điều kiện đầy đủ: document_states.csv.</text>
+</svg>

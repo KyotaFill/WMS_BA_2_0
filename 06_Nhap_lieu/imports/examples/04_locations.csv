@@ -1,0 +1,4 @@
+﻿code,warehouse_code,parent_code,name,kind,is_active
+A-01,WH-A,,Ô A01,STORAGE,True
+A-QC,WH-A,,Cách ly A,QUARANTINE,True
+B-01,WH-B,,Ô B01,STORAGE,True

@@ -1,0 +1,12 @@
+@startuml
+left to right direction
+actor "Ban điều hành" as DIRECTOR
+rectangle "WMS" {
+usecase "UC21 Khóa/mở kỳ" as UC21
+usecase "UC23 Nạp tồn đầu kỳ" as UC23
+usecase "UC24 Tra cứu và xuất báo cáo" as UC24
+}
+DIRECTOR -- UC21
+DIRECTOR -- UC23
+DIRECTOR -- UC24
+@enduml

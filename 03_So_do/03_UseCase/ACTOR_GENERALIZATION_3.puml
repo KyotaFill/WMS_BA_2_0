@@ -1,0 +1,8 @@
+@startuml
+left to right direction
+actor "Người dùng WMS" as USER
+actor "Ban điều hành" as DIRECTOR
+actor "Kiểm toán" as AUDITOR
+DIRECTOR --|> USER
+AUDITOR --|> USER
+@enduml

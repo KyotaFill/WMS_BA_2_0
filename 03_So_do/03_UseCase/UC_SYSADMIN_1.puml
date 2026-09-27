@@ -1,0 +1,12 @@
+@startuml
+left to right direction
+actor "Quản trị kỹ thuật" as SYSADMIN
+rectangle "WMS" {
+usecase "UC02 Cấp vai trò theo kho" as UC02
+usecase "UC27 Sao lưu và khôi phục" as UC27
+usecase "UC28 Cập nhật app đa hệ điều hành" as UC28
+}
+SYSADMIN -- UC02
+SYSADMIN -- UC27
+SYSADMIN -- UC28
+@enduml

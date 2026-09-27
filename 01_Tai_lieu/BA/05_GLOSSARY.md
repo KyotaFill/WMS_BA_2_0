@@ -1,0 +1,13 @@
+# Thuật ngữ
+- Stakeholder: bên có quan tâm hoặc ảnh hưởng đến thay đổi; không nhất thiết trực tiếp dùng app.
+- Actor: vai trò tương tác với WMS từ ngoài ranh giới hệ thống.
+- Use case: mục tiêu có giá trị nhận được từ tương tác actor/hệ thống; không phải mỗi nút hoặc bảng dữ liệu.
+- RACI: trách nhiệm đối với công việc/deliverable; RBAC: quyền thực hiện hành động của tài khoản.
+- As-Is: quy trình hiện có, phải được xác minh. To-Be: quy trình đề xuất tương lai.
+- GR/TR/FR/NFR: yêu cầu chung, kỹ thuật, chức năng, phi chức năng; FNR trong slide được ghi NFR tại đây.
+- DRAFT: nháp; SYNCED: nháp đã đồng bộ; UNKNOWN: chưa rõ kết quả server; POSTED: server đã ghi sổ.
+- Physical/on_hand: lượng vật lý; reserved: giữ chỗ còn hiệu lực; available: lượng đủ điều kiện trừ giữ chỗ.
+- Transit: hàng đã gửi chưa nhận; không mặc định là thiếu mất.
+- Ledger: sổ phát sinh bất biến; balance: số dư được đối soát từ ledger.
+- Reversal: giao dịch đảo có liên kết gốc; không xóa lịch sử.
+- Baseline: phiên bản yêu cầu được người có thẩm quyền phê duyệt; chưa có trong bản Draft này.

@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2720" height="1160" viewBox="0 0 2720 1160">
+<rect x="0" y="0" width="2720" height="1160" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="35" y="35" font-family="Tinos,Times New Roman,serif" font-size="24" text-anchor="start" fill="#19344b" font-weight="bold">Class Domain / UML implementation</text>
+<text x="35" y="62" font-family="Tinos,Times New Roman,serif" font-size="13" text-anchor="start" fill="#6b7b8c">WMS / BA 2.0 / 27-09-2026 / DRAFT</text>
+<path d="M325.0,690 L235.0,790" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M325.0,690 L315.9318114157845,692.6015295118651 L314.2965642940408,701.8927063399547 L323.36475287825624,699.2911768280895 Z" stroke="#526d87" fill="#526d87" stroke-width="1.6"/>
+<path d="M1225.0,350 L460.0,450" stroke="#526d87" fill="none" stroke-width="1.6" stroke-dasharray="6 4"/>
+<path d="M471.1210733709478,442.49521971820656 L460.0,450 L472.6764682480034,454.3939905276822" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M1292.5,350 L1135.0,450" stroke="#526d87" fill="none" stroke-width="1.6" stroke-dasharray="6 4"/>
+<path d="M1141.9145049629822,438.5026254685299 L1135.0,450 L1148.3466026029653,448.6331792515035" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M1135.0,690 L1135.0,790" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M1360.0,350 L1585.0,450" stroke="#526d87" fill="none" stroke-width="1.6" stroke-dasharray="6 4"/>
+<path d="M1571.5974306202363,450.6092076990802 L1585.0,450 L1576.4710922128777,439.64346911563706" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M685.0,790 L595.0,690" stroke="#526d87" fill="none" stroke-width="1.6" stroke-dasharray="6 4"/>
+<path d="M607.4873416569525,694.9057413652313 L595.0,690 L598.5678119019864,702.9333181447007" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M1427.5,350 L2035.0,450" stroke="#526d87" fill="none" stroke-width="1.6" stroke-dasharray="6 4"/>
+<path d="M2022.1848063760017,453.97124821428093 L2035.0,450 L2024.1338852541762,442.1305940293698" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M2485.0,450 L1495.0,350" stroke="#526d87" fill="none" stroke-width="1.6" stroke-dasharray="6 4"/>
+<path d="M1507.542238504041,345.23636133740746 L1495.0,350 L1506.3362540324988,357.1756076056774" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<rect x="290.0" y="450" width="340" height="240" rx="0" fill="#f8fafc" stroke="#879caf" stroke-width="1.3"/>
+<rect x="290.0" y="450" width="340" height="35" rx="0" fill="#19344b" stroke="#19344b" stroke-width="1.3"/>
+<text x="300.0" y="474" font-family="Tinos,Times New Roman,serif" font-size="18" text-anchor="start" fill="#ffffff" font-weight="bold">Document</text>
+<text x="300.0" y="508" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">- id: UUID</text>
+<text x="300.0" y="531" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">- version: int</text>
+<text x="300.0" y="554" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">- status: DocumentStatus</text>
+<path d="M290.0,569 L630.0,569" stroke="#879caf" fill="none" stroke-width="1.6"/>
+<text x="300.0" y="592" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ submit(): void</text>
+<text x="300.0" y="615" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ assertCanPost(): void</text>
+<rect x="65.0" y="790" width="340" height="240" rx="0" fill="#f8fafc" stroke="#879caf" stroke-width="1.3"/>
+<rect x="65.0" y="790" width="340" height="35" rx="0" fill="#19344b" stroke="#19344b" stroke-width="1.3"/>
+<text x="75.0" y="814" font-family="Tinos,Times New Roman,serif" font-size="18" text-anchor="start" fill="#ffffff" font-weight="bold">DocumentLine</text>
+<text x="75.0" y="848" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">- productId: UUID</text>
+<text x="75.0" y="871" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">- quantity: Decimal</text>
+<text x="75.0" y="894" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">- factorSnapshot: Decimal</text>
+<path d="M65.0,909 L405.0,909" stroke="#879caf" fill="none" stroke-width="1.6"/>
+<text x="75.0" y="932" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ remainingPosted(): Decimal</text>
+<rect x="1190.0" y="110" width="340" height="240" rx="0" fill="#f8fafc" stroke="#879caf" stroke-width="1.3"/>
+<rect x="1190.0" y="110" width="340" height="35" rx="0" fill="#19344b" stroke="#19344b" stroke-width="1.3"/>
+<text x="1200.0" y="134" font-family="Tinos,Times New Roman,serif" font-size="18" text-anchor="start" fill="#ffffff" font-weight="bold">InventoryService</text>
+<path d="M1190.0,160 L1530.0,160" stroke="#879caf" fill="none" stroke-width="1.6"/>
+<text x="1200.0" y="183" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ post(cmd): PostingResult</text>
+<text x="1200.0" y="206" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ reserve(cmd): Reservation</text>
+<text x="1200.0" y="229" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ reverse(cmd): PostingResult</text>
+<rect x="965.0" y="790" width="340" height="240" rx="0" fill="#f8fafc" stroke="#879caf" stroke-width="1.3"/>
+<rect x="965.0" y="790" width="340" height="35" rx="0" fill="#19344b" stroke="#19344b" stroke-width="1.3"/>
+<text x="975.0" y="814" font-family="Tinos,Times New Roman,serif" font-size="18" text-anchor="start" fill="#ffffff" font-weight="bold">StockItem</text>
+<text x="975.0" y="848" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">- productId: UUID</text>
+<text x="975.0" y="871" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">- lotId: UUID [0..1]</text>
+<text x="975.0" y="894" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">- serialId: UUID [0..1]</text>
+<path d="M965.0,909 L1305.0,909" stroke="#879caf" fill="none" stroke-width="1.6"/>
+<text x="975.0" y="932" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ validateTracking(): void</text>
+<rect x="965.0" y="450" width="340" height="240" rx="0" fill="#f8fafc" stroke="#879caf" stroke-width="1.3"/>
+<rect x="965.0" y="450" width="340" height="35" rx="0" fill="#19344b" stroke="#19344b" stroke-width="1.3"/>
+<text x="975.0" y="474" font-family="Tinos,Times New Roman,serif" font-size="18" text-anchor="start" fill="#ffffff" font-weight="bold">StockMove</text>
+<text x="975.0" y="508" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">- source: Location</text>
+<text x="975.0" y="531" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">- destination: Location</text>
+<text x="975.0" y="554" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">- quantityBase: Decimal</text>
+<path d="M965.0,569 L1305.0,569" stroke="#879caf" fill="none" stroke-width="1.6"/>
+<text x="975.0" y="592" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">{immutable after posting}</text>
+<rect x="1415.0" y="450" width="340" height="240" rx="0" fill="#f8fafc" stroke="#879caf" stroke-width="1.3"/>
+<rect x="1415.0" y="450" width="340" height="35" rx="0" fill="#19344b" stroke="#19344b" stroke-width="1.3"/>
+<text x="1425.0" y="474" font-family="Tinos,Times New Roman,serif" font-size="18" text-anchor="start" fill="#ffffff" font-weight="bold">Reservation</text>
+<text x="1425.0" y="508" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">- quantity: Decimal</text>
+<text x="1425.0" y="531" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">- consumed: Decimal</text>
+<text x="1425.0" y="554" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">- released: Decimal</text>
+<path d="M1415.0,569 L1755.0,569" stroke="#879caf" fill="none" stroke-width="1.6"/>
+<text x="1425.0" y="592" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ remaining(): Decimal</text>
+<text x="1425.0" y="615" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ consume(qty): void</text>
+<text x="1425.0" y="638" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ release(qty): void</text>
+<rect x="515.0" y="790" width="340" height="240" rx="0" fill="#f8fafc" stroke="#879caf" stroke-width="1.3"/>
+<rect x="515.0" y="790" width="340" height="35" rx="0" fill="#19344b" stroke="#19344b" stroke-width="1.3"/>
+<text x="525.0" y="814" font-family="Tinos,Times New Roman,serif" font-size="18" text-anchor="start" fill="#ffffff" font-weight="bold">ApprovalService</text>
+<path d="M515.0,840 L855.0,840" stroke="#879caf" fill="none" stroke-width="1.6"/>
+<text x="525.0" y="863" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ submit(document): Request</text>
+<text x="525.0" y="886" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ decide(request, actor): Decision</text>
+<text x="525.0" y="909" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ assertApproved(document): void</text>
+<rect x="1865.0" y="450" width="340" height="240" rx="0" fill="#f8fafc" stroke="#879caf" stroke-width="1.3"/>
+<rect x="1865.0" y="450" width="340" height="35" rx="0" fill="#19344b" stroke="#19344b" stroke-width="1.3"/>
+<text x="1875.0" y="474" font-family="Tinos,Times New Roman,serif" font-size="18" text-anchor="start" fill="#ffffff" font-weight="bold">AuthorizationPolicy</text>
+<path d="M1865.0,500 L2205.0,500" stroke="#879caf" fill="none" stroke-width="1.6"/>
+<text x="1875.0" y="523" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ allows(actor, action, resource): bool</text>
+<text x="1875.0" y="546" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ assertSeparationOfDuties(): void</text>
+<rect x="2315.0" y="450" width="340" height="240" rx="0" fill="#f8fafc" stroke="#879caf" stroke-width="1.3"/>
+<rect x="2315.0" y="450" width="340" height="35" rx="0" fill="#19344b" stroke="#19344b" stroke-width="1.3"/>
+<text x="2325.0" y="474" font-family="Tinos,Times New Roman,serif" font-size="18" text-anchor="start" fill="#ffffff" font-weight="bold">CountService</text>
+<path d="M2315.0,500 L2655.0,500" stroke="#879caf" fill="none" stroke-width="1.6"/>
+<text x="2325.0" y="523" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ freeze(locations): CountSession</text>
+<text x="2325.0" y="546" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ recordObservation(): void</text>
+<text x="2325.0" y="569" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ postAdjustment(): PostingResult</text>
+<rect x="191.6689453125" y="741" width="86.662109375" height="20" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="235.0" y="756" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">gồm</text>
+<text x="345.0" y="715" font-family="Tinos,Times New Roman,serif" font-size="15" text-anchor="start" fill="#19344b">1</text>
+<text x="195.0" y="775" font-family="Tinos,Times New Roman,serif" font-size="15" text-anchor="start" fill="#19344b">0..*</text>
+<rect x="429.12060546875" y="401" width="61.7587890625" height="20" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="460.0" y="416" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">validates</text>
+<rect x="1109.572265625" y="401" width="50.85546875" height="20" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="1135.0" y="416" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">creates</text>
+<rect x="1111.5" y="741" width="47.0" height="20" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="1135.0" y="756" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">ghi cho</text>
+<text x="1153.0" y="715.0" font-family="Tinos,Times New Roman,serif" font-size="15" text-anchor="start" fill="#19344b">0..*</text>
+<text x="1153.0" y="765.0" font-family="Tinos,Times New Roman,serif" font-size="15" text-anchor="start" fill="#19344b">1</text>
+<rect x="1551.39306640625" y="401" width="67.2138671875" height="20" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="1585.0" y="416" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">consumes</text>
+<rect x="660.337890625" y="741" width="49.32421875" height="20" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="685.0" y="756" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">guards</text>
+<rect x="2040" y="430" width="90" height="18" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="2085.0" y="443" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">checks</text>
+<rect x="2449.25341796875" y="401" width="71.4931640625" height="20" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="2485.0" y="416" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">posts delta</text>
+<text x="35" y="1128" font-family="Tinos,Times New Roman,serif" font-size="13" text-anchor="start" fill="#6b7b8c">Ch8 PDF 64-71 | - private; + public. Nét liền: association; nét đứt mũi tên mở: dependency; tam giác rỗng: realization.</text>
+</svg>

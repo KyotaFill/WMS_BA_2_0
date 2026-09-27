@@ -1,0 +1,568 @@
+[
+  {
+    "requirement": "FR01",
+    "use_case": "UC01",
+    "process": "SRS - hỗ trợ/ngoại lệ",
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "permissions": "Không cần phiên; rate limit",
+    "tables": "app_user,auth_session,mfa_factor",
+    "tests": "T11",
+    "api_coverage": "MISSING - chưa đặc tả trong OpenAPI lõi",
+    "test_execution": "NOT_RUN",
+    "approval": "PENDING",
+    "api_paths": []
+  },
+  {
+    "requirement": "FR02",
+    "use_case": "UC02",
+    "process": "SRS - hỗ trợ/ngoại lệ",
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "permissions": "role.manage",
+    "tables": "user_role_grant,role_permission,audit_event",
+    "tests": "T07",
+    "api_coverage": "MISSING - chưa đặc tả trong OpenAPI lõi",
+    "test_execution": "NOT_RUN",
+    "approval": "PENDING",
+    "api_paths": []
+  },
+  {
+    "requirement": "FR03",
+    "use_case": "UC03",
+    "process": "SRS - hỗ trợ/ngoại lệ",
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "permissions": "master.write",
+    "tables": "product,product_uom,barcode",
+    "tests": "T12",
+    "api_coverage": "MISSING - chưa đặc tả trong OpenAPI lõi",
+    "test_execution": "NOT_RUN",
+    "approval": "PENDING",
+    "api_paths": []
+  },
+  {
+    "requirement": "FR04",
+    "use_case": "UC04",
+    "process": "SRS - hỗ trợ/ngoại lệ",
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "permissions": "warehouse.configure",
+    "tables": "warehouse,location",
+    "tests": "T13",
+    "api_coverage": "MISSING - chưa đặc tả trong OpenAPI lõi",
+    "test_execution": "NOT_RUN",
+    "approval": "PENDING",
+    "api_paths": []
+  },
+  {
+    "requirement": "FR05",
+    "use_case": "UC05",
+    "process": "P01",
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "permissions": "po.draft; gửi theo policy của loại PO",
+    "tables": "document,document_line,approval_request,approval_step",
+    "tests": "T14",
+    "api_coverage": "PARTIAL - chưa đủ toàn luồng UC",
+    "test_execution": "NOT_RUN",
+    "approval": "PENDING",
+    "api_paths": [
+      "/documents/{id}/submit"
+    ]
+  },
+  {
+    "requirement": "FR06",
+    "use_case": "UC06",
+    "process": "P01",
+    "rules": [
+      "BR01",
+      "BR02",
+      "BR03",
+      "BR04",
+      "BR05"
+    ],
+    "permissions": "receipt.draft,receipt.post",
+    "tables": "document_line,inventory_transaction,stock_move,stock_balance",
+    "tests": "T01,T02",
+    "api_coverage": "PARTIAL - chưa đủ toàn luồng UC",
+    "test_execution": "NOT_RUN",
+    "approval": "PENDING",
+    "api_paths": [
+      "/receipts/{id}/post"
+    ]
+  },
+  {
+    "requirement": "FR07",
+    "use_case": "UC07",
+    "process": "P01",
+    "rules": [
+      "BR01",
+      "BR02",
+      "BR03",
+      "BR04",
+      "BR05"
+    ],
+    "permissions": "quality.decide,move.post",
+    "tables": "quality_decision,document,stock_move",
+    "tests": "T01",
+    "api_coverage": "PARTIAL - chưa đủ toàn luồng UC",
+    "test_execution": "NOT_RUN",
+    "approval": "PENDING",
+    "api_paths": [
+      "/moves/{id}/post"
+    ]
+  },
+  {
+    "requirement": "FR08",
+    "use_case": "UC08",
+    "process": "P02",
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "permissions": "so.draft,issue.draft",
+    "tables": "document,document_line,document_assignment",
+    "tests": "T14",
+    "api_coverage": "PARTIAL - chưa đủ toàn luồng UC",
+    "test_execution": "NOT_RUN",
+    "approval": "PENDING",
+    "api_paths": [
+      "/documents/{id}/submit"
+    ]
+  },
+  {
+    "requirement": "FR09",
+    "use_case": "UC09",
+    "process": "P02",
+    "rules": [
+      "BR01",
+      "BR02",
+      "BR03",
+      "BR04",
+      "BR05"
+    ],
+    "permissions": "reservation.manage",
+    "tables": "reservation,stock_balance,lot",
+    "tests": "T03",
+    "api_coverage": "PARTIAL - chưa đủ toàn luồng UC",
+    "test_execution": "NOT_RUN",
+    "approval": "PENDING",
+    "api_paths": [
+      "/issues/{id}/reserve"
+    ]
+  },
+  {
+    "requirement": "FR10",
+    "use_case": "UC10",
+    "process": "P02",
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "permissions": "pick.confirm",
+    "tables": "pick_task,package,package_line",
+    "tests": "T15",
+    "api_coverage": "MISSING - chưa đặc tả trong OpenAPI lõi",
+    "test_execution": "NOT_RUN",
+    "approval": "PENDING",
+    "api_paths": []
+  },
+  {
+    "requirement": "FR11",
+    "use_case": "UC11",
+    "process": "P02",
+    "rules": [
+      "BR01",
+      "BR02",
+      "BR03",
+      "BR04",
+      "BR05"
+    ],
+    "permissions": "issue.post",
+    "tables": "stock_move,reservation_consumption,document_line",
+    "tests": "T02,T03",
+    "api_coverage": "PARTIAL - chưa đủ toàn luồng UC",
+    "test_execution": "NOT_RUN",
+    "approval": "PENDING",
+    "api_paths": [
+      "/issues/{id}/post"
+    ]
+  },
+  {
+    "requirement": "FR12",
+    "use_case": "UC12",
+    "process": "P04",
+    "rules": [
+      "BR01",
+      "BR02",
+      "BR03",
+      "BR04",
+      "BR05"
+    ],
+    "permissions": "transfer.dispatch",
+    "tables": "document,inventory_transaction,stock_move",
+    "tests": "T04",
+    "api_coverage": "PARTIAL - chưa đủ toàn luồng UC",
+    "test_execution": "NOT_RUN",
+    "approval": "PENDING",
+    "api_paths": [
+      "/transfers/{id}/dispatch"
+    ]
+  },
+  {
+    "requirement": "FR13",
+    "use_case": "UC13",
+    "process": "P04",
+    "rules": [
+      "BR01",
+      "BR02",
+      "BR03",
+      "BR04",
+      "BR05"
+    ],
+    "permissions": "transfer.receive",
+    "tables": "document,stock_move,stock_balance",
+    "tests": "T04",
+    "api_coverage": "PARTIAL - chưa đủ toàn luồng UC",
+    "test_execution": "NOT_RUN",
+    "approval": "PENDING",
+    "api_paths": [
+      "/transfers/{id}/receive"
+    ]
+  },
+  {
+    "requirement": "FR14",
+    "use_case": "UC14",
+    "process": "SRS - hỗ trợ/ngoại lệ",
+    "rules": [
+      "BR01",
+      "BR02",
+      "BR03",
+      "BR04",
+      "BR05"
+    ],
+    "permissions": "return.draft,return.post",
+    "tables": "document_line,document_link,stock_move",
+    "tests": "T10",
+    "api_coverage": "PARTIAL - chưa đủ toàn luồng UC",
+    "test_execution": "NOT_RUN",
+    "approval": "PENDING",
+    "api_paths": [
+      "/returns/{id}/post"
+    ]
+  },
+  {
+    "requirement": "FR15",
+    "use_case": "UC15",
+    "process": "SRS - hỗ trợ/ngoại lệ",
+    "rules": [
+      "BR01",
+      "BR02",
+      "BR03",
+      "BR04",
+      "BR05"
+    ],
+    "permissions": "return.draft,return.post",
+    "tables": "document_line,reservation,stock_move",
+    "tests": "T10",
+    "api_coverage": "PARTIAL - chưa đủ toàn luồng UC",
+    "test_execution": "NOT_RUN",
+    "approval": "PENDING",
+    "api_paths": [
+      "/returns/{id}/post"
+    ]
+  },
+  {
+    "requirement": "FR16",
+    "use_case": "UC16",
+    "process": "P03",
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "permissions": "count.create",
+    "tables": "count_session,count_location_lock,count_line",
+    "tests": "T05,T16",
+    "api_coverage": "PARTIAL - chưa đủ toàn luồng UC",
+    "test_execution": "NOT_RUN",
+    "approval": "PENDING",
+    "api_paths": [
+      "/counts/{id}/freeze"
+    ]
+  },
+  {
+    "requirement": "FR17",
+    "use_case": "UC17",
+    "process": "P03",
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "permissions": "count.enter",
+    "tables": "count_line,count_observation",
+    "tests": "T05",
+    "api_coverage": "MISSING - chưa đặc tả trong OpenAPI lõi",
+    "test_execution": "NOT_RUN",
+    "approval": "PENDING",
+    "api_paths": []
+  },
+  {
+    "requirement": "FR18",
+    "use_case": "UC18",
+    "process": "P03",
+    "rules": [
+      "BR01",
+      "BR02",
+      "BR03",
+      "BR04",
+      "BR05"
+    ],
+    "permissions": "count.submit,adjustment.approve,adjustment.post",
+    "tables": "count_session,document,approval_step,stock_move",
+    "tests": "T05",
+    "api_coverage": "PARTIAL - chưa đủ toàn luồng UC",
+    "test_execution": "NOT_RUN",
+    "approval": "PENDING",
+    "api_paths": [
+      "/counts/{id}/submit",
+      "/adjustments/{id}/post"
+    ]
+  },
+  {
+    "requirement": "FR19",
+    "use_case": "UC19",
+    "process": "SRS - hỗ trợ/ngoại lệ",
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "permissions": "document.cancel",
+    "tables": "document,reservation,audit_event",
+    "tests": "T17",
+    "api_coverage": "PARTIAL - chưa đủ toàn luồng UC",
+    "test_execution": "NOT_RUN",
+    "approval": "PENDING",
+    "api_paths": [
+      "/documents/{id}/cancel"
+    ]
+  },
+  {
+    "requirement": "FR20",
+    "use_case": "UC20",
+    "process": "SRS - hỗ trợ/ngoại lệ",
+    "rules": [
+      "BR01",
+      "BR02",
+      "BR03",
+      "BR04",
+      "BR05"
+    ],
+    "permissions": "adjustment.approve,adjustment.post",
+    "tables": "inventory_transaction,stock_move,document_link",
+    "tests": "T10,T18",
+    "api_coverage": "PARTIAL - chưa đủ toàn luồng UC",
+    "test_execution": "NOT_RUN",
+    "approval": "PENDING",
+    "api_paths": [
+      "/adjustments/{id}/post"
+    ]
+  },
+  {
+    "requirement": "FR21",
+    "use_case": "UC21",
+    "process": "SRS - hỗ trợ/ngoại lệ",
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "permissions": "period.close,period.reopen",
+    "tables": "stock_period,audit_event",
+    "tests": "T19",
+    "api_coverage": "MISSING - chưa đặc tả trong OpenAPI lõi",
+    "test_execution": "NOT_RUN",
+    "approval": "PENDING",
+    "api_paths": []
+  },
+  {
+    "requirement": "FR22",
+    "use_case": "UC22",
+    "process": "SRS - hỗ trợ/ngoại lệ",
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "permissions": "import.validate,import.commit + quyền dữ liệu",
+    "tables": "import_job,import_row,document",
+    "tests": "T12,T20",
+    "api_coverage": "PARTIAL - chưa đủ toàn luồng UC",
+    "test_execution": "NOT_RUN",
+    "approval": "PENDING",
+    "api_paths": [
+      "/imports/{id}/commit"
+    ]
+  },
+  {
+    "requirement": "FR23",
+    "use_case": "UC23",
+    "process": "SRS - hỗ trợ/ngoại lệ",
+    "rules": [
+      "BR01",
+      "BR02",
+      "BR03",
+      "BR04",
+      "BR05"
+    ],
+    "permissions": "opening.draft,opening.approve,opening.post",
+    "tables": "document,import_job,stock_move",
+    "tests": "T20",
+    "api_coverage": "PARTIAL - chưa đủ toàn luồng UC",
+    "test_execution": "NOT_RUN",
+    "approval": "PENDING",
+    "api_paths": [
+      "/openings/{id}/post"
+    ]
+  },
+  {
+    "requirement": "FR24",
+    "use_case": "UC24",
+    "process": "SRS - hỗ trợ/ngoại lệ",
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "permissions": "report.read,report.export,price.read nếu cần",
+    "tables": "stock_move,stock_balance,export_job",
+    "tests": "T07,T21",
+    "api_coverage": "MISSING - chưa đặc tả trong OpenAPI lõi",
+    "test_execution": "NOT_RUN",
+    "approval": "PENDING",
+    "api_paths": []
+  },
+  {
+    "requirement": "FR25",
+    "use_case": "UC25",
+    "process": "SRS - hỗ trợ/ngoại lệ",
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "permissions": "Quyền lệnh tương ứng tại server",
+    "tables": "idempotency_record + local SQLite",
+    "tests": "T02,T08",
+    "api_coverage": "PARTIAL - chưa đủ toàn luồng UC",
+    "test_execution": "NOT_RUN",
+    "approval": "PENDING",
+    "api_paths": [
+      "/operations/{key}"
+    ]
+  },
+  {
+    "requirement": "FR26",
+    "use_case": "UC26",
+    "process": "SRS - hỗ trợ/ngoại lệ",
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "permissions": "print.execute,document.read",
+    "tables": "export_job,stored_file,audit_event",
+    "tests": "T22",
+    "api_coverage": "MISSING - chưa đặc tả trong OpenAPI lõi",
+    "test_execution": "NOT_RUN",
+    "approval": "PENDING",
+    "api_paths": []
+  },
+  {
+    "requirement": "FR27",
+    "use_case": "UC27",
+    "process": "SRS - hỗ trợ/ngoại lệ",
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "permissions": "backup.operate",
+    "tables": "Toàn DB + stored_file",
+    "tests": "T09",
+    "api_coverage": "MISSING - chưa đặc tả trong OpenAPI lõi",
+    "test_execution": "NOT_RUN",
+    "approval": "PENDING",
+    "api_paths": []
+  },
+  {
+    "requirement": "FR28",
+    "use_case": "UC28",
+    "process": "SRS - hỗ trợ/ngoại lệ",
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "permissions": "config.manage cho quản trị phát hành; người dùng chỉ cập nhật client của mình",
+    "tables": "client_release + local SQLite",
+    "tests": "T23",
+    "api_coverage": "MISSING - chưa đặc tả trong OpenAPI lõi",
+    "test_execution": "NOT_RUN",
+    "approval": "PENDING",
+    "api_paths": []
+  },
+  {
+    "requirement": "FR29",
+    "use_case": "UC29",
+    "process": "SRS - hỗ trợ/ngoại lệ",
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "permissions": "Không cần phiên hoàn chỉnh; giới hạn thử",
+    "tables": "mfa_factor,auth_session",
+    "tests": "T11",
+    "api_coverage": "MISSING - chưa đặc tả trong OpenAPI lõi",
+    "test_execution": "NOT_RUN",
+    "approval": "PENDING",
+    "api_paths": []
+  },
+  {
+    "requirement": "FR30",
+    "use_case": "UC30",
+    "process": "SRS - hỗ trợ/ngoại lệ",
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "permissions": "document.approve hoặc quyền duyệt chuyên biệt theo loại",
+    "tables": "approval_request,approval_step",
+    "tests": "T14",
+    "api_coverage": "PARTIAL - chưa đủ toàn luồng UC",
+    "test_execution": "NOT_RUN",
+    "approval": "PENDING",
+    "api_paths": [
+      "/approval-requests/{id}/decide"
+    ]
+  },
+  {
+    "requirement": "FR31",
+    "use_case": "UC31",
+    "process": "SRS - hỗ trợ/ngoại lệ",
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "permissions": "import.validate + quyền dữ liệu",
+    "tables": "import_job,import_row",
+    "tests": "T12,T20",
+    "api_coverage": "MISSING - chưa đặc tả trong OpenAPI lõi",
+    "test_execution": "NOT_RUN",
+    "approval": "PENDING",
+    "api_paths": []
+  }
+]

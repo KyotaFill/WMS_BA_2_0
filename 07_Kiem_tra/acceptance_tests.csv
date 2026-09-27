@@ -1,0 +1,27 @@
+﻿id,scenario,steps,expected
+T01,"Nhận 80/100, cách ly 5","Nhận 80, move 75 tới STORAGE",Physical 80; available <=75; PO remaining20
+T02,Timeout sau COMMIT,Gửi lại cùng key; khác key cùng execution,Một inventory_transaction; đổi payload cùng key trả409
+T03,Hai phiên PostgreSQL cùng xuất7 từ10,"Barrier đồng thời, cùng loại lệnh","Một thành công, một thiếu; cuối3; không âm"
+T04,"Chuyển20, nhận18","Dispatch rồi receive, retry cả hai","Nguồn80,đích18,transit2 nếu đầu100"
+T05,Kiểm kê100 thành98,"Đếm2 lượt, duyệt khác người, post",Một delta -2; lock chỉ mở sau commit
+T06,Cùng serial nhập hai vị trí,Hai transaction cạnh tranh,Chỉ một serial_position; tổng tồn serial1
+T07,"Role A quản lý khoA, nhận khoB","DuyệtB, đọc/export khoC, tải file sau revoke",Đều từ chối; không lộ giá/kho khác
+T08,Offline draft và crash SENDING,Restart; query operation; thiếu tồn khi online,Giữ draft; không auto post; lỗi CONFLICT đúng
+T09,Restore base backup và WAL,Khôi phục máy khác; reconcile; login desktop,"Đo RPO/RTO, 0 lệch ledger/balance/serial"
+T10,Trả/đảo và retry,Trả vượt; đảo sau hàng đi tiếp; tự duyệt,Chặn sai; lịch sử gốc không đổi
+T11,Thu hồi phiên/MFA,Lock user khi client vẫn mở; refresh replay,Lệnh tiếp theo bị từ chối; token không vào log
+T12,Import sai FK/trùng barcode/decimal,Dry-run; đổi file sau validate; commit lại,Lỗi dòng rõ; không partial ngầm; hash mismatch
+T13,Cây vị trí sai,"Chu kỳ, khác kho cha, dùng GROUP để post","Từ chối, số dư không đổi"
+T14,Sửa sau submit/duyệt,Concurrent edit/approve; nhận từ nhiều receipts,Chặn stale; approval bị invalidate; không vượt PO
+T15,Soạn hàng không xuất,DONE pick; in lại; xuất từng phần,On_hand không đổi lúc pick/in; consume đúng khi post
+T16,Freeze và post cạnh tranh,Hai connection khóa cùng location,Một thứ tự serialize rõ; snapshot không cắt ngang
+T17,Hủy có giữ chỗ,Cancel khi post đang chạy,Không mất phần đã post; remaining reservation đúng
+T18,Đảo toàn lần post,Hai reversal cùng lúc; lượng nguồn không đủ,Tối đa một reversal; thiếu tồn rollback
+T19,Close kỳ và backdate,Close/post đồng thời; post kỳ CLOSED,Không lọt phiếu sau đóng; audit reopen
+T20,Opening lặp batch,Import cùng file2 lần; đổi serial location,Không nhân đôi tồn; serial trùng bị chặn
+T21,Báo cáo ranh giới kho,Move nội bộ10 rồi xuất3; giá thiếu quyền,R02 không đếm nội bộ thành nhập/xuất; giá được che
+T22,Máy quét và in,"Code128/QR, tiếng Việt, scale100%, reprint",Quét đọc lại được; không post lại khi in
+T23,Upgrade từng OS/arch,"Máy sạch, bản N-1 có nháp, mất mạng",Nháp/pending giữ nguyên; UI responsive; TLS đúng
+T24,Ràng buộc DB và transaction,NULL item duplicate; FK; fail giữa post,Unique/FK chặn; rollback toàn bộ
+T25,Dữ liệu lô hết hạn,Reserve hôm trước rồi post sau expiry,Chặn xuất; release có kiểm soát; không tồn available âm
+T26,Tải đại diện,5 kho/30 đồng thời/50k SKU/1m moves,Ghi p95/p99 theo endpoint/cấu hình; chưa gán kết quả đạt

@@ -1,0 +1,12 @@
+@startuml
+left to right direction
+actor "Quản lý kho" as WAREHOUSE_MANAGER
+rectangle "WMS" {
+usecase "UC16 Mở phiên kiểm kê" as UC16
+usecase "UC18 Duyệt kiểm kê và điều chỉnh" as UC18
+usecase "UC19 Hủy hoặc đóng phần còn lại" as UC19
+}
+WAREHOUSE_MANAGER -- UC16
+WAREHOUSE_MANAGER -- UC18
+WAREHOUSE_MANAGER -- UC19
+@enduml

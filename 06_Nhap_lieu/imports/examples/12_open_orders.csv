@@ -1,0 +1,2 @@
+﻿external_number,kind,warehouse_code,partner_code,business_date,line_no,sku,uom_code,remaining_quantity,note
+PO-DEMO,PO,WH-A,NCC001,2026-09-26,1,SKU001,CAI,20,Dữ liệu minh họa

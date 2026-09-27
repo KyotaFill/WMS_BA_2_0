@@ -1,0 +1,59 @@
+@startuml
+class PostDocumentHandler {
+- uow: UnitOfWork
+--
++ execute(cmd): PostingResult
+}
+interface UnitOfWork {
++ repositories: RepositorySet
+--
++ begin(): void
++ commit(): void
++ rollback(): void
+}
+interface DocumentRepository {
+--
++ getForUpdate(ids): Document[]
++ save(document): void
+}
+interface StockRepository {
+--
++ lockItemsAndBalances(): void
++ appendMoves(moves): void
+}
+interface IdempotencyStore {
+--
++ lockKey(actor, key): void
++ get(key): Result [0..1]
++ saveResult(key, result): void
+}
+interface EventPublisher {
+--
++ appendOutbox(event): void
+}
+class PostgresUnitOfWork {
+- session: SQLAlchemySession
+--
++ begin(): void
++ commit(): void
++ rollback(): void
+}
+class InventoryDomain {
+--
++ validatePosting(cmd): void
+{no SQL / HTTP / Tkinter}
+}
+class AuthorizationPolicy {
+--
++ allows(actor, action, resource): bool
++ assertSeparationOfDuties(): void
+}
+PostDocumentHandler ..> UnitOfWork : uses
+PostDocumentHandler ..> InventoryDomain : calls
+PostDocumentHandler ..> AuthorizationPolicy : checks
+UnitOfWork -- DocumentRepository : exposes
+UnitOfWork -- StockRepository : exposes
+UnitOfWork -- IdempotencyStore : exposes
+UnitOfWork -- EventPublisher : exposes
+PostgresUnitOfWork ..|> UnitOfWork : implements
+@enduml

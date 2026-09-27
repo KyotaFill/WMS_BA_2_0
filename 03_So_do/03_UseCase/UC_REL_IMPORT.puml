@@ -1,0 +1,10 @@
+@startuml
+left to right direction
+actor "Người dùng" as USER
+rectangle "WMS" {
+usecase "UC22 Import danh mục và đơn mở" as UC22
+usecase "UC31 Kiểm tra file nhập" as UC31
+}
+USER -- UC22
+UC22 ..> UC31 : <<include>>
+@enduml

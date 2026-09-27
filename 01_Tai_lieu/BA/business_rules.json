@@ -1,0 +1,74 @@
+[
+  {
+    "id": "BR01",
+    "name": "Phạm vi quyền",
+    "statement": "Mỗi thao tác phải được cấp quyền theo đúng tài nguyên/kho tại server; ẩn nút không thay cho kiểm soát.",
+    "status": "Thiết kế cơ sở - chờ thẩm định"
+  },
+  {
+    "id": "BR02",
+    "name": "Phân tách nhiệm vụ",
+    "statement": "Người tạo/gửi không tự duyệt; kiểm kê còn loại trừ mọi người đếm. Hai bước duyệt khác người.",
+    "status": "Thiết kế cơ sở - chờ thẩm định"
+  },
+  {
+    "id": "BR03",
+    "name": "Bất biến sổ",
+    "statement": "Ledger append-only; sửa sai bằng reversal/phiếu bù có truy vết, không sửa xóa lịch sử.",
+    "status": "Thiết kế cơ sở - chờ thẩm định"
+  },
+  {
+    "id": "BR04",
+    "name": "Ghi sổ nguyên tử",
+    "statement": "Ledger, balance, reservation, audit, outbox và kết quả idempotency cùng transaction; chỉ báo thành công sau commit.",
+    "status": "Thiết kế cơ sở - chờ thẩm định"
+  },
+  {
+    "id": "BR05",
+    "name": "Chống thực hiện lặp",
+    "statement": "Cùng key và payload trả kết quả cũ; cùng key khác payload bị từ chối. Timeout không tạo key mới.",
+    "status": "Thiết kế cơ sở - chờ thẩm định"
+  },
+  {
+    "id": "BR06",
+    "name": "Lô và serial",
+    "statement": "Tracking đúng SKU; serial nguyên đơn vị, tối đa một vị trí; hạn dùng kiểm tra lại khi giữ và xuất.",
+    "status": "Thiết kế cơ sở - chờ thẩm định"
+  },
+  {
+    "id": "BR07",
+    "name": "Đơn vị",
+    "statement": "Giữ factor_snapshot, dùng Decimal; không cộng đơn vị khác loại và không sửa quy đổi cũ đã phát sinh.",
+    "status": "Thiết kế cơ sở - chờ thẩm định"
+  },
+  {
+    "id": "BR08",
+    "name": "Chuyển kho",
+    "statement": "Nguồn + transit + đích bảo toàn; thiếu hàng chưa nhận còn transit, mất/hỏng cần điều chỉnh được duyệt.",
+    "status": "Thiết kế cơ sở - chờ thẩm định"
+  },
+  {
+    "id": "BR09",
+    "name": "Kiểm kê",
+    "statement": "Freeze không còn reservation; không lộ snapshot khi đếm mù; post delta và mở khóa nguyên tử.",
+    "status": "Thiết kế cơ sở - chờ thẩm định"
+  },
+  {
+    "id": "BR10",
+    "name": "Ngoại tuyến",
+    "statement": "Nháp offline không phải đã ghi sổ. Ghi sổ cần online và quyền/version hiện hành.",
+    "status": "Thiết kế cơ sở - chờ thẩm định"
+  },
+  {
+    "id": "BR11",
+    "name": "Kỳ và phiên bản",
+    "statement": "Không ghi vào kỳ đóng; duyệt theo version; sửa nội dung phải duyệt lại.",
+    "status": "Thiết kế cơ sở - chờ thẩm định"
+  },
+  {
+    "id": "BR12",
+    "name": "Nhập dữ liệu",
+    "statement": "Dry-run không tạo số dư; commit revalidate hash/quyền/quan hệ. Tồn đầu kỳ qua chứng từ OPENING.",
+    "status": "Thiết kế cơ sở - chờ thẩm định"
+  }
+]

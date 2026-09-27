@@ -1,0 +1,14 @@
+@startuml
+left to right direction
+actor "Quản lý kho" as WAREHOUSE_MANAGER
+rectangle "WMS" {
+usecase "UC07 Kiểm tra và cất hàng" as UC07
+usecase "UC08 Lập yêu cầu bán và phiếu xuất" as UC08
+usecase "UC14 Khách trả hàng" as UC14
+usecase "UC15 Trả nhà cung cấp" as UC15
+}
+WAREHOUSE_MANAGER -- UC07
+WAREHOUSE_MANAGER -- UC08
+WAREHOUSE_MANAGER -- UC14
+WAREHOUSE_MANAGER -- UC15
+@enduml

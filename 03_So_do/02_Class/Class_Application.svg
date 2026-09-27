@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3170" height="1160" viewBox="0 0 3170 1160">
+<rect x="0" y="0" width="3170" height="1160" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="35" y="35" font-family="Tinos,Times New Roman,serif" font-size="24" text-anchor="start" fill="#19344b" font-weight="bold">Class Application / UML implementation</text>
+<text x="35" y="62" font-family="Tinos,Times New Roman,serif" font-size="13" text-anchor="start" fill="#6b7b8c">WMS / BA 2.0 / 27-09-2026 / DRAFT</text>
+<path d="M1450.0,350 L1135.0,450" stroke="#526d87" fill="none" stroke-width="1.6" stroke-dasharray="6 4"/>
+<path d="M1144.6220164111735,440.6503048080107 L1135.0,450 L1148.2529660002954,452.0877960137452" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M1585.0,350 L2485.0,450" stroke="#526d87" fill="none" stroke-width="1.6" stroke-dasharray="6 4"/>
+<path d="M2472.4108060274675,454.63812409514355 L2485.0,450 L2473.7359843403656,442.7115192790601" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M1720.0,350 L2935.0,450" stroke="#526d87" fill="none" stroke-width="1.6" stroke-dasharray="6 4"/>
+<path d="M2922.548275866318,454.99545454375004 L2935.0,450 L2923.5326018847904,443.0358934193041" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M1000.0,690 L235.0,790" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M1067.5,690 L685.0,790" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M1135.0,690 L1135.0,790" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M1202.5,690 L1585.0,790" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M2035.0,790 L1270.0,690" stroke="#526d87" fill="none" stroke-width="1.6" stroke-dasharray="6 4"/>
+<path d="M1270.0,690 L1282.6764682480034,685.6060094723179 L1281.1210733709477,697.5047802817934 Z" stroke="#526d87" fill="#ffffff" stroke-width="1.6"/>
+<rect x="1415.0" y="110" width="340" height="240" rx="0" fill="#f8fafc" stroke="#879caf" stroke-width="1.3"/>
+<rect x="1415.0" y="110" width="340" height="35" rx="0" fill="#19344b" stroke="#19344b" stroke-width="1.3"/>
+<text x="1425.0" y="134" font-family="Tinos,Times New Roman,serif" font-size="18" text-anchor="start" fill="#ffffff" font-weight="bold">PostDocumentHandler</text>
+<text x="1425.0" y="168" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">- uow: UnitOfWork</text>
+<path d="M1415.0,183 L1755.0,183" stroke="#879caf" fill="none" stroke-width="1.6"/>
+<text x="1425.0" y="206" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ execute(cmd): PostingResult</text>
+<rect x="965.0" y="450" width="340" height="240" rx="0" fill="#f8fafc" stroke="#879caf" stroke-width="1.3"/>
+<rect x="965.0" y="450" width="340" height="35" rx="0" fill="#19344b" stroke="#19344b" stroke-width="1.3"/>
+<text x="975.0" y="474" font-family="Tinos,Times New Roman,serif" font-size="15" text-anchor="start" fill="#ffffff" font-weight="bold">&lt;&lt;interface&gt;&gt; UnitOfWork</text>
+<text x="975.0" y="508" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ repositories: RepositorySet</text>
+<path d="M965.0,523 L1305.0,523" stroke="#879caf" fill="none" stroke-width="1.6"/>
+<text x="975.0" y="546" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ begin(): void</text>
+<text x="975.0" y="569" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ commit(): void</text>
+<text x="975.0" y="592" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ rollback(): void</text>
+<rect x="65.0" y="790" width="340" height="240" rx="0" fill="#f8fafc" stroke="#879caf" stroke-width="1.3"/>
+<rect x="65.0" y="790" width="340" height="35" rx="0" fill="#19344b" stroke="#19344b" stroke-width="1.3"/>
+<text x="75.0" y="814" font-family="Tinos,Times New Roman,serif" font-size="15" text-anchor="start" fill="#ffffff" font-weight="bold">&lt;&lt;interface&gt;&gt; DocumentRepository</text>
+<path d="M65.0,840 L405.0,840" stroke="#879caf" fill="none" stroke-width="1.6"/>
+<text x="75.0" y="863" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ getForUpdate(ids): Document[]</text>
+<text x="75.0" y="886" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ save(document): void</text>
+<rect x="515.0" y="790" width="340" height="240" rx="0" fill="#f8fafc" stroke="#879caf" stroke-width="1.3"/>
+<rect x="515.0" y="790" width="340" height="35" rx="0" fill="#19344b" stroke="#19344b" stroke-width="1.3"/>
+<text x="525.0" y="814" font-family="Tinos,Times New Roman,serif" font-size="15" text-anchor="start" fill="#ffffff" font-weight="bold">&lt;&lt;interface&gt;&gt; StockRepository</text>
+<path d="M515.0,840 L855.0,840" stroke="#879caf" fill="none" stroke-width="1.6"/>
+<text x="525.0" y="863" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ lockItemsAndBalances(): void</text>
+<text x="525.0" y="886" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ appendMoves(moves): void</text>
+<rect x="965.0" y="790" width="340" height="240" rx="0" fill="#f8fafc" stroke="#879caf" stroke-width="1.3"/>
+<rect x="965.0" y="790" width="340" height="35" rx="0" fill="#19344b" stroke="#19344b" stroke-width="1.3"/>
+<text x="975.0" y="814" font-family="Tinos,Times New Roman,serif" font-size="15" text-anchor="start" fill="#ffffff" font-weight="bold">&lt;&lt;interface&gt;&gt; IdempotencyStore</text>
+<path d="M965.0,840 L1305.0,840" stroke="#879caf" fill="none" stroke-width="1.6"/>
+<text x="975.0" y="863" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ lockKey(actor, key): void</text>
+<text x="975.0" y="886" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ get(key): Result [0..1]</text>
+<text x="975.0" y="909" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ saveResult(key, result): void</text>
+<rect x="1415.0" y="790" width="340" height="240" rx="0" fill="#f8fafc" stroke="#879caf" stroke-width="1.3"/>
+<rect x="1415.0" y="790" width="340" height="35" rx="0" fill="#19344b" stroke="#19344b" stroke-width="1.3"/>
+<text x="1425.0" y="814" font-family="Tinos,Times New Roman,serif" font-size="15" text-anchor="start" fill="#ffffff" font-weight="bold">&lt;&lt;interface&gt;&gt; EventPublisher</text>
+<path d="M1415.0,840 L1755.0,840" stroke="#879caf" fill="none" stroke-width="1.6"/>
+<text x="1425.0" y="863" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ appendOutbox(event): void</text>
+<rect x="1865.0" y="790" width="340" height="240" rx="0" fill="#f8fafc" stroke="#879caf" stroke-width="1.3"/>
+<rect x="1865.0" y="790" width="340" height="35" rx="0" fill="#19344b" stroke="#19344b" stroke-width="1.3"/>
+<text x="1875.0" y="814" font-family="Tinos,Times New Roman,serif" font-size="18" text-anchor="start" fill="#ffffff" font-weight="bold">PostgresUnitOfWork</text>
+<text x="1875.0" y="848" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">- session: SQLAlchemySession</text>
+<path d="M1865.0,863 L2205.0,863" stroke="#879caf" fill="none" stroke-width="1.6"/>
+<text x="1875.0" y="886" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ begin(): void</text>
+<text x="1875.0" y="909" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ commit(): void</text>
+<text x="1875.0" y="932" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ rollback(): void</text>
+<rect x="2315.0" y="450" width="340" height="240" rx="0" fill="#f8fafc" stroke="#879caf" stroke-width="1.3"/>
+<rect x="2315.0" y="450" width="340" height="35" rx="0" fill="#19344b" stroke="#19344b" stroke-width="1.3"/>
+<text x="2325.0" y="474" font-family="Tinos,Times New Roman,serif" font-size="18" text-anchor="start" fill="#ffffff" font-weight="bold">InventoryDomain</text>
+<path d="M2315.0,500 L2655.0,500" stroke="#879caf" fill="none" stroke-width="1.6"/>
+<text x="2325.0" y="523" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ validatePosting(cmd): void</text>
+<text x="2325.0" y="546" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">{no SQL / HTTP / Tkinter}</text>
+<rect x="2765.0" y="450" width="340" height="240" rx="0" fill="#f8fafc" stroke="#879caf" stroke-width="1.3"/>
+<rect x="2765.0" y="450" width="340" height="35" rx="0" fill="#19344b" stroke="#19344b" stroke-width="1.3"/>
+<text x="2775.0" y="474" font-family="Tinos,Times New Roman,serif" font-size="18" text-anchor="start" fill="#ffffff" font-weight="bold">AuthorizationPolicy</text>
+<path d="M2765.0,500 L3105.0,500" stroke="#879caf" fill="none" stroke-width="1.6"/>
+<text x="2775.0" y="523" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ allows(actor, action, resource): bool</text>
+<text x="2775.0" y="546" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ assertSeparationOfDuties(): void</text>
+<rect x="1116.94482421875" y="401" width="36.1103515625" height="20" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="1135.0" y="416" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">uses</text>
+<rect x="2460" y="430" width="65" height="18" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="2492.5" y="443" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">calls</text>
+<rect x="2909.955078125" y="401" width="50.08984375" height="20" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="2935.0" y="416" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">checks</text>
+<rect x="206.837890625" y="741" width="56.32421875" height="20" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="235.0" y="756" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">exposes</text>
+<rect x="656.837890625" y="741" width="56.32421875" height="20" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="685.0" y="756" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">exposes</text>
+<rect x="1106.837890625" y="741" width="56.32421875" height="20" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="1135.0" y="756" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">exposes</text>
+<rect x="1556.837890625" y="741" width="56.32421875" height="20" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="1585.0" y="756" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">exposes</text>
+<rect x="1996.337890625" y="741" width="77.32421875" height="20" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="2035.0" y="756" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">implements</text>
+<text x="35" y="1128" font-family="Tinos,Times New Roman,serif" font-size="13" text-anchor="start" fill="#6b7b8c">Ch8 PDF 64-71 | - private; + public. Nét liền: association; nét đứt mũi tên mở: dependency; tam giác rỗng: realization.</text>
+</svg>

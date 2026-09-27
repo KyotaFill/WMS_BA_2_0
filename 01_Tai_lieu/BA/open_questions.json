@@ -1,0 +1,74 @@
+[
+  {
+    "id": "Q01",
+    "question": "Ngân sách 200 triệu bao gồm hay chưa bao gồm dự phòng 50 triệu?",
+    "owner": "Sponsor",
+    "impact": "Chốt trần và phạm vi, không tự cộng.",
+    "answer": "",
+    "evidence": "",
+    "status": "OPEN"
+  },
+  {
+    "id": "Q02",
+    "question": "Ngành hàng, có hạn dùng/serial/quy đổi và hàng ký gửi không?",
+    "owner": "Chủ kho",
+    "impact": "Chốt tracking và rule.",
+    "answer": "",
+    "evidence": "",
+    "status": "OPEN"
+  },
+  {
+    "id": "Q03",
+    "question": "Các bước nhận/xuất hiện tại và ai ký từng loại phiếu?",
+    "owner": "Chủ kho",
+    "impact": "Xác minh As-Is và SOD.",
+    "answer": "",
+    "evidence": "",
+    "status": "OPEN"
+  },
+  {
+    "id": "Q04",
+    "question": "Ai có quyền duyệt thay thế và hạn mức theo kho/loại chứng từ?",
+    "owner": "Kiểm soát",
+    "impact": "Chốt policy và RACI.",
+    "answer": "",
+    "evidence": "",
+    "status": "OPEN"
+  },
+  {
+    "id": "Q05",
+    "question": "Số kho, số người đồng thời và dung lượng thực tế?",
+    "owner": "IT/Chủ kho",
+    "impact": "Chốt NFR05.",
+    "answer": "",
+    "evidence": "",
+    "status": "OPEN"
+  },
+  {
+    "id": "Q06",
+    "question": "Phiên bản/kiến trúc OS server/client, máy in và máy quét?",
+    "owner": "IT",
+    "impact": "Chốt ma trận kiểm thử.",
+    "answer": "",
+    "evidence": "",
+    "status": "OPEN"
+  },
+  {
+    "id": "Q07",
+    "question": "Baseline sai lệch tồn, thời gian nhận/xuất và yêu cầu phục hồi?",
+    "owner": "Sponsor/IT",
+    "impact": "Chốt mục tiêu B01-B04.",
+    "answer": "",
+    "evidence": "",
+    "status": "OPEN"
+  },
+  {
+    "id": "Q08",
+    "question": "Mẫu biểu và chính sách giữ hồ sơ, dữ liệu nhạy cảm?",
+    "owner": "Kiểm soát",
+    "impact": "Chốt biểu mẫu, quyền và retention.",
+    "answer": "",
+    "evidence": "",
+    "status": "OPEN"
+  }
+]

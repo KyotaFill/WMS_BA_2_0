@@ -1,0 +1,8 @@
+@startuml
+left to right direction
+actor "Kiểm toán" as AUDITOR
+rectangle "WMS" {
+usecase "UC24 Tra cứu và xuất báo cáo" as UC24
+}
+AUDITOR -- UC24
+@enduml

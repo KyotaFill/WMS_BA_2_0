@@ -1,0 +1,740 @@
+{
+  "version": "1.0",
+  "encoding": "UTF-8 BOM",
+  "csv_delimiter": ",",
+  "decimal_separator": ".",
+  "templates": [
+    {
+      "name": "01_uom",
+      "description": "Đơn vị tính",
+      "columns": [
+        {
+          "name": "code",
+          "type": "text",
+          "required": true,
+          "rule": "Unique; tối đa 30 ký tự"
+        },
+        {
+          "name": "name",
+          "type": "text",
+          "required": true,
+          "rule": "Tên đơn vị"
+        },
+        {
+          "name": "decimal_places",
+          "type": "integer",
+          "required": true,
+          "rule": "0..6; CAI dùng 0"
+        }
+      ],
+      "example": [
+        [
+          "CAI",
+          "Cái",
+          0
+        ],
+        [
+          "THUNG",
+          "Thùng",
+          0
+        ]
+      ]
+    },
+    {
+      "name": "02_categories",
+      "description": "Nhóm hàng",
+      "columns": [
+        {
+          "name": "code",
+          "type": "text",
+          "required": true,
+          "rule": "Unique"
+        },
+        {
+          "name": "name",
+          "type": "text",
+          "required": true,
+          "rule": "Tên nhóm"
+        },
+        {
+          "name": "parent_code",
+          "type": "text",
+          "required": false,
+          "rule": "FK cùng file hoặc DB; không chu kỳ"
+        }
+      ],
+      "example": [
+        [
+          "TP",
+          "Thực phẩm",
+          ""
+        ]
+      ]
+    },
+    {
+      "name": "03_warehouses",
+      "description": "Kho",
+      "columns": [
+        {
+          "name": "code",
+          "type": "text",
+          "required": true,
+          "rule": "Unique"
+        },
+        {
+          "name": "name",
+          "type": "text",
+          "required": true,
+          "rule": "Tên kho"
+        },
+        {
+          "name": "address",
+          "type": "text",
+          "required": false,
+          "rule": "Địa chỉ"
+        },
+        {
+          "name": "is_active",
+          "type": "boolean",
+          "required": true,
+          "rule": "TRUE/FALSE"
+        }
+      ],
+      "example": [
+        [
+          "WH-A",
+          "Kho A",
+          "",
+          true
+        ],
+        [
+          "WH-B",
+          "Kho B",
+          "",
+          true
+        ]
+      ]
+    },
+    {
+      "name": "04_locations",
+      "description": "Vị trí vật lý; vị trí ảo do server tạo",
+      "columns": [
+        {
+          "name": "code",
+          "type": "text",
+          "required": true,
+          "rule": "Unique toàn hệ thống"
+        },
+        {
+          "name": "warehouse_code",
+          "type": "text",
+          "required": true,
+          "rule": "FK 03_warehouses.code"
+        },
+        {
+          "name": "parent_code",
+          "type": "text",
+          "required": false,
+          "rule": "FK cùng kho; không chu kỳ"
+        },
+        {
+          "name": "name",
+          "type": "text",
+          "required": true,
+          "rule": "Tên vị trí"
+        },
+        {
+          "name": "kind",
+          "type": "text",
+          "required": true,
+          "rule": "GROUP/STORAGE/RECEIVING/QUARANTINE/SHIPPING"
+        },
+        {
+          "name": "is_active",
+          "type": "boolean",
+          "required": true,
+          "rule": "TRUE/FALSE"
+        }
+      ],
+      "example": [
+        [
+          "A-01",
+          "WH-A",
+          "",
+          "Ô A01",
+          "STORAGE",
+          true
+        ],
+        [
+          "A-QC",
+          "WH-A",
+          "",
+          "Cách ly A",
+          "QUARANTINE",
+          true
+        ],
+        [
+          "B-01",
+          "WH-B",
+          "",
+          "Ô B01",
+          "STORAGE",
+          true
+        ]
+      ]
+    },
+    {
+      "name": "05_products",
+      "description": "Hàng hóa",
+      "columns": [
+        {
+          "name": "sku",
+          "type": "text",
+          "required": true,
+          "rule": "Unique; giữ mã nguyên văn"
+        },
+        {
+          "name": "name",
+          "type": "text",
+          "required": true,
+          "rule": "Tên hàng"
+        },
+        {
+          "name": "category_code",
+          "type": "text",
+          "required": false,
+          "rule": "FK 02_categories.code"
+        },
+        {
+          "name": "base_uom_code",
+          "type": "text",
+          "required": true,
+          "rule": "FK 01_uom.code"
+        },
+        {
+          "name": "tracking",
+          "type": "text",
+          "required": true,
+          "rule": "NONE/LOT/SERIAL"
+        },
+        {
+          "name": "expiry_required",
+          "type": "boolean",
+          "required": true,
+          "rule": "TRUE chỉ khi LOT"
+        },
+        {
+          "name": "is_active",
+          "type": "boolean",
+          "required": true,
+          "rule": "TRUE/FALSE"
+        }
+      ],
+      "example": [
+        [
+          "SKU001",
+          "Hàng mẫu theo lô",
+          "TP",
+          "CAI",
+          "LOT",
+          true,
+          true
+        ],
+        [
+          "SKU002",
+          "Thiết bị mẫu",
+          "",
+          "CAI",
+          "SERIAL",
+          false,
+          true
+        ]
+      ]
+    },
+    {
+      "name": "06_product_uom",
+      "description": "Quy đổi phiên bản 1 khi tạo mới",
+      "columns": [
+        {
+          "name": "sku",
+          "type": "text",
+          "required": true,
+          "rule": "FK 05_products.sku"
+        },
+        {
+          "name": "uom_code",
+          "type": "text",
+          "required": true,
+          "rule": "FK 01_uom.code"
+        },
+        {
+          "name": "factor",
+          "type": "decimal",
+          "required": true,
+          "rule": ">0, tối đa 8 số lẻ; base UOM factor=1"
+        },
+        {
+          "name": "revision",
+          "type": "integer",
+          "required": true,
+          "rule": ">=1; unique sku/uom/revision"
+        },
+        {
+          "name": "is_active",
+          "type": "boolean",
+          "required": true,
+          "rule": "Chỉ một revision active mỗi sku/uom"
+        }
+      ],
+      "example": [
+        [
+          "SKU001",
+          "CAI",
+          "1",
+          1,
+          true
+        ],
+        [
+          "SKU001",
+          "THUNG",
+          "12",
+          1,
+          true
+        ],
+        [
+          "SKU002",
+          "CAI",
+          "1",
+          1,
+          true
+        ]
+      ]
+    },
+    {
+      "name": "07_barcodes",
+      "description": "Mã quét; cột text giữ số 0 đầu",
+      "columns": [
+        {
+          "name": "barcode",
+          "type": "text",
+          "required": true,
+          "rule": "Unique toàn hệ thống"
+        },
+        {
+          "name": "sku",
+          "type": "text",
+          "required": true,
+          "rule": "FK 05_products.sku"
+        },
+        {
+          "name": "uom_code",
+          "type": "text",
+          "required": true,
+          "rule": "FK 06_product_uom theo sku/uom/revision"
+        },
+        {
+          "name": "revision",
+          "type": "integer",
+          "required": true,
+          "rule": "Phiên bản quy đổi"
+        },
+        {
+          "name": "is_active",
+          "type": "boolean",
+          "required": true,
+          "rule": "TRUE/FALSE"
+        }
+      ],
+      "example": [
+        [
+          "000123456789",
+          "SKU001",
+          "CAI",
+          1,
+          true
+        ]
+      ]
+    },
+    {
+      "name": "08_partners",
+      "description": "Khách hàng/nhà cung cấp",
+      "columns": [
+        {
+          "name": "code",
+          "type": "text",
+          "required": true,
+          "rule": "Unique"
+        },
+        {
+          "name": "name",
+          "type": "text",
+          "required": true,
+          "rule": "Tên đối tác"
+        },
+        {
+          "name": "is_customer",
+          "type": "boolean",
+          "required": true,
+          "rule": "Ít nhất một trong hai loại TRUE"
+        },
+        {
+          "name": "is_supplier",
+          "type": "boolean",
+          "required": true,
+          "rule": "Ít nhất một trong hai loại TRUE"
+        },
+        {
+          "name": "tax_code",
+          "type": "text",
+          "required": false,
+          "rule": "Giữ số 0 đầu"
+        },
+        {
+          "name": "address",
+          "type": "text",
+          "required": false,
+          "rule": "Địa chỉ"
+        },
+        {
+          "name": "is_active",
+          "type": "boolean",
+          "required": true,
+          "rule": "TRUE/FALSE"
+        }
+      ],
+      "example": [
+        [
+          "NCC001",
+          "Nhà cung cấp mẫu",
+          false,
+          true,
+          "",
+          "",
+          true
+        ]
+      ]
+    },
+    {
+      "name": "09_lots",
+      "description": "Lô",
+      "columns": [
+        {
+          "name": "sku",
+          "type": "text",
+          "required": true,
+          "rule": "SKU phải tracking LOT"
+        },
+        {
+          "name": "lot_code",
+          "type": "text",
+          "required": true,
+          "rule": "Unique theo SKU"
+        },
+        {
+          "name": "manufactured_on",
+          "type": "date",
+          "required": false,
+          "rule": "YYYY-MM-DD"
+        },
+        {
+          "name": "expires_on",
+          "type": "date",
+          "required": false,
+          "rule": "Bắt buộc nếu expiry_required; >= ngày sản xuất"
+        }
+      ],
+      "example": [
+        [
+          "SKU001",
+          "LOT001",
+          "2026-09-01",
+          "2027-09-01"
+        ]
+      ]
+    },
+    {
+      "name": "10_serials",
+      "description": "Serial",
+      "columns": [
+        {
+          "name": "sku",
+          "type": "text",
+          "required": true,
+          "rule": "SKU phải tracking SERIAL"
+        },
+        {
+          "name": "serial_code",
+          "type": "text",
+          "required": true,
+          "rule": "Unique theo SKU; text"
+        }
+      ],
+      "example": [
+        [
+          "SKU002",
+          "SN0001"
+        ]
+      ]
+    },
+    {
+      "name": "11_opening",
+      "description": "Tồn đầu kỳ; tạo phiếu OPENING chờ duyệt",
+      "columns": [
+        {
+          "name": "batch_code",
+          "type": "text",
+          "required": true,
+          "rule": "Mã đợt duy nhất; retry không đổi mã"
+        },
+        {
+          "name": "business_date",
+          "type": "date",
+          "required": true,
+          "rule": "YYYY-MM-DD; cutover trong kỳ mở"
+        },
+        {
+          "name": "warehouse_code",
+          "type": "text",
+          "required": true,
+          "rule": "FK kho"
+        },
+        {
+          "name": "location_code",
+          "type": "text",
+          "required": true,
+          "rule": "Vị trí lá cùng kho"
+        },
+        {
+          "name": "sku",
+          "type": "text",
+          "required": true,
+          "rule": "FK SKU"
+        },
+        {
+          "name": "lot_code",
+          "type": "text",
+          "required": false,
+          "rule": "Bắt buộc với LOT"
+        },
+        {
+          "name": "serial_code",
+          "type": "text",
+          "required": false,
+          "rule": "Bắt buộc với SERIAL"
+        },
+        {
+          "name": "quantity_base",
+          "type": "decimal",
+          "required": true,
+          "rule": ">0; SERIAL=1; theo base UOM, tối đa 6 số lẻ"
+        }
+      ],
+      "example": [
+        [
+          "OPEN-DEMO",
+          "2026-09-26",
+          "WH-A",
+          "A-01",
+          "SKU001",
+          "LOT001",
+          "",
+          "100"
+        ],
+        [
+          "OPEN-DEMO",
+          "2026-09-26",
+          "WH-A",
+          "A-01",
+          "SKU002",
+          "",
+          "SN0001",
+          "1"
+        ]
+      ]
+    },
+    {
+      "name": "12_open_orders",
+      "description": "Đơn đang mở, chỉ nạp lượng còn lại; không nạp lịch sử đã thực hiện",
+      "columns": [
+        {
+          "name": "external_number",
+          "type": "text",
+          "required": true,
+          "rule": "Mã hệ thống cũ unique theo kind"
+        },
+        {
+          "name": "kind",
+          "type": "text",
+          "required": true,
+          "rule": "PO/SO"
+        },
+        {
+          "name": "warehouse_code",
+          "type": "text",
+          "required": true,
+          "rule": "FK kho"
+        },
+        {
+          "name": "partner_code",
+          "type": "text",
+          "required": true,
+          "rule": "FK đối tác đúng loại"
+        },
+        {
+          "name": "business_date",
+          "type": "date",
+          "required": true,
+          "rule": "YYYY-MM-DD"
+        },
+        {
+          "name": "line_no",
+          "type": "integer",
+          "required": true,
+          "rule": ">0 unique trong phiếu"
+        },
+        {
+          "name": "sku",
+          "type": "text",
+          "required": true,
+          "rule": "FK SKU"
+        },
+        {
+          "name": "uom_code",
+          "type": "text",
+          "required": true,
+          "rule": "Quy đổi active"
+        },
+        {
+          "name": "remaining_quantity",
+          "type": "decimal",
+          "required": true,
+          "rule": ">0 lượng chưa thực hiện"
+        },
+        {
+          "name": "note",
+          "type": "text",
+          "required": false,
+          "rule": "Tham chiếu nguồn"
+        }
+      ],
+      "example": [
+        [
+          "PO-DEMO",
+          "PO",
+          "WH-A",
+          "NCC001",
+          "2026-09-26",
+          1,
+          "SKU001",
+          "CAI",
+          "20",
+          "Dữ liệu minh họa"
+        ]
+      ]
+    },
+    {
+      "name": "13_grants",
+      "description": "Đề nghị cấp quyền; import không tự kích hoạt grant",
+      "columns": [
+        {
+          "name": "username",
+          "type": "text",
+          "required": true,
+          "rule": "User phải tồn tại; không chứa mật khẩu"
+        },
+        {
+          "name": "role_code",
+          "type": "text",
+          "required": true,
+          "rule": "FK role"
+        },
+        {
+          "name": "scope_kind",
+          "type": "text",
+          "required": true,
+          "rule": "GLOBAL/WAREHOUSE/ALL_WAREHOUSES"
+        },
+        {
+          "name": "warehouse_code",
+          "type": "text",
+          "required": false,
+          "rule": "Bắt buộc chỉ khi WAREHOUSE"
+        },
+        {
+          "name": "valid_from",
+          "type": "datetime",
+          "required": true,
+          "rule": "ISO8601 có timezone"
+        },
+        {
+          "name": "valid_until",
+          "type": "datetime",
+          "required": false,
+          "rule": "ISO8601, lớn hơn valid_from"
+        },
+        {
+          "name": "approval_reference",
+          "type": "text",
+          "required": true,
+          "rule": "Biên bản người thứ hai phê chuẩn"
+        }
+      ],
+      "example": [
+        [
+          "receiver.demo",
+          "RECEIVER",
+          "WAREHOUSE",
+          "WH-A",
+          "2026-09-26T08:00:00+07:00",
+          "",
+          "DEMO-NOT-APPROVED"
+        ]
+      ]
+    },
+    {
+      "name": "14_prices",
+      "description": "Giá tham chiếu quản trị",
+      "columns": [
+        {
+          "name": "sku",
+          "type": "text",
+          "required": true,
+          "rule": "FK SKU"
+        },
+        {
+          "name": "effective_on",
+          "type": "date",
+          "required": true,
+          "rule": "YYYY-MM-DD; unique theo SKU"
+        },
+        {
+          "name": "amount",
+          "type": "decimal",
+          "required": true,
+          "rule": ">=0; tối đa 4 số lẻ"
+        },
+        {
+          "name": "currency",
+          "type": "text",
+          "required": true,
+          "rule": "VND"
+        },
+        {
+          "name": "source",
+          "type": "text",
+          "required": true,
+          "rule": "Nguồn giá"
+        }
+      ],
+      "example": [
+        [
+          "SKU001",
+          "2026-09-26",
+          "15000",
+          "VND",
+          "Giá minh họa, không dùng production"
+        ]
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+@startuml
+left to right direction
+actor "Mua hàng" as BUYER
+rectangle "WMS" {
+usecase "UC05 Lập và gửi yêu cầu mua" as UC05
+usecase "UC15 Trả nhà cung cấp" as UC15
+}
+BUYER -- UC05
+BUYER -- UC15
+@enduml

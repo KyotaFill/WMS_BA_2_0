@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1250" height="900" viewBox="0 0 1250 900">
+<rect x="0" y="0" width="1250" height="900" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="35" y="35" font-family="Tinos,Times New Roman,serif" font-size="24" text-anchor="start" fill="#19344b" font-weight="bold">Tổng quát hóa vai trò người dùng</text>
+<text x="35" y="62" font-family="Tinos,Times New Roman,serif" font-size="13" text-anchor="start" fill="#6b7b8c">WMS / BA 2.0 / 27-09-2026 / DRAFT</text>
+<path d="M855,168 L315,338" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M315,338 L324.6444757574741,328.67347399277236 L328.24790626026663,340.11966500164266 Z" stroke="#526d87" fill="#ffffff" stroke-width="1.6"/>
+<path d="M855,358 L315,338" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M315,338 L327.21384796826044,332.44825092351795 L326.76970804214193,344.4400289287192 Z" stroke="#526d87" fill="#ffffff" stroke-width="1.6"/>
+<ellipse cx="280.0" cy="281.0" rx="17.0" ry="17.0" fill="#ffffff" stroke="#19344b" stroke-width="2"/>
+<path d="M280,298 L280,360" stroke="#526d87" fill="none" stroke-width="2.5"/>
+<path d="M245,338 L280,315 L315,338" stroke="#526d87" fill="none" stroke-width="2.5"/>
+<path d="M250,402 L280,360 L310,402" stroke="#526d87" fill="none" stroke-width="2.5"/>
+<text x="150" y="320" font-family="Tinos,Times New Roman,serif" font-size="19" text-anchor="middle" fill="#19344b" font-weight="bold">Người dùng WMS</text>
+<ellipse cx="890.0" cy="111.0" rx="17.0" ry="17.0" fill="#ffffff" stroke="#19344b" stroke-width="2"/>
+<path d="M890,128 L890,190" stroke="#526d87" fill="none" stroke-width="2.5"/>
+<path d="M855,168 L890,145 L925,168" stroke="#526d87" fill="none" stroke-width="2.5"/>
+<path d="M860,232 L890,190 L920,232" stroke="#526d87" fill="none" stroke-width="2.5"/>
+<text x="1070" y="150" font-family="Tinos,Times New Roman,serif" font-size="19" text-anchor="middle" fill="#19344b" font-weight="bold">Ban điều hành</text>
+<ellipse cx="890.0" cy="301.0" rx="17.0" ry="17.0" fill="#ffffff" stroke="#19344b" stroke-width="2"/>
+<path d="M890,318 L890,380" stroke="#526d87" fill="none" stroke-width="2.5"/>
+<path d="M855,358 L890,335 L925,358" stroke="#526d87" fill="none" stroke-width="2.5"/>
+<path d="M860,422 L890,380 L920,422" stroke="#526d87" fill="none" stroke-width="2.5"/>
+<text x="1070" y="340" font-family="Tinos,Times New Roman,serif" font-size="19" text-anchor="middle" fill="#19344b" font-weight="bold">Kiểm toán</text>
+<text x="35" y="868" font-family="Tinos,Times New Roman,serif" font-size="13" text-anchor="start" fill="#6b7b8c">Ch8 PDF 23 | Tam giác rỗng hướng actor tổng quát. Kế thừa tương tác chung không tự cấp quyền nghiệp vụ.</text>
+</svg>

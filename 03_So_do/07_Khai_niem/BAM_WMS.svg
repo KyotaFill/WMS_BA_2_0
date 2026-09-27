@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1370" height="930" viewBox="0 0 1370 930">
+<rect x="0" y="0" width="1370" height="930" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="35" y="35" font-family="Tinos,Times New Roman,serif" font-size="24" text-anchor="start" fill="#19344b" font-weight="bold">Business Activity Model / đề xuất</text>
+<text x="35" y="62" font-family="Tinos,Times New Roman,serif" font-size="13" text-anchor="start" fill="#6b7b8c">WMS / BA 2.0 / 27-09-2026 / DRAFT</text>
+<path d="M550,230 L300,380" stroke="#526d87" fill="none" stroke-width="1.6" stroke-dasharray="6 4"/>
+<path d="M307.2029405759854,368.6810933805944 L300,380 L313.37688964111567,378.97100848914494" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M410,445 L500,445" stroke="#526d87" fill="none" stroke-width="1.6" stroke-dasharray="6 4"/>
+<path d="M488.0,451.0 L500,445 L488.0,439.0" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M850,445 L940,445" stroke="#526d87" fill="none" stroke-width="1.6" stroke-dasharray="6 4"/>
+<path d="M928.0,451.0 L940,445 L928.0,439.0" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M1100,510 L800,690" stroke="#526d87" fill="none" stroke-width="1.6" stroke-dasharray="6 4"/>
+<path d="M807.2029405759854,678.6810933805945 L800,690 L813.3768896411157,688.971008489145" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M670,690 L670,510" stroke="#526d87" fill="none" stroke-width="1.6" stroke-dasharray="6 4"/>
+<path d="M676.0,522.0 L670,510 L664.0,522.0" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M675,820 L675,860 L25,860 L25,80 L675,80 L675,100" stroke="#526d87" fill="none" stroke-width="1.6" stroke-dasharray="6 4"/>
+<path d="M669.0,88.0 L675,100 L681.0,88.0" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<rect x="500" y="100" width="350" height="130" rx="0" fill="#f8fafc" stroke="#879caf" stroke-width="1.3"/>
+<rect x="500" y="100" width="350" height="35" rx="0" fill="#19344b" stroke="#19344b" stroke-width="1.3"/>
+<text x="510" y="124" font-family="Tinos,Times New Roman,serif" font-size="18" text-anchor="start" fill="#ffffff" font-weight="bold">PLAN</text>
+<text x="512" y="162" font-family="Tinos,Times New Roman,serif" font-size="16" text-anchor="start" fill="#19344b">Kế hoạch kho</text>
+<text x="512" y="189" font-family="Tinos,Times New Roman,serif" font-size="16" text-anchor="start" fill="#19344b">Mục tiêu và năng lực</text>
+<rect x="60" y="380" width="350" height="130" rx="0" fill="#f8fafc" stroke="#879caf" stroke-width="1.3"/>
+<rect x="60" y="380" width="350" height="35" rx="0" fill="#19344b" stroke="#19344b" stroke-width="1.3"/>
+<text x="70" y="404" font-family="Tinos,Times New Roman,serif" font-size="18" text-anchor="start" fill="#ffffff" font-weight="bold">ENABLE</text>
+<text x="72" y="442" font-family="Tinos,Times New Roman,serif" font-size="16" text-anchor="start" fill="#19344b">Danh mục, người</text>
+<text x="72" y="469" font-family="Tinos,Times New Roman,serif" font-size="16" text-anchor="start" fill="#19344b">Hạ tầng và quy tắc</text>
+<rect x="500" y="380" width="350" height="130" rx="0" fill="#f8fafc" stroke="#879caf" stroke-width="1.3"/>
+<rect x="500" y="380" width="350" height="35" rx="0" fill="#19344b" stroke="#19344b" stroke-width="1.3"/>
+<text x="510" y="404" font-family="Tinos,Times New Roman,serif" font-size="18" text-anchor="start" fill="#ffffff" font-weight="bold">DO</text>
+<text x="512" y="442" font-family="Tinos,Times New Roman,serif" font-size="16" text-anchor="start" fill="#19344b">Nhận, cất, cấp</text>
+<text x="512" y="469" font-family="Tinos,Times New Roman,serif" font-size="16" text-anchor="start" fill="#19344b">Chuyển và kiểm kê</text>
+<rect x="940" y="380" width="350" height="130" rx="0" fill="#f8fafc" stroke="#879caf" stroke-width="1.3"/>
+<rect x="940" y="380" width="350" height="35" rx="0" fill="#19344b" stroke="#19344b" stroke-width="1.3"/>
+<text x="950" y="404" font-family="Tinos,Times New Roman,serif" font-size="18" text-anchor="start" fill="#ffffff" font-weight="bold">MONITOR</text>
+<text x="952" y="442" font-family="Tinos,Times New Roman,serif" font-size="16" text-anchor="start" fill="#19344b">Đối soát tồn</text>
+<text x="952" y="469" font-family="Tinos,Times New Roman,serif" font-size="16" text-anchor="start" fill="#19344b">Đo thời gian, sai lệch</text>
+<rect x="500" y="690" width="350" height="130" rx="0" fill="#f8fafc" stroke="#879caf" stroke-width="1.3"/>
+<rect x="500" y="690" width="350" height="35" rx="0" fill="#19344b" stroke="#19344b" stroke-width="1.3"/>
+<text x="510" y="714" font-family="Tinos,Times New Roman,serif" font-size="18" text-anchor="start" fill="#ffffff" font-weight="bold">CONTROL</text>
+<text x="512" y="752" font-family="Tinos,Times New Roman,serif" font-size="16" text-anchor="start" fill="#19344b">Điều chỉnh quy tắc</text>
+<text x="512" y="779" font-family="Tinos,Times New Roman,serif" font-size="16" text-anchor="start" fill="#19344b">Năng lực và xử lý lệch</text>
+<rect x="310" y="270" width="135" height="24" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="377.5" y="289" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">định hướng</text>
+<rect x="960" y="590" width="145" height="24" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="1032.5" y="609" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">cung cấp số đo</text>
+<rect x="685" y="590" width="115" height="24" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="742.5" y="609" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">kiểm soát</text>
+<text x="35" y="898" font-family="Tinos,Times New Roman,serif" font-size="13" text-anchor="start" fill="#6b7b8c">Ch5 PDF 38-40 | Mô hình phụ thuộc hoạt động cần có; chưa phải đồng thuận stakeholder và không biểu diễn sequence flow.</text>
+</svg>

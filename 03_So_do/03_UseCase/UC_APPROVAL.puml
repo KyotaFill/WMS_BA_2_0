@@ -1,0 +1,8 @@
+@startuml
+left to right direction
+actor "Người duyệt" as APPROVER
+rectangle "WMS" {
+usecase "UC30 Duyệt chứng từ" as UC30
+}
+APPROVER -- UC30
+@enduml

@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1680" height="1190" viewBox="0 0 1680 1190">
+<rect x="0" y="0" width="1680" height="1190" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="35" y="35" font-family="Tinos,Times New Roman,serif" font-size="24" text-anchor="start" fill="#19344b" font-weight="bold">Trình tự ghi sổ và xử lý timeout</text>
+<text x="35" y="62" font-family="Tinos,Times New Roman,serif" font-size="13" text-anchor="start" fill="#6b7b8c">WMS / BA 2.0 / 27-09-2026 / DRAFT</text>
+<path d="M235,140 L235,1130" stroke="#a2b1be" fill="none" stroke-width="1.6" stroke-dasharray="6 4"/>
+<path d="M605,140 L605,1130" stroke="#a2b1be" fill="none" stroke-width="1.6" stroke-dasharray="6 4"/>
+<path d="M1035,140 L1035,1130" stroke="#a2b1be" fill="none" stroke-width="1.6" stroke-dasharray="6 4"/>
+<path d="M1465,140 L1465,1130" stroke="#a2b1be" fill="none" stroke-width="1.6" stroke-dasharray="6 4"/>
+<path d="M235,205 L605,205" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M605,205 L593.0,211.0 L593.0,199.0 Z" stroke="#526d87" fill="#526d87" stroke-width="1.6"/>
+<path d="M605,280 L1035,280" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M1035,280 L1023.0,286.0 L1023.0,274.0 Z" stroke="#526d87" fill="#526d87" stroke-width="1.6"/>
+<path d="M1035,355 L1465,355" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M1465,355 L1453.0,361.0 L1453.0,349.0 Z" stroke="#526d87" fill="#526d87" stroke-width="1.6"/>
+<path d="M1035,430 L1465,430" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M1465,430 L1453.0,436.0 L1453.0,424.0 Z" stroke="#526d87" fill="#526d87" stroke-width="1.6"/>
+<path d="M1035,505 L1465,505" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M1465,505 L1453.0,511.0 L1453.0,499.0 Z" stroke="#526d87" fill="#526d87" stroke-width="1.6"/>
+<path d="M1035,580 L1465,580" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M1465,580 L1453.0,586.0 L1453.0,574.0 Z" stroke="#526d87" fill="#526d87" stroke-width="1.6"/>
+<path d="M1035,655 L605,655" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M605,655 L617.0,649.0 L617.0,661.0 Z" stroke="#526d87" fill="#526d87" stroke-width="1.6"/>
+<path d="M1035,730 L1465,730" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M1465,730 L1453.0,736.0 L1453.0,724.0 Z" stroke="#526d87" fill="#526d87" stroke-width="1.6"/>
+<path d="M1035,805 L1465,805" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M1465,805 L1453.0,811.0 L1453.0,799.0 Z" stroke="#526d87" fill="#526d87" stroke-width="1.6"/>
+<path d="M1035,880 L605,880" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M605,880 L617.0,874.0 L617.0,886.0 Z" stroke="#526d87" fill="#526d87" stroke-width="1.6"/>
+<path d="M605,955 L1035,955" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M1035,955 L1023.0,961.0 L1023.0,949.0 Z" stroke="#526d87" fill="#526d87" stroke-width="1.6"/>
+<path d="M1035,1030 L605,1030" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M605,1030 L617.0,1024.0 L617.0,1036.0 Z" stroke="#526d87" fill="#526d87" stroke-width="1.6"/>
+<rect x="100" y="75" width="270" height="65" rx="10" fill="#edf4fa" stroke="#879caf" stroke-width="1.3"/>
+<text x="235.0" y="113.5" font-family="Tinos,Times New Roman,serif" font-size="20" text-anchor="middle" fill="#19344b" font-weight="bold">Nhân viên</text>
+<rect x="470" y="75" width="270" height="65" rx="10" fill="#edf4fa" stroke="#879caf" stroke-width="1.3"/>
+<text x="605.0" y="113.5" font-family="Tinos,Times New Roman,serif" font-size="20" text-anchor="middle" fill="#19344b" font-weight="bold">Tkinter Presenter</text>
+<rect x="900" y="75" width="270" height="65" rx="10" fill="#edf4fa" stroke="#879caf" stroke-width="1.3"/>
+<text x="1035.0" y="113.5" font-family="Tinos,Times New Roman,serif" font-size="20" text-anchor="middle" fill="#19344b" font-weight="bold">FastAPI Handler</text>
+<rect x="1330" y="75" width="270" height="65" rx="10" fill="#edf4fa" stroke="#879caf" stroke-width="1.3"/>
+<text x="1465.0" y="113.5" font-family="Tinos,Times New Roman,serif" font-size="20" text-anchor="middle" fill="#19344b" font-weight="bold">PostgreSQL</text>
+<rect x="334.23828125" y="173" width="171.5234375" height="25" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="420.0" y="193" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">1. Xác nhận ghi sổ online</text>
+<rect x="658.9921875" y="248" width="322.015625" height="25" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="820.0" y="268" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">2. Persist key/payload, rồi POST + version + key</text>
+<rect x="1125.81640625" y="323" width="248.3671875" height="25" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="1250.0" y="343" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">3. BEGIN; serialize idempotency key</text>
+<rect x="1084.26171875" y="398" width="331.4765625" height="25" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="1250.0" y="418" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">4. Check quyền, khóa document / period / location</text>
+<rect x="1113.15625" y="473" width="273.6875" height="25" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="1250.0" y="493" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">5. Khóa stock item / balance / reservation</text>
+<rect x="1143.33203125" y="548" width="213.3359375" height="25" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="1250.0" y="568" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">6a. Không hợp lệ: ROLLBACK</text>
+<rect x="681.0234375" y="623" width="277.953125" height="25" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="820.0" y="643" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">6b. Trả lỗi có mã; giữ nội dung đang nhập</text>
+<rect x="1073.9921875" y="698" width="352.015625" height="25" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="1250.0" y="718" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">7a. Hợp lệ: ledger + balance + audit + outbox + result</text>
+<rect x="1201.109375" y="773" width="97.78125" height="25" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="1250.0" y="793" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">7b. COMMIT</text>
+<rect x="746.90625" y="848" width="146.1875" height="25" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="820.0" y="868" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">8. Kết quả đã commit</text>
+<rect x="672.703125" y="923" width="294.59375" height="25" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="820.0" y="943" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">9. Mất phản hồi: GET operation bằng key cũ</text>
+<rect x="636.49609375" y="998" width="367.0078125" height="25" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="820.0" y="1018" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">10. Trả kết quả hoặc NOT_FOUND; retry vẫn cùng key</text>
+<text x="35" y="1158" font-family="Tinos,Times New Roman,serif" font-size="13" text-anchor="start" fill="#6b7b8c">6a-6b là nhánh lỗi; 7a-8 là nhánh hợp lệ. Chỉ báo POSTED sau COMMIT. NOT_FOUND không cho phép đổi key.</text>
+</svg>

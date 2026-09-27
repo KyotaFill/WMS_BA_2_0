@@ -1,0 +1,19 @@
+[
+  {
+    "id": "CR-TEMPLATE",
+    "requested_by": "",
+    "date": "",
+    "reason": "",
+    "affected_requirements": [],
+    "process_impact": "",
+    "data_impact": "",
+    "permission_impact": "",
+    "api_impact": "",
+    "test_impact": "",
+    "cost_impact": "",
+    "schedule_impact": "",
+    "decision": "",
+    "approved_by": "",
+    "status": "TEMPLATE"
+  }
+]

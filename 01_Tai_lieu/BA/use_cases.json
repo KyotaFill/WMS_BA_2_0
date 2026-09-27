@@ -1,0 +1,1773 @@
+[
+  {
+    "id": "UC01",
+    "name": "Đăng nhập và MFA",
+    "actor": "Mọi người dùng",
+    "permission": "Không cần phiên; rate limit",
+    "precondition": "User hoạt động, thiết bị trỏ đúng server TLS",
+    "main_flow": "Nhập tài khoản; server kiểm tra hash; challenge MFA nếu đặc quyền; cấp phiên; tải policy/quyền/kho.",
+    "exceptions": "Sai mật khẩu không tiết lộ user tồn tại; user bị khóa từ chối; refresh bị phát lại thu hồi chuỗi.",
+    "postcondition": "Token RAM/OS vault, không SQLite; audit đăng nhập.",
+    "tables": "app_user,auth_session,mfa_factor",
+    "test": "T11",
+    "status": "DRAFT - chờ thẩm định nghiệp vụ",
+    "priority": "Must",
+    "source": "Hồ sơ WMS 1.1; cần stakeholder xác nhận",
+    "summary": "Token RAM/OS vault, không SQLite; audit đăng nhập.",
+    "trigger": "Tác nhân chọn chức năng đăng nhập và mfa",
+    "scope": "WMS desktop + API nội bộ",
+    "nfr": [
+      "NFR01",
+      "NFR03"
+    ],
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "basic_steps": [
+      "Người dùng nhập tài khoản và mật khẩu.",
+      "Hệ thống kiểm tra tài khoản và giới hạn thử đăng nhập.",
+      "Hệ thống kiểm tra mật khẩu; tại điểm mở rộng MFA, gọi UC29 nếu chính sách yêu cầu.",
+      "Hệ thống cấp phiên và tải quyền theo kho; người dùng vào màn hình làm việc."
+    ],
+    "alternatives": [
+      {
+        "at": "Bước 3",
+        "condition": "Tài khoản không thuộc chính sách MFA",
+        "response": "Bỏ qua UC29; tiếp tục bước 4."
+      }
+    ],
+    "exceptions_detail": [
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "Sai mật khẩu không tiết lộ user tồn tại",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "user bị khóa từ chối",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "refresh bị phát lại thu hồi chuỗi",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      }
+    ],
+    "minimal_guarantee": "Bảo toàn dữ liệu đã xác nhận; lệnh thất bại không để lại thay đổi một phần. Lần thực hiện đã commit được tra cứu theo mã thao tác."
+  },
+  {
+    "id": "UC02",
+    "name": "Cấp vai trò theo kho",
+    "actor": "SYSADMIN",
+    "permission": "role.manage",
+    "precondition": "MFA; có yêu cầu cấp quyền được duyệt",
+    "main_flow": "Chọn user; role; scope; thời hạn; kiểm tra phân tách nhiệm vụ; ghi grant và audit; tăng auth_version.",
+    "exceptions": "Chặn tự nâng quyền nghiệp vụ; warehouse scope thiếu mã bị lỗi; cần người thứ hai duyệt ngoài hệ thống ở v1.",
+    "postcondition": "Quyền có hiệu lực server và thu hồi phiên/quyền cũ.",
+    "tables": "user_role_grant,role_permission,audit_event",
+    "test": "T07",
+    "status": "DRAFT - chờ thẩm định nghiệp vụ",
+    "priority": "Must",
+    "source": "Hồ sơ WMS 1.1; cần stakeholder xác nhận",
+    "summary": "Quyền có hiệu lực server và thu hồi phiên/quyền cũ.",
+    "trigger": "Tác nhân chọn chức năng cấp vai trò theo kho",
+    "scope": "WMS desktop + API nội bộ",
+    "nfr": [
+      "NFR01",
+      "NFR03"
+    ],
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "basic_steps": [
+      "Quản trị chọn tài khoản, vai trò, kho và thời hạn dựa trên yêu cầu cấp quyền đã được người thứ hai phê chuẩn.",
+      "Hệ thống kiểm tra phạm vi và phân tách nhiệm vụ; chặn tự nâng quyền nghiệp vụ.",
+      "Quản trị xác nhận cấp quyền.",
+      "Hệ thống lưu grant, nhật ký và tăng auth_version; các lệnh tiếp theo dùng quyền mới."
+    ],
+    "alternatives": [
+      {
+        "at": "Trước bước 1",
+        "condition": "Tác nhân chưa sẵn sàng thực hiện",
+        "response": "Thoát chức năng; không tạo hiệu ứng nghiệp vụ mới."
+      }
+    ],
+    "exceptions_detail": [
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "Chặn tự nâng quyền nghiệp vụ",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "warehouse scope thiếu mã bị lỗi",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "cần người thứ hai duyệt ngoài hệ thống ở v1",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      }
+    ],
+    "minimal_guarantee": "Bảo toàn dữ liệu đã xác nhận; lệnh thất bại không để lại thay đổi một phần. Lần thực hiện đã commit được tra cứu theo mã thao tác."
+  },
+  {
+    "id": "UC03",
+    "name": "Nhập danh mục hàng và quy cách",
+    "actor": "MASTER_DATA",
+    "permission": "master.write",
+    "precondition": "UOM và nhóm đã có",
+    "main_flow": "Tạo SKU/base UOM/tracking; tạo quy đổi revision 1; barcode; validate; lưu và audit.",
+    "exceptions": "Barcode trùng; tỷ lệ <=0; đổi tracking khi có phát sinh đều chặn.",
+    "postcondition": "SKU tra được từ desktop khác; tồn không đổi.",
+    "tables": "product,product_uom,barcode",
+    "test": "T12",
+    "status": "DRAFT - chờ thẩm định nghiệp vụ",
+    "priority": "Must",
+    "source": "Hồ sơ WMS 1.1; cần stakeholder xác nhận",
+    "summary": "SKU tra được từ desktop khác; tồn không đổi.",
+    "trigger": "Tác nhân chọn chức năng nhập danh mục hàng và quy cách",
+    "scope": "WMS desktop + API nội bộ",
+    "nfr": [
+      "NFR01",
+      "NFR03"
+    ],
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "basic_steps": [
+      "Người quản lý danh mục nhập SKU, tên, đơn vị cơ sở và phương thức theo dõi.",
+      "Hệ thống kiểm tra mã, đơn vị và điều kiện sửa sản phẩm đã phát sinh.",
+      "Tác nhân nhập quy đổi và barcode rồi xác nhận.",
+      "Hệ thống lưu revision quy đổi và nhật ký; trả danh mục mới mà không đổi tồn."
+    ],
+    "alternatives": [
+      {
+        "at": "Trước bước 1",
+        "condition": "Tác nhân chưa sẵn sàng thực hiện",
+        "response": "Thoát chức năng; không tạo hiệu ứng nghiệp vụ mới."
+      }
+    ],
+    "exceptions_detail": [
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "Barcode trùng",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "tỷ lệ <=0",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "đổi tracking khi có phát sinh đều chặn",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      }
+    ],
+    "minimal_guarantee": "Bảo toàn dữ liệu đã xác nhận; lệnh thất bại không để lại thay đổi một phần. Lần thực hiện đã commit được tra cứu theo mã thao tác."
+  },
+  {
+    "id": "UC04",
+    "name": "Tạo kho và vị trí",
+    "actor": "MASTER_DATA",
+    "permission": "warehouse.configure",
+    "precondition": "Có mã kho chuẩn hóa",
+    "main_flow": "Tạo kho; nhóm vị trí; vị trí lá; cấu hình RECEIVING/QUARANTINE/STORAGE; duyệt cấu trúc.",
+    "exceptions": "Chu kỳ cây, khác kho với cha, đổi kind khi có tồn/giữ chỗ bị chặn.",
+    "postcondition": "Cấu trúc hợp lệ, chưa cấp quyền tự động cho người tạo.",
+    "tables": "warehouse,location",
+    "test": "T13",
+    "status": "DRAFT - chờ thẩm định nghiệp vụ",
+    "priority": "Must",
+    "source": "Hồ sơ WMS 1.1; cần stakeholder xác nhận",
+    "summary": "Cấu trúc hợp lệ, chưa cấp quyền tự động cho người tạo.",
+    "trigger": "Tác nhân chọn chức năng tạo kho và vị trí",
+    "scope": "WMS desktop + API nội bộ",
+    "nfr": [
+      "NFR01",
+      "NFR03"
+    ],
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "basic_steps": [
+      "Tác nhân chọn kho, nhập mã và cấu trúc vị trí.",
+      "Hệ thống kiểm tra cha cùng kho, không chu kỳ và loại vị trí.",
+      "Tác nhân xác nhận cấu trúc.",
+      "Hệ thống lưu; không tự cấp quyền vận hành kho cho người tạo."
+    ],
+    "alternatives": [
+      {
+        "at": "Trước bước 1",
+        "condition": "Tác nhân chưa sẵn sàng thực hiện",
+        "response": "Thoát chức năng; không tạo hiệu ứng nghiệp vụ mới."
+      }
+    ],
+    "exceptions_detail": [
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "Chu kỳ cây, khác kho với cha, đổi kind khi có tồn/giữ chỗ bị chặn",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      }
+    ],
+    "minimal_guarantee": "Bảo toàn dữ liệu đã xác nhận; lệnh thất bại không để lại thay đổi một phần. Lần thực hiện đã commit được tra cứu theo mã thao tác."
+  },
+  {
+    "id": "UC05",
+    "name": "Lập và gửi yêu cầu mua",
+    "actor": "BUYER; người duyệt tham gia UC30 riêng",
+    "permission": "po.draft; gửi theo policy của loại PO",
+    "precondition": "Có đối tác nhà cung cấp, SKU hoạt động",
+    "main_flow": "Tạo PO DRAFT; nhập dòng/UOM; submit version; người khác duyệt theo policy; APPROVED.",
+    "exceptions": "Sửa sau submit vô hiệu duyệt; thiếu role đúng bước bị từ chối.",
+    "postcondition": "PO mở để nhận từng phần, không tăng tồn.",
+    "tables": "document,document_line,approval_request,approval_step",
+    "test": "T14",
+    "status": "DRAFT - chờ thẩm định nghiệp vụ",
+    "priority": "Must",
+    "source": "Hồ sơ WMS 1.1; cần stakeholder xác nhận",
+    "summary": "Tạo PO và đưa vào quy trình duyệt; quyết định duyệt là UC30 riêng.",
+    "trigger": "Tác nhân chọn chức năng lập và duyệt yêu cầu mua",
+    "scope": "WMS desktop + API nội bộ",
+    "nfr": [
+      "NFR01",
+      "NFR03"
+    ],
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "basic_steps": [
+      "Người mua lập PO, chọn nhà cung cấp và nhập dòng hàng.",
+      "Hệ thống kiểm tra đơn vị, SKU, số lượng và lưu DRAFT.",
+      "Người mua gửi phiếu chờ duyệt; hệ thống chốt version được gửi.",
+      "Người duyệt xử lý trong UC30 độc lập; PO APPROVED mới được dùng để nhận."
+    ],
+    "alternatives": [
+      {
+        "at": "Trước bước 1",
+        "condition": "Tác nhân chưa sẵn sàng thực hiện",
+        "response": "Thoát chức năng; không tạo hiệu ứng nghiệp vụ mới."
+      }
+    ],
+    "exceptions_detail": [
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "Sửa sau submit vô hiệu duyệt",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "thiếu role đúng bước bị từ chối",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      }
+    ],
+    "minimal_guarantee": "Bảo toàn dữ liệu đã xác nhận; lệnh thất bại không để lại thay đổi một phần. Lần thực hiện đã commit được tra cứu theo mã thao tác."
+  },
+  {
+    "id": "UC06",
+    "name": "Nhận hàng từng phần",
+    "actor": "RECEIVER",
+    "permission": "receipt.draft,receipt.post",
+    "precondition": "PO APPROVED còn lượng được nhận; người nhận có quyền và được giao kho. Receipt phải APPROVED trước bước 5, không bắt buộc tồn tại trước bước 1.",
+    "main_flow": "Chọn dòng PO; lập receipt có source_line; quét SKU/lô/serial; nhập lượng; post vào nhận/cách ly; cập nhật tiến độ PO.",
+    "exceptions": "Nhận vượt remaining mặc định chặn; serial đang tồn chặn; timeout giữ execution_key và tra kết quả.",
+    "postcondition": "Lượng thực nhận tăng đúng một lần, PO còn mở phần thiếu.",
+    "tables": "document_line,inventory_transaction,stock_move,stock_balance",
+    "test": "T01,T02",
+    "status": "DRAFT - chờ thẩm định nghiệp vụ",
+    "priority": "Must",
+    "source": "Hồ sơ WMS 1.1; cần stakeholder xác nhận",
+    "summary": "Lượng thực nhận tăng đúng một lần, PO còn mở phần thiếu.",
+    "trigger": "Tác nhân chọn chức năng nhận hàng từng phần",
+    "scope": "WMS desktop + API nội bộ",
+    "nfr": [
+      "NFR01",
+      "NFR03",
+      "NFR02"
+    ],
+    "rules": [
+      "BR01",
+      "BR02",
+      "BR03",
+      "BR04",
+      "BR05"
+    ],
+    "basic_steps": [
+      "Nhân viên nhận chọn PO APPROVED và các dòng còn được nhận.",
+      "Hệ thống hiển thị lượng còn lại trong phạm vi kho được giao.",
+      "Nhân viên tạo receipt, quét SKU/lô/serial và nhập lượng thực nhận.",
+      "Hệ thống kiểm tra và lưu nháp; receipt được gửi và duyệt qua UC30 theo policy.",
+      "Nhân viên xác nhận ghi sổ receipt đã duyệt khi đang online.",
+      "Hệ thống kiểm tra lại quyền, version, lượng còn lại và tracking trong một giao dịch; ghi nhận vào RECEIVING/QUARANTINE.",
+      "Hệ thống trả mã giao dịch và lượng PO còn mở; nhân viên đối chiếu kết quả."
+    ],
+    "alternatives": [
+      {
+        "at": "Bước 3",
+        "condition": "Chỉ nhận một phần PO",
+        "response": "Tiếp tục bước 4 với lượng thực nhận; sau bước 7 PO còn mở phần thiếu."
+      }
+    ],
+    "exceptions_detail": [
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "Nhận vượt remaining mặc định chặn",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "serial đang tồn chặn",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "timeout giữ execution_key và tra kết quả",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Sau khi gửi lệnh ghi sổ",
+        "condition": "Mất phản hồi, chưa biết server đã commit hay chưa",
+        "response": "Đặt UNKNOWN; tra cùng mã thao tác. Không rollback giả trên UI, không đổi execution_key. Nếu đã commit thì hiển thị kết quả cũ."
+      }
+    ],
+    "minimal_guarantee": "Bảo toàn dữ liệu đã xác nhận; lệnh thất bại không để lại thay đổi một phần. Lần thực hiện đã commit được tra cứu theo mã thao tác."
+  },
+  {
+    "id": "UC07",
+    "name": "Kiểm tra và cất hàng",
+    "actor": "WAREHOUSE_MANAGER + RECEIVER",
+    "permission": "quality.decide,move.post",
+    "precondition": "Hàng ở RECEIVING/QUARANTINE, chưa giữ chỗ",
+    "main_flow": "Ghi quyết định đạt/không đạt và lượng; lập INTERNAL_MOVE tham chiếu quyết định; post hàng đạt tới STORAGE.",
+    "exceptions": "Tổng quyết định vượt lần nhận chặn; hàng không đạt ở cách ly; giữ chỗ khác không được di chuyển ngầm.",
+    "postcondition": "Tổng vật lý bảo toàn; chỉ hàng đạt/còn hạn tại STORAGE mới khả dụng.",
+    "tables": "quality_decision,document,stock_move",
+    "test": "T01",
+    "status": "DRAFT - chờ thẩm định nghiệp vụ",
+    "priority": "Must",
+    "source": "Hồ sơ WMS 1.1; cần stakeholder xác nhận",
+    "summary": "Tổng vật lý bảo toàn; chỉ hàng đạt/còn hạn tại STORAGE mới khả dụng.",
+    "trigger": "Tác nhân chọn chức năng kiểm tra và cất hàng",
+    "scope": "WMS desktop + API nội bộ",
+    "nfr": [
+      "NFR01",
+      "NFR03",
+      "NFR02"
+    ],
+    "rules": [
+      "BR01",
+      "BR02",
+      "BR03",
+      "BR04",
+      "BR05"
+    ],
+    "basic_steps": [
+      "Quản lý kho chọn lượng hàng nhận cần đánh giá, ghi đạt/không đạt và lý do.",
+      "Hệ thống kiểm tra tổng quyết định không vượt lượng đã nhận.",
+      "Nhân viên nhận chọn vị trí cất và lập INTERNAL_MOVE tham chiếu quyết định.",
+      "Hệ thống kiểm tra phê duyệt/quyền move và ghi sổ lượng đạt sang STORAGE.",
+      "Hệ thống giữ hàng không đạt tại cách ly và cập nhật khả dụng."
+    ],
+    "alternatives": [
+      {
+        "at": "Trước bước 1",
+        "condition": "Tác nhân chưa sẵn sàng thực hiện",
+        "response": "Thoát chức năng; không tạo hiệu ứng nghiệp vụ mới."
+      }
+    ],
+    "exceptions_detail": [
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "Tổng quyết định vượt lần nhận chặn",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "hàng không đạt ở cách ly",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "giữ chỗ khác không được di chuyển ngầm",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      }
+    ],
+    "minimal_guarantee": "Bảo toàn dữ liệu đã xác nhận; lệnh thất bại không để lại thay đổi một phần. Lần thực hiện đã commit được tra cứu theo mã thao tác."
+  },
+  {
+    "id": "UC08",
+    "name": "Lập yêu cầu bán và phiếu xuất",
+    "actor": "SELLER + PICKER",
+    "permission": "so.draft,issue.draft",
+    "precondition": "SKU và khách hàng hoạt động",
+    "main_flow": "Lập SO; duyệt; lập ISSUE từ dòng SO; nhập lượng từng phần; giao người soạn; duyệt ISSUE.",
+    "exceptions": "SO đóng hoặc lượng thực hiện vượt nhu cầu bị chặn khi post; bản nháp không chiếm tồn.",
+    "postcondition": "ISSUE được duyệt, liên kết dòng SO.",
+    "tables": "document,document_line,document_assignment",
+    "test": "T14",
+    "status": "DRAFT - chờ thẩm định nghiệp vụ",
+    "priority": "Must",
+    "source": "Hồ sơ WMS 1.1; cần stakeholder xác nhận",
+    "summary": "ISSUE được duyệt, liên kết dòng SO.",
+    "trigger": "Tác nhân chọn chức năng lập yêu cầu bán và phiếu xuất",
+    "scope": "WMS desktop + API nội bộ",
+    "nfr": [
+      "NFR01",
+      "NFR03"
+    ],
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "basic_steps": [
+      "Người bán lập SO từ yêu cầu khách hàng.",
+      "Hệ thống kiểm tra danh mục và lưu nháp; người có quyền gửi SO để UC30 duyệt.",
+      "Nhân viên soạn lập ISSUE tham chiếu dòng SO được duyệt, chọn lượng và người soạn.",
+      "Hệ thống lưu ISSUE; người có quyền gửi và người duyệt thực hiện UC30.",
+      "Hệ thống trả ISSUE APPROVED; bản nháp không giữ tồn."
+    ],
+    "alternatives": [
+      {
+        "at": "Trước bước 1",
+        "condition": "Tác nhân chưa sẵn sàng thực hiện",
+        "response": "Thoát chức năng; không tạo hiệu ứng nghiệp vụ mới."
+      }
+    ],
+    "exceptions_detail": [
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "SO đóng hoặc lượng thực hiện vượt nhu cầu bị chặn khi post",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "bản nháp không chiếm tồn",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      }
+    ],
+    "minimal_guarantee": "Bảo toàn dữ liệu đã xác nhận; lệnh thất bại không để lại thay đổi một phần. Lần thực hiện đã commit được tra cứu theo mã thao tác."
+  },
+  {
+    "id": "UC09",
+    "name": "Giữ hàng theo lô/vị trí",
+    "actor": "PICKER",
+    "permission": "reservation.manage",
+    "precondition": "ISSUE/TRANSFER/SUPPLIER_RETURN đã duyệt",
+    "main_flow": "Lấy đề xuất FEFO; người dùng xác nhận; khóa document/location/item/balance; kiểm tra expiry; tạo reservation và tăng reserved.",
+    "exceptions": "Thiếu hàng từ chối toàn lệnh mặc định; giữ từng phần chỉ khi request explicitly partial; hai máy không vượt tồn.",
+    "postcondition": "Khả dụng giảm, on_hand giữ nguyên.",
+    "tables": "reservation,stock_balance,lot",
+    "test": "T03",
+    "status": "DRAFT - chờ thẩm định nghiệp vụ",
+    "priority": "Must",
+    "source": "Hồ sơ WMS 1.1; cần stakeholder xác nhận",
+    "summary": "Khả dụng giảm, on_hand giữ nguyên.",
+    "trigger": "Tác nhân chọn chức năng giữ hàng theo lô/vị trí",
+    "scope": "WMS desktop + API nội bộ",
+    "nfr": [
+      "NFR01",
+      "NFR03",
+      "NFR02"
+    ],
+    "rules": [
+      "BR01",
+      "BR02",
+      "BR03",
+      "BR04",
+      "BR05"
+    ],
+    "basic_steps": [
+      "Nhân viên soạn chọn phiếu xuất đã duyệt.",
+      "Hệ thống đề xuất lô/vị trí theo FEFO và khả dụng hiện tại.",
+      "Nhân viên xác nhận nguồn và số lượng cần giữ.",
+      "Hệ thống khóa dữ liệu liên quan, kiểm tra lại hạn dùng, giữ chỗ và khóa kiểm kê.",
+      "Hệ thống tạo reservation và cập nhật reserved nguyên tử; trả phần đã giữ."
+    ],
+    "alternatives": [
+      {
+        "at": "Bước 3",
+        "condition": "Thiếu hàng nhưng request cho phép partial rõ ràng",
+        "response": "Chỉ giữ phần được xác nhận trong khả dụng; phản hồi lượng chưa đáp ứng."
+      }
+    ],
+    "exceptions_detail": [
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "Thiếu hàng từ chối toàn lệnh mặc định",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "giữ từng phần chỉ khi request explicitly partial",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "hai máy không vượt tồn",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      }
+    ],
+    "minimal_guarantee": "Bảo toàn dữ liệu đã xác nhận; lệnh thất bại không để lại thay đổi một phần. Lần thực hiện đã commit được tra cứu theo mã thao tác."
+  },
+  {
+    "id": "UC10",
+    "name": "Soạn và đóng kiện",
+    "actor": "PICKER",
+    "permission": "pick.confirm",
+    "precondition": "Có reservation hiệu lực, task được giao",
+    "main_flow": "Quét vị trí; quét đúng SKU/lô/serial; ghi picked quantity; nhập kiện; xác nhận DONE.",
+    "exceptions": "Quét sai nguồn chặn; đổi nguồn phải release/reserve lại nguyên tử; không dedup hai scan khác UUID.",
+    "postcondition": "Task DONE và kiện có dữ liệu, chưa giảm tồn.",
+    "tables": "pick_task,package,package_line",
+    "test": "T15",
+    "status": "DRAFT - chờ thẩm định nghiệp vụ",
+    "priority": "Must",
+    "source": "Hồ sơ WMS 1.1; cần stakeholder xác nhận",
+    "summary": "Task DONE và kiện có dữ liệu, chưa giảm tồn.",
+    "trigger": "Tác nhân chọn chức năng soạn và đóng kiện",
+    "scope": "WMS desktop + API nội bộ",
+    "nfr": [
+      "NFR01",
+      "NFR03"
+    ],
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "basic_steps": [
+      "Nhân viên nhận task được giao và quét vị trí, SKU/lô/serial.",
+      "Hệ thống đối chiếu nguồn với reservation còn hiệu lực.",
+      "Nhân viên nhập lượng soạn và kiện rồi xác nhận hoàn tất.",
+      "Hệ thống lưu task DONE và thông tin kiện; tồn vật lý chưa giảm."
+    ],
+    "alternatives": [
+      {
+        "at": "Trước bước 1",
+        "condition": "Tác nhân chưa sẵn sàng thực hiện",
+        "response": "Thoát chức năng; không tạo hiệu ứng nghiệp vụ mới."
+      }
+    ],
+    "exceptions_detail": [
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "Quét sai nguồn chặn",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "đổi nguồn phải release/reserve lại nguyên tử",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "không dedup hai scan khác UUID",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      }
+    ],
+    "minimal_guarantee": "Bảo toàn dữ liệu đã xác nhận; lệnh thất bại không để lại thay đổi một phần. Lần thực hiện đã commit được tra cứu theo mã thao tác."
+  },
+  {
+    "id": "UC11",
+    "name": "Xuất hàng từng phần",
+    "actor": "PICKER",
+    "permission": "issue.post",
+    "precondition": "Đã soạn, phiếu APPROVED/PARTIAL, kỳ mở",
+    "main_flow": "Chọn lượng xuất; xác nhận online; khóa nguồn/giữ chỗ; post tới EXTERNAL; consume reservation; cập nhật ISSUE và SO.",
+    "exceptions": "Hết hạn/kho bị kiểm kê/quyền bị thu hồi chặn; timeout sau commit tra operation; không gửi key mới.",
+    "postcondition": "On_hand và reserved giảm đúng lượng xuất; phiếu PARTIAL/COMPLETED.",
+    "tables": "stock_move,reservation_consumption,document_line",
+    "test": "T02,T03",
+    "status": "DRAFT - chờ thẩm định nghiệp vụ",
+    "priority": "Must",
+    "source": "Hồ sơ WMS 1.1; cần stakeholder xác nhận",
+    "summary": "On_hand và reserved giảm đúng lượng xuất; phiếu PARTIAL/COMPLETED.",
+    "trigger": "Tác nhân chọn chức năng xuất hàng từng phần",
+    "scope": "WMS desktop + API nội bộ",
+    "nfr": [
+      "NFR01",
+      "NFR03",
+      "NFR02"
+    ],
+    "rules": [
+      "BR01",
+      "BR02",
+      "BR03",
+      "BR04",
+      "BR05"
+    ],
+    "basic_steps": [
+      "Nhân viên chọn ISSUE đã soạn và lượng xuất thực tế.",
+      "Hệ thống hiển thị tóm tắt để xác nhận khi online.",
+      "Nhân viên xác nhận; máy trạm lưu mã thao tác trước khi gửi.",
+      "Hệ thống kiểm tra lại quyền, kỳ, trạng thái, tồn và reservation.",
+      "Hệ thống ghi sổ, giảm tồn và tiêu thụ giữ chỗ trong một giao dịch.",
+      "Hệ thống trả mã giao dịch, trạng thái PARTIAL/COMPLETED và SO còn lại."
+    ],
+    "alternatives": [
+      {
+        "at": "Trước bước 1",
+        "condition": "Tác nhân chưa sẵn sàng thực hiện",
+        "response": "Thoát chức năng; không tạo hiệu ứng nghiệp vụ mới."
+      }
+    ],
+    "exceptions_detail": [
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "Hết hạn/kho bị kiểm kê/quyền bị thu hồi chặn",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "timeout sau commit tra operation",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "không gửi key mới",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Sau khi gửi lệnh ghi sổ",
+        "condition": "Mất phản hồi, chưa biết server đã commit hay chưa",
+        "response": "Đặt UNKNOWN; tra cùng mã thao tác. Không rollback giả trên UI, không đổi execution_key. Nếu đã commit thì hiển thị kết quả cũ."
+      }
+    ],
+    "minimal_guarantee": "Bảo toàn dữ liệu đã xác nhận; lệnh thất bại không để lại thay đổi một phần. Lần thực hiện đã commit được tra cứu theo mã thao tác."
+  },
+  {
+    "id": "UC12",
+    "name": "Xuất chuyển kho",
+    "actor": "PICKER nguồn",
+    "permission": "transfer.dispatch",
+    "precondition": "TRANSFER duyệt cho cả hai kho; có transit riêng",
+    "main_flow": "Giữ hàng; soạn; post DISPATCH từ nguồn tới TRANSIT của phiếu; lưu lượng đã gửi.",
+    "exceptions": "Kho nguồn hết hàng chặn; không post vào transit phiếu khác; retry không tăng transit hai lần.",
+    "postcondition": "Nguồn giảm, transit tăng cùng transaction.",
+    "tables": "document,inventory_transaction,stock_move",
+    "test": "T04",
+    "status": "DRAFT - chờ thẩm định nghiệp vụ",
+    "priority": "Must",
+    "source": "Hồ sơ WMS 1.1; cần stakeholder xác nhận",
+    "summary": "Nguồn giảm, transit tăng cùng transaction.",
+    "trigger": "Tác nhân chọn chức năng xuất chuyển kho",
+    "scope": "WMS desktop + API nội bộ",
+    "nfr": [
+      "NFR01",
+      "NFR03",
+      "NFR02"
+    ],
+    "rules": [
+      "BR01",
+      "BR02",
+      "BR03",
+      "BR04",
+      "BR05"
+    ],
+    "basic_steps": [
+      "Nhân viên nguồn chọn TRANSFER đã được duyệt và task đã soạn.",
+      "Hệ thống kiểm tra quyền dispatch tại kho nguồn và transit thuộc đúng phiếu.",
+      "Nhân viên xác nhận lượng gửi.",
+      "Hệ thống ghi DISPATCH: giảm nguồn, tăng transit cùng giao dịch; trả biên nhận."
+    ],
+    "alternatives": [
+      {
+        "at": "Trước bước 1",
+        "condition": "Tác nhân chưa sẵn sàng thực hiện",
+        "response": "Thoát chức năng; không tạo hiệu ứng nghiệp vụ mới."
+      }
+    ],
+    "exceptions_detail": [
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "Kho nguồn hết hàng chặn",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "không post vào transit phiếu khác",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "retry không tăng transit hai lần",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Sau khi gửi lệnh ghi sổ",
+        "condition": "Mất phản hồi, chưa biết server đã commit hay chưa",
+        "response": "Đặt UNKNOWN; tra cùng mã thao tác. Không rollback giả trên UI, không đổi execution_key. Nếu đã commit thì hiển thị kết quả cũ."
+      }
+    ],
+    "minimal_guarantee": "Bảo toàn dữ liệu đã xác nhận; lệnh thất bại không để lại thay đổi một phần. Lần thực hiện đã commit được tra cứu theo mã thao tác."
+  },
+  {
+    "id": "UC13",
+    "name": "Nhận chuyển thiếu hoặc từng phần",
+    "actor": "RECEIVER đích",
+    "permission": "transfer.receive",
+    "precondition": "Được giao và quyền kho đích; có hàng ở transit",
+    "main_flow": "Quét hàng tới; chọn lượng thực nhận; post ARRIVE từ transit tới receiving đích; phần thiếu để transit.",
+    "exceptions": "Nhận vượt đã gửi/chưa nhận chặn; mất hàng cần phiếu ADJUSTMENT được duyệt riêng.",
+    "postcondition": "Gửi 20 nhận 18 thì transit còn 2; tổng bảo toàn.",
+    "tables": "document,stock_move,stock_balance",
+    "test": "T04",
+    "status": "DRAFT - chờ thẩm định nghiệp vụ",
+    "priority": "Must",
+    "source": "Hồ sơ WMS 1.1; cần stakeholder xác nhận",
+    "summary": "Gửi 20 nhận 18 thì transit còn 2; tổng bảo toàn.",
+    "trigger": "Tác nhân chọn chức năng nhận chuyển thiếu hoặc từng phần",
+    "scope": "WMS desktop + API nội bộ",
+    "nfr": [
+      "NFR01",
+      "NFR03",
+      "NFR02"
+    ],
+    "rules": [
+      "BR01",
+      "BR02",
+      "BR03",
+      "BR04",
+      "BR05"
+    ],
+    "basic_steps": [
+      "Nhân viên đích mở TRANSFER được giao và quét hàng thực đến.",
+      "Hệ thống hiển thị lượng đã gửi chưa nhận.",
+      "Nhân viên xác nhận lượng thực nhận.",
+      "Hệ thống ghi ARRIVE từ transit sang RECEIVING đích; phần thiếu tiếp tục ở transit."
+    ],
+    "alternatives": [
+      {
+        "at": "Bước 3",
+        "condition": "Nhận 18 trên 20 đã gửi",
+        "response": "Ghi nhận 18; còn 2 tại transit; không tự điều chỉnh mất hàng."
+      }
+    ],
+    "exceptions_detail": [
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "Nhận vượt đã gửi/chưa nhận chặn",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "mất hàng cần phiếu ADJUSTMENT được duyệt riêng",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Sau khi gửi lệnh ghi sổ",
+        "condition": "Mất phản hồi, chưa biết server đã commit hay chưa",
+        "response": "Đặt UNKNOWN; tra cùng mã thao tác. Không rollback giả trên UI, không đổi execution_key. Nếu đã commit thì hiển thị kết quả cũ."
+      }
+    ],
+    "minimal_guarantee": "Bảo toàn dữ liệu đã xác nhận; lệnh thất bại không để lại thay đổi một phần. Lần thực hiện đã commit được tra cứu theo mã thao tác."
+  },
+  {
+    "id": "UC14",
+    "name": "Khách trả hàng",
+    "actor": "RECEIVER + WAREHOUSE_MANAGER",
+    "permission": "return.draft,return.post",
+    "precondition": "Có ISSUE gốc, hoặc ngoại lệ được duyệt",
+    "main_flow": "Lập CUSTOMER_RETURN tham chiếu từng dòng xuất; khóa dòng nguồn; kiểm tra tổng đã trả; nhận vào QUARANTINE; kiểm tra lại.",
+    "exceptions": "Trả vượt xuất hoặc serial không đúng nguồn chặn; thiếu nguồn cần return.unlinked và reason.",
+    "postcondition": "Tăng hàng cách ly, chưa khả dụng; không sửa ISSUE gốc.",
+    "tables": "document_line,document_link,stock_move",
+    "test": "T10",
+    "status": "DRAFT - chờ thẩm định nghiệp vụ",
+    "priority": "Must",
+    "source": "Hồ sơ WMS 1.1; cần stakeholder xác nhận",
+    "summary": "Tăng hàng cách ly, chưa khả dụng; không sửa ISSUE gốc.",
+    "trigger": "Tác nhân chọn chức năng khách trả hàng",
+    "scope": "WMS desktop + API nội bộ",
+    "nfr": [
+      "NFR01",
+      "NFR03",
+      "NFR02"
+    ],
+    "rules": [
+      "BR01",
+      "BR02",
+      "BR03",
+      "BR04",
+      "BR05"
+    ],
+    "basic_steps": [
+      "Nhân viên nhận tìm dòng ISSUE gốc và nhập lượng khách trả.",
+      "Hệ thống kiểm tra tổng đã trả và serial so với nguồn xuất.",
+      "Người có quyền hoàn tất phê duyệt theo policy.",
+      "Người quản lý kho có return.post xác nhận; hệ thống ghi tăng QUARANTINE và liên kết nguồn.",
+      "Hàng trả chờ UC07 đánh giá trước khi được coi là khả dụng."
+    ],
+    "alternatives": [
+      {
+        "at": "Trước bước 1",
+        "condition": "Tác nhân chưa sẵn sàng thực hiện",
+        "response": "Thoát chức năng; không tạo hiệu ứng nghiệp vụ mới."
+      }
+    ],
+    "exceptions_detail": [
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "Trả vượt xuất hoặc serial không đúng nguồn chặn",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "thiếu nguồn cần return.unlinked và reason",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      }
+    ],
+    "minimal_guarantee": "Bảo toàn dữ liệu đã xác nhận; lệnh thất bại không để lại thay đổi một phần. Lần thực hiện đã commit được tra cứu theo mã thao tác."
+  },
+  {
+    "id": "UC15",
+    "name": "Trả nhà cung cấp",
+    "actor": "BUYER + WAREHOUSE_MANAGER",
+    "permission": "return.draft,return.post",
+    "precondition": "Có receipt gốc và hàng hiện hữu",
+    "main_flow": "Lập SUPPLIER_RETURN liên kết nguồn; chọn đúng lô/serial; duyệt; giữ hàng phù hợp; xuất tới EXTERNAL.",
+    "exceptions": "Hàng cách ly được trả khi quyền và policy cho phép; không dùng công thức khả dụng bán để chặn nhầm; vẫn kiểm tra lượng chưa bị giữ.",
+    "postcondition": "Giảm tồn; lưu nguồn trả; không xử lý công nợ.",
+    "tables": "document_line,reservation,stock_move",
+    "test": "T10",
+    "status": "DRAFT - chờ thẩm định nghiệp vụ",
+    "priority": "Must",
+    "source": "Hồ sơ WMS 1.1; cần stakeholder xác nhận",
+    "summary": "Giảm tồn; lưu nguồn trả; không xử lý công nợ.",
+    "trigger": "Tác nhân chọn chức năng trả nhà cung cấp",
+    "scope": "WMS desktop + API nội bộ",
+    "nfr": [
+      "NFR01",
+      "NFR03",
+      "NFR02"
+    ],
+    "rules": [
+      "BR01",
+      "BR02",
+      "BR03",
+      "BR04",
+      "BR05"
+    ],
+    "basic_steps": [
+      "Người mua lập phiếu trả nhà cung cấp từ dòng receipt gốc.",
+      "Hệ thống đối chiếu hàng đang có và lượng còn được trả.",
+      "Người có quyền duyệt theo UC30; tác nhân chọn lô/serial và giữ hàng.",
+      "Người có quyền return.post xác nhận; hệ thống ghi xuất về EXTERNAL.",
+      "Hệ thống giữ truy vết nguồn; công nợ không xử lý trong use case này."
+    ],
+    "alternatives": [
+      {
+        "at": "Trước bước 1",
+        "condition": "Tác nhân chưa sẵn sàng thực hiện",
+        "response": "Thoát chức năng; không tạo hiệu ứng nghiệp vụ mới."
+      }
+    ],
+    "exceptions_detail": [
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "Hàng cách ly được trả khi quyền và policy cho phép",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "không dùng công thức khả dụng bán để chặn nhầm",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "vẫn kiểm tra lượng chưa bị giữ",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      }
+    ],
+    "minimal_guarantee": "Bảo toàn dữ liệu đã xác nhận; lệnh thất bại không để lại thay đổi một phần. Lần thực hiện đã commit được tra cứu theo mã thao tác."
+  },
+  {
+    "id": "UC16",
+    "name": "Mở phiên kiểm kê",
+    "actor": "WAREHOUSE_MANAGER",
+    "permission": "count.create",
+    "precondition": "Vị trí thuộc kho, không có active lock và reservation mở",
+    "main_flow": "Khóa row location; chặn luồng ghi liên quan; tạo active lock; chụp snapshot; giao người đếm; FROZEN.",
+    "exceptions": "Còn giữ chỗ phải release/hoàn tất rồi freeze; mọi post/reserve đồng thời phải chung cơ chế khóa row.",
+    "postcondition": "Snapshot nhất quán; vị trí khác vẫn làm việc.",
+    "tables": "count_session,count_location_lock,count_line",
+    "test": "T05,T16",
+    "status": "DRAFT - chờ thẩm định nghiệp vụ",
+    "priority": "Must",
+    "source": "Hồ sơ WMS 1.1; cần stakeholder xác nhận",
+    "summary": "Snapshot nhất quán; vị trí khác vẫn làm việc.",
+    "trigger": "Tác nhân chọn chức năng mở phiên kiểm kê",
+    "scope": "WMS desktop + API nội bộ",
+    "nfr": [
+      "NFR01",
+      "NFR03"
+    ],
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "basic_steps": [
+      "Quản lý kho chọn phạm vi vị trí và người đếm.",
+      "Hệ thống kiểm tra không còn reservation mở, khóa row vị trí và tạo active lock.",
+      "Hệ thống chụp snapshot nhất quán và tạo phiên FROZEN.",
+      "Hệ thống giao nhiệm vụ đếm; vị trí ngoài phạm vi tiếp tục vận hành."
+    ],
+    "alternatives": [
+      {
+        "at": "Trước bước 1",
+        "condition": "Tác nhân chưa sẵn sàng thực hiện",
+        "response": "Thoát chức năng; không tạo hiệu ứng nghiệp vụ mới."
+      }
+    ],
+    "exceptions_detail": [
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "Còn giữ chỗ phải release/hoàn tất rồi freeze",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "mọi post/reserve đồng thời phải chung cơ chế khóa row",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      }
+    ],
+    "minimal_guarantee": "Bảo toàn dữ liệu đã xác nhận; lệnh thất bại không để lại thay đổi một phần. Lần thực hiện đã commit được tra cứu theo mã thao tác."
+  },
+  {
+    "id": "UC17",
+    "name": "Đếm mù và đếm lại",
+    "actor": "RECEIVER/PICKER",
+    "permission": "count.enter",
+    "precondition": "Phiên FROZEN/COUNTED, người đếm được phân công",
+    "main_flow": "Quét vị trí và hàng; nhập số đếm; thêm hàng ngoài snapshot với snapshot 0; lưu observation; đếm lại nếu ngưỡng yêu cầu.",
+    "exceptions": "Không trả snapshot qua API đếm mù; quét trùng UUID trả kết quả cũ; số âm/serial phân số chặn.",
+    "postcondition": "Lịch sử đếm append-only, chưa đổi tồn.",
+    "tables": "count_line,count_observation",
+    "test": "T05",
+    "status": "DRAFT - chờ thẩm định nghiệp vụ",
+    "priority": "Must",
+    "source": "Hồ sơ WMS 1.1; cần stakeholder xác nhận",
+    "summary": "Lịch sử đếm append-only, chưa đổi tồn.",
+    "trigger": "Tác nhân chọn chức năng đếm mù và đếm lại",
+    "scope": "WMS desktop + API nội bộ",
+    "nfr": [
+      "NFR01",
+      "NFR03"
+    ],
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "basic_steps": [
+      "Người được giao chọn phiên kiểm kê và quét vị trí, hàng.",
+      "Hệ thống trả dữ liệu đếm mù, không trả số lượng snapshot.",
+      "Người đếm nhập lượng và xác nhận vòng đếm.",
+      "Hệ thống lưu observation append-only; hàng ngoài snapshot có số gốc 0.",
+      "Nếu chính sách yêu cầu, người được giao thực hiện vòng đếm lại; chưa thay đổi tồn."
+    ],
+    "alternatives": [
+      {
+        "at": "Trước bước 1",
+        "condition": "Tác nhân chưa sẵn sàng thực hiện",
+        "response": "Thoát chức năng; không tạo hiệu ứng nghiệp vụ mới."
+      }
+    ],
+    "exceptions_detail": [
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "Không trả snapshot qua API đếm mù",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "quét trùng UUID trả kết quả cũ",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "số âm/serial phân số chặn",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      }
+    ],
+    "minimal_guarantee": "Bảo toàn dữ liệu đã xác nhận; lệnh thất bại không để lại thay đổi một phần. Lần thực hiện đã commit được tra cứu theo mã thao tác."
+  },
+  {
+    "id": "UC18",
+    "name": "Duyệt kiểm kê và điều chỉnh",
+    "actor": "WAREHOUSE_MANAGER + CONTROLLER",
+    "permission": "count.submit,adjustment.approve,adjustment.post",
+    "precondition": "Đủ số đếm, khóa còn hiệu lực, policy duyệt",
+    "main_flow": "Chọn số đếm cuối; sinh ADJUSTMENT theo delta; người khác duyệt; post chênh lệch; cập nhật POSTED và mở khóa cùng transaction.",
+    "exceptions": "Người đếm/lập không được duyệt; không đủ người duyệt giữ chờ; failed post rollback và giữ khóa.",
+    "postcondition": "100 thành 98 tạo delta -2 có trace đầy đủ.",
+    "tables": "count_session,document,approval_step,stock_move",
+    "test": "T05",
+    "status": "DRAFT - chờ thẩm định nghiệp vụ",
+    "priority": "Must",
+    "source": "Hồ sơ WMS 1.1; cần stakeholder xác nhận",
+    "summary": "100 thành 98 tạo delta -2 có trace đầy đủ.",
+    "trigger": "Tác nhân chọn chức năng duyệt kiểm kê và điều chỉnh",
+    "scope": "WMS desktop + API nội bộ",
+    "nfr": [
+      "NFR01",
+      "NFR03",
+      "NFR02"
+    ],
+    "rules": [
+      "BR01",
+      "BR02",
+      "BR03",
+      "BR04",
+      "BR05"
+    ],
+    "basic_steps": [
+      "Quản lý kho chốt số đếm cuối và gửi chênh lệch cần điều chỉnh.",
+      "Hệ thống sinh ADJUSTMENT từ delta và giữ khóa kiểm kê.",
+      "Người kiểm soát khác người lập và mọi người đếm xem xét rồi duyệt theo UC30.",
+      "Người có quyền adjustment.post xác nhận ghi sổ.",
+      "Hệ thống ghi delta, chuyển phiên POSTED và nhả khóa trong cùng giao dịch."
+    ],
+    "alternatives": [
+      {
+        "at": "Trước bước 1",
+        "condition": "Tác nhân chưa sẵn sàng thực hiện",
+        "response": "Thoát chức năng; không tạo hiệu ứng nghiệp vụ mới."
+      }
+    ],
+    "exceptions_detail": [
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "Người đếm/lập không được duyệt",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "không đủ người duyệt giữ chờ",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "failed post rollback và giữ khóa",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Sau khi gửi lệnh ghi sổ",
+        "condition": "Mất phản hồi, chưa biết server đã commit hay chưa",
+        "response": "Đặt UNKNOWN; tra cùng mã thao tác. Không rollback giả trên UI, không đổi execution_key. Nếu đã commit thì hiển thị kết quả cũ."
+      }
+    ],
+    "minimal_guarantee": "Bảo toàn dữ liệu đã xác nhận; lệnh thất bại không để lại thay đổi một phần. Lần thực hiện đã commit được tra cứu theo mã thao tác."
+  },
+  {
+    "id": "UC19",
+    "name": "Hủy hoặc đóng phần còn lại",
+    "actor": "WAREHOUSE_MANAGER",
+    "permission": "document.cancel",
+    "precondition": "Có phần chưa thực hiện",
+    "main_flow": "Nhập lý do; khóa phiếu/reservation; release phần chưa dùng; đóng remaining; giữ nguyên sổ đã post.",
+    "exceptions": "Không hủy mất lịch sử dispatch; hàng transit còn phải xử lý riêng; execution đang chạy gây 409.",
+    "postcondition": "Không còn reservation mồ côi; sổ cũ nguyên vẹn.",
+    "tables": "document,reservation,audit_event",
+    "test": "T17",
+    "status": "DRAFT - chờ thẩm định nghiệp vụ",
+    "priority": "Must",
+    "source": "Hồ sơ WMS 1.1; cần stakeholder xác nhận",
+    "summary": "Không còn reservation mồ côi; sổ cũ nguyên vẹn.",
+    "trigger": "Tác nhân chọn chức năng hủy hoặc đóng phần còn lại",
+    "scope": "WMS desktop + API nội bộ",
+    "nfr": [
+      "NFR01",
+      "NFR03"
+    ],
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "basic_steps": [
+      "Quản lý kho chọn phần phiếu chưa thực hiện và nhập lý do đóng/hủy.",
+      "Hệ thống kiểm tra thao tác đang chạy và phần tồn tại transit.",
+      "Tác nhân xác nhận.",
+      "Hệ thống giải phóng giữ chỗ chưa dùng, đóng remaining và lưu nhật ký; các phát sinh đã post giữ nguyên."
+    ],
+    "alternatives": [
+      {
+        "at": "Trước bước 1",
+        "condition": "Tác nhân chưa sẵn sàng thực hiện",
+        "response": "Thoát chức năng; không tạo hiệu ứng nghiệp vụ mới."
+      }
+    ],
+    "exceptions_detail": [
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "Không hủy mất lịch sử dispatch",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "hàng transit còn phải xử lý riêng",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "execution đang chạy gây 409",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      }
+    ],
+    "minimal_guarantee": "Bảo toàn dữ liệu đã xác nhận; lệnh thất bại không để lại thay đổi một phần. Lần thực hiện đã commit được tra cứu theo mã thao tác."
+  },
+  {
+    "id": "UC20",
+    "name": "Đảo lần ghi sổ sai",
+    "actor": "CONTROLLER",
+    "permission": "adjustment.approve,adjustment.post",
+    "precondition": "Có lần post gốc, chưa đảo, kỳ đích mở",
+    "main_flow": "Tạo REVERSAL link gốc; hoán đổi source/destination từng move với cùng lượng; duyệt; kiểm tra đủ tồn/serial; post REVERSE.",
+    "exceptions": "Có giao dịch tiếp theo làm thiếu nguồn đảo: chặn và dùng phiếu bù được duyệt; không đưa header về nháp.",
+    "postcondition": "Lịch sử gốc giữ nguyên; mỗi transaction đảo tối đa một lần.",
+    "tables": "inventory_transaction,stock_move,document_link",
+    "test": "T10,T18",
+    "status": "DRAFT - chờ thẩm định nghiệp vụ",
+    "priority": "Must",
+    "source": "Hồ sơ WMS 1.1; cần stakeholder xác nhận",
+    "summary": "Lịch sử gốc giữ nguyên; mỗi transaction đảo tối đa một lần.",
+    "trigger": "Tác nhân chọn chức năng đảo lần ghi sổ sai",
+    "scope": "WMS desktop + API nội bộ",
+    "nfr": [
+      "NFR01",
+      "NFR03",
+      "NFR02"
+    ],
+    "rules": [
+      "BR01",
+      "BR02",
+      "BR03",
+      "BR04",
+      "BR05"
+    ],
+    "basic_steps": [
+      "Người kiểm soát chọn giao dịch gốc và lý do đảo.",
+      "Hệ thống kiểm tra chưa đảo, không phải reversal và kỳ đích đang mở.",
+      "Hệ thống tạo phiếu REVERSAL với nguồn/đích hoán đổi; người độc lập duyệt.",
+      "Người có quyền xác nhận ghi sổ.",
+      "Hệ thống kiểm tra tồn/serial, ghi đảo một lần; không xóa giao dịch gốc."
+    ],
+    "alternatives": [
+      {
+        "at": "Trước bước 1",
+        "condition": "Tác nhân chưa sẵn sàng thực hiện",
+        "response": "Thoát chức năng; không tạo hiệu ứng nghiệp vụ mới."
+      }
+    ],
+    "exceptions_detail": [
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "Có giao dịch tiếp theo làm thiếu nguồn đảo: chặn và dùng phiếu bù được duyệt",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "không đưa header về nháp",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Sau khi gửi lệnh ghi sổ",
+        "condition": "Mất phản hồi, chưa biết server đã commit hay chưa",
+        "response": "Đặt UNKNOWN; tra cùng mã thao tác. Không rollback giả trên UI, không đổi execution_key. Nếu đã commit thì hiển thị kết quả cũ."
+      }
+    ],
+    "minimal_guarantee": "Bảo toàn dữ liệu đã xác nhận; lệnh thất bại không để lại thay đổi một phần. Lần thực hiện đã commit được tra cứu theo mã thao tác."
+  },
+  {
+    "id": "UC21",
+    "name": "Khóa/mở kỳ",
+    "actor": "CONTROLLER khóa kỳ; DIRECTOR mở lại kỳ",
+    "permission": "period.close,period.reopen",
+    "precondition": "Không overlap kỳ; đối soát đã hoàn tất",
+    "main_flow": "Khóa period row; kiểm tra việc dở dang; close; mở lại cần lý do và xác nhận kiểm soát; audit.",
+    "exceptions": "Post cạnh tranh phải chờ khóa; backdate vào CLOSED bị từ chối.",
+    "postcondition": "Ngày nghiệp vụ tách posted_at; báo cáo tái đối soát khi mở.",
+    "tables": "stock_period,audit_event",
+    "test": "T19",
+    "status": "DRAFT - chờ thẩm định nghiệp vụ",
+    "priority": "Must",
+    "source": "Hồ sơ WMS 1.1; cần stakeholder xác nhận",
+    "summary": "Ngày nghiệp vụ tách posted_at; báo cáo tái đối soát khi mở.",
+    "trigger": "Tác nhân chọn chức năng khóa/mở kỳ",
+    "scope": "WMS desktop + API nội bộ",
+    "nfr": [
+      "NFR01",
+      "NFR03"
+    ],
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "basic_steps": [
+      "Người kiểm soát chọn kỳ đã đối soát.",
+      "Hệ thống khóa kỳ và kiểm tra phát sinh dở dang.",
+      "Tác nhân xác nhận khóa kỳ.",
+      "Hệ thống ghi CLOSED và audit; từ chối backdate vào kỳ đóng."
+    ],
+    "alternatives": [
+      {
+        "at": "Bước 1",
+        "condition": "Chọn mở lại kỳ",
+        "response": "Chỉ tài khoản có period.reopen, có lý do và xác nhận kiểm soát mới được mở; audit và đối soát lại báo cáo."
+      }
+    ],
+    "exceptions_detail": [
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "Post cạnh tranh phải chờ khóa",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "backdate vào CLOSED bị từ chối",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      }
+    ],
+    "minimal_guarantee": "Bảo toàn dữ liệu đã xác nhận; lệnh thất bại không để lại thay đổi một phần. Lần thực hiện đã commit được tra cứu theo mã thao tác."
+  },
+  {
+    "id": "UC22",
+    "name": "Import danh mục và đơn mở",
+    "actor": "MASTER_DATA/CONTROLLER",
+    "permission": "import.validate,import.commit + quyền dữ liệu",
+    "precondition": "CSV/XLSX đúng template version",
+    "main_flow": "Upload; hash; mapping; dry-run tất cả dòng và quan hệ; tải lỗi; chốt file; commit có revalidation và dedup.",
+    "exceptions": "File đổi sau validate phải chạy lại; quan hệ chưa tồn tại lỗi theo dòng; dữ liệu khác kho không được nạp.",
+    "postcondition": "Danh mục hoặc document DRAFT; không ghi balance từ spreadsheet.",
+    "tables": "import_job,import_row,document",
+    "test": "T12,T20",
+    "status": "DRAFT - chờ thẩm định nghiệp vụ",
+    "priority": "Must",
+    "source": "Hồ sơ WMS 1.1; cần stakeholder xác nhận",
+    "summary": "Danh mục hoặc document DRAFT; không ghi balance từ spreadsheet.",
+    "trigger": "Tác nhân chọn chức năng import danh mục và đơn mở",
+    "scope": "WMS desktop + API nội bộ",
+    "nfr": [
+      "NFR01",
+      "NFR03"
+    ],
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "basic_steps": [
+      "Tác nhân chọn mẫu và tải file cần nhập.",
+      "Hệ thống thực hiện UC31 kiểm tra toàn bộ file, quyền và quan hệ; trả lỗi theo dòng.",
+      "Tác nhân sửa file nếu cần và chạy lại UC31 đến khi hợp lệ.",
+      "Tác nhân xác nhận nhập đúng phiên bản/hash file đã kiểm tra.",
+      "Hệ thống kiểm tra lại dữ liệu trong giao dịch, chống nạp trùng và tạo danh mục hoặc chứng từ DRAFT.",
+      "Hệ thống trả kết quả từng đợt; không ghi trực tiếp số dư từ spreadsheet."
+    ],
+    "alternatives": [
+      {
+        "at": "Trước bước 1",
+        "condition": "Tác nhân chưa sẵn sàng thực hiện",
+        "response": "Thoát chức năng; không tạo hiệu ứng nghiệp vụ mới."
+      }
+    ],
+    "exceptions_detail": [
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "File đổi sau validate phải chạy lại",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "quan hệ chưa tồn tại lỗi theo dòng",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "dữ liệu khác kho không được nạp",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      }
+    ],
+    "minimal_guarantee": "Bảo toàn dữ liệu đã xác nhận; lệnh thất bại không để lại thay đổi một phần. Lần thực hiện đã commit được tra cứu theo mã thao tác."
+  },
+  {
+    "id": "UC23",
+    "name": "Nạp tồn đầu kỳ",
+    "actor": "CONTROLLER + người duyệt",
+    "permission": "opening.draft,opening.approve,opening.post",
+    "precondition": "Cutover, tồn nguồn đã kiểm kê và ký",
+    "main_flow": "Nạp mẫu; dry-run; tạo OPENING theo kho; duyệt; post OPENING -> vị trí thật; đối soát theo SKU/lô/serial.",
+    "exceptions": "Trùng batch hoặc execution không nạp lại; không có cơ chế upsert số dư; không cộng thêm vào kho đang hoạt động.",
+    "postcondition": "Ledger = balance, có phiếu mở đầu kỳ.",
+    "tables": "document,import_job,stock_move",
+    "test": "T20",
+    "status": "DRAFT - chờ thẩm định nghiệp vụ",
+    "priority": "Must",
+    "source": "Hồ sơ WMS 1.1; cần stakeholder xác nhận",
+    "summary": "Ledger = balance, có phiếu mở đầu kỳ.",
+    "trigger": "Tác nhân chọn chức năng nạp tồn đầu kỳ",
+    "scope": "WMS desktop + API nội bộ",
+    "nfr": [
+      "NFR01",
+      "NFR03",
+      "NFR02"
+    ],
+    "rules": [
+      "BR01",
+      "BR02",
+      "BR03",
+      "BR04",
+      "BR05"
+    ],
+    "basic_steps": [
+      "Người kiểm soát chọn bộ số liệu tồn đã được kiểm kê và ký tại cutover.",
+      "Hệ thống dry-run, kiểm tra quan hệ và tạo phiếu OPENING theo kho.",
+      "Người duyệt độc lập duyệt lượng mở đầu kỳ.",
+      "Người có quyền opening.post xác nhận.",
+      "Hệ thống ghi OPENING vào vị trí thật một lần; đối soát ledger với balance."
+    ],
+    "alternatives": [
+      {
+        "at": "Trước bước 1",
+        "condition": "Tác nhân chưa sẵn sàng thực hiện",
+        "response": "Thoát chức năng; không tạo hiệu ứng nghiệp vụ mới."
+      }
+    ],
+    "exceptions_detail": [
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "Trùng batch hoặc execution không nạp lại",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "không có cơ chế upsert số dư",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "không cộng thêm vào kho đang hoạt động",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Sau khi gửi lệnh ghi sổ",
+        "condition": "Mất phản hồi, chưa biết server đã commit hay chưa",
+        "response": "Đặt UNKNOWN; tra cùng mã thao tác. Không rollback giả trên UI, không đổi execution_key. Nếu đã commit thì hiển thị kết quả cũ."
+      }
+    ],
+    "minimal_guarantee": "Bảo toàn dữ liệu đã xác nhận; lệnh thất bại không để lại thay đổi một phần. Lần thực hiện đã commit được tra cứu theo mã thao tác."
+  },
+  {
+    "id": "UC24",
+    "name": "Tra cứu và xuất báo cáo",
+    "actor": "CONTROLLER/DIRECTOR/AUDITOR",
+    "permission": "report.read,report.export,price.read nếu cần",
+    "precondition": "Kho được cấp; bộ lọc hợp lệ",
+    "main_flow": "Chọn R01..R08; server scope; lọc cột giá; job xuất; kiểm tra lại quyền khi tải file.",
+    "exceptions": "Thu hồi quyền sau tạo job thì không tải; chuỗi nguy hiểm trong CSV được escape; không cộng kg và cái.",
+    "postcondition": "Tệp có thời điểm, scope, đơn vị và nhãn giá quản trị.",
+    "tables": "stock_move,stock_balance,export_job",
+    "test": "T07,T21",
+    "status": "DRAFT - chờ thẩm định nghiệp vụ",
+    "priority": "Must",
+    "source": "Hồ sơ WMS 1.1; cần stakeholder xác nhận",
+    "summary": "Tệp có thời điểm, scope, đơn vị và nhãn giá quản trị.",
+    "trigger": "Tác nhân chọn chức năng tra cứu và xuất báo cáo",
+    "scope": "WMS desktop + API nội bộ",
+    "nfr": [
+      "NFR01",
+      "NFR03"
+    ],
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "basic_steps": [
+      "Tác nhân chọn báo cáo R01-R08, kho và bộ lọc.",
+      "Hệ thống kiểm tra quyền kho và quyền giá; trả dữ liệu có đơn vị.",
+      "Tác nhân chọn xuất file.",
+      "Hệ thống tạo job theo phạm vi được phép.",
+      "Tác nhân tải file; hệ thống kiểm tra lại quyền hiện hành trước khi cấp nội dung."
+    ],
+    "alternatives": [
+      {
+        "at": "Sau bước 2",
+        "condition": "Chỉ xem báo cáo",
+        "response": "Kết thúc thành công, không tạo job xuất."
+      }
+    ],
+    "exceptions_detail": [
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "Thu hồi quyền sau tạo job thì không tải",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "chuỗi nguy hiểm trong CSV được escape",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "không cộng kg và cái",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      }
+    ],
+    "minimal_guarantee": "Bảo toàn dữ liệu đã xác nhận; lệnh thất bại không để lại thay đổi một phần. Lần thực hiện đã commit được tra cứu theo mã thao tác."
+  },
+  {
+    "id": "UC25",
+    "name": "Nháp và phục hồi sau mất LAN",
+    "actor": "Mọi nhân viên có quyền nghiệp vụ",
+    "permission": "Quyền lệnh tương ứng tại server",
+    "precondition": "Đã đăng nhập, app có cache tối thiểu",
+    "main_flow": "Lưu draft/scan vào SQLite riêng; khi online sync nháp; post chỉ khi xác nhận online; UNKNOWN dùng cùng key tra server.",
+    "exceptions": "Hết quyền/thiếu tồn/khác version => CONFLICT; không last-write-wins; không tự post các scan offline.",
+    "postcondition": "SYNCED khác POSTED; không báo thành công giả.",
+    "tables": "idempotency_record + local SQLite",
+    "test": "T02,T08",
+    "status": "DRAFT - chờ thẩm định nghiệp vụ",
+    "priority": "Must",
+    "source": "Hồ sơ WMS 1.1; cần stakeholder xác nhận",
+    "summary": "SYNCED khác POSTED; không báo thành công giả.",
+    "trigger": "Tác nhân chọn chức năng nháp và phục hồi sau mất lan",
+    "scope": "WMS desktop + API nội bộ",
+    "nfr": [
+      "NFR01",
+      "NFR03"
+    ],
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "basic_steps": [
+      "Người dùng đang làm nghiệp vụ nhận thông báo mất LAN.",
+      "Ứng dụng lưu nháp và các mã thao tác cục bộ, hiển thị rõ chưa ghi sổ.",
+      "Khi online, người dùng chọn đồng bộ nháp; hệ thống kiểm tra quyền và version.",
+      "Với thao tác UNKNOWN, ứng dụng tra cứu mã cũ; chỉ thử lại bằng cùng key và payload.",
+      "Ứng dụng báo POSTED chỉ khi server xác nhận commit; SYNCED chỉ là nháp đã đồng bộ."
+    ],
+    "alternatives": [
+      {
+        "at": "Trước bước 1",
+        "condition": "Tác nhân chưa sẵn sàng thực hiện",
+        "response": "Thoát chức năng; không tạo hiệu ứng nghiệp vụ mới."
+      }
+    ],
+    "exceptions_detail": [
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "Hết quyền/thiếu tồn/khác version => CONFLICT",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "không last-write-wins",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "không tự post các scan offline",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      }
+    ],
+    "minimal_guarantee": "Bảo toàn dữ liệu đã xác nhận; lệnh thất bại không để lại thay đổi một phần. Lần thực hiện đã commit được tra cứu theo mã thao tác."
+  },
+  {
+    "id": "UC26",
+    "name": "In tem và in lại chứng từ",
+    "actor": "Nhân viên kho",
+    "permission": "print.execute,document.read",
+    "precondition": "Mẫu đã chốt và máy in được kiểm thử",
+    "main_flow": "Sinh PDF theo mẫu, xem trước, gọi print adapter OS; ghi audit in/in lại.",
+    "exceptions": "Lỗi driver/mất máy in giữ file; không post lại vì in thất bại.",
+    "postcondition": "Bốn mẫu chứng từ và hai tem; quét lại được barcode.",
+    "tables": "export_job,stored_file,audit_event",
+    "test": "T22",
+    "status": "DRAFT - chờ thẩm định nghiệp vụ",
+    "priority": "Must",
+    "source": "Hồ sơ WMS 1.1; cần stakeholder xác nhận",
+    "summary": "Bốn mẫu chứng từ và hai tem; quét lại được barcode.",
+    "trigger": "Tác nhân chọn chức năng in tem và in lại chứng từ",
+    "scope": "WMS desktop + API nội bộ",
+    "nfr": [
+      "NFR01",
+      "NFR03"
+    ],
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "basic_steps": [
+      "Nhân viên chọn chứng từ hoặc tem được phép xem.",
+      "Hệ thống sinh PDF theo mẫu và hiển thị xem trước.",
+      "Nhân viên chọn máy in, xác nhận in hoặc in lại.",
+      "Ứng dụng gọi adapter OS và lưu nhật ký kết quả; không thay đổi giao dịch tồn."
+    ],
+    "alternatives": [
+      {
+        "at": "Trước bước 1",
+        "condition": "Tác nhân chưa sẵn sàng thực hiện",
+        "response": "Thoát chức năng; không tạo hiệu ứng nghiệp vụ mới."
+      }
+    ],
+    "exceptions_detail": [
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "Lỗi driver/mất máy in giữ file",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "không post lại vì in thất bại",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      }
+    ],
+    "minimal_guarantee": "Bảo toàn dữ liệu đã xác nhận; lệnh thất bại không để lại thay đổi một phần. Lần thực hiện đã commit được tra cứu theo mã thao tác."
+  },
+  {
+    "id": "UC27",
+    "name": "Sao lưu và khôi phục",
+    "actor": "SYSADMIN",
+    "permission": "backup.operate",
+    "precondition": "Runbook, bản backup và khóa giải mã tách biệt",
+    "main_flow": "Base backup + WAL; kiểm tra thành công; khôi phục môi trường khác; đối chiếu ledger/balance/serial; thử client; đo RPO/RTO.",
+    "exceptions": "Thiếu WAL hoặc file đính kèm phải báo; sau phát sinh mới không restore mù snapshot cũ.",
+    "postcondition": "Bằng chứng restore; mục tiêu RPO 15 phút/RTO 4 giờ cần đo.",
+    "tables": "Toàn DB + stored_file",
+    "test": "T09",
+    "status": "DRAFT - chờ thẩm định nghiệp vụ",
+    "priority": "Must",
+    "source": "Hồ sơ WMS 1.1; cần stakeholder xác nhận",
+    "summary": "Bằng chứng restore; mục tiêu RPO 15 phút/RTO 4 giờ cần đo.",
+    "trigger": "Tác nhân chọn chức năng sao lưu và khôi phục",
+    "scope": "WMS desktop + API nội bộ",
+    "nfr": [
+      "NFR01",
+      "NFR03"
+    ],
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "basic_steps": [
+      "Quản trị chọn tác vụ sao lưu trong runbook.",
+      "Hệ thống tạo base backup và lưu WAL, đối chiếu tệp đi kèm và ghi kết quả.",
+      "Quản trị phục hồi bản đã chọn vào môi trường tách biệt.",
+      "Hệ thống và quản trị đối chiếu ledger, balance, serial, tệp và thử client.",
+      "Quản trị ghi bằng chứng diễn tập, thời gian mất dữ liệu và thời gian phục hồi."
+    ],
+    "alternatives": [
+      {
+        "at": "Trước bước 1",
+        "condition": "Tác nhân chưa sẵn sàng thực hiện",
+        "response": "Thoát chức năng; không tạo hiệu ứng nghiệp vụ mới."
+      }
+    ],
+    "exceptions_detail": [
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "Thiếu WAL hoặc file đính kèm phải báo",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "sau phát sinh mới không restore mù snapshot cũ",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      }
+    ],
+    "minimal_guarantee": "Bảo toàn dữ liệu đã xác nhận; lệnh thất bại không để lại thay đổi một phần. Lần thực hiện đã commit được tra cứu theo mã thao tác."
+  },
+  {
+    "id": "UC28",
+    "name": "Cập nhật app đa hệ điều hành",
+    "actor": "SYSADMIN + người dùng",
+    "permission": "config.manage cho quản trị phát hành; người dùng chỉ cập nhật client của mình",
+    "precondition": "Bộ cài riêng OS/arch, API tương thích",
+    "main_flow": "Build native từng target; kiểm tra checksum/ký gói theo chính sách; rollout pilot; migrate SQLite; theo dõi phiên bản.",
+    "exceptions": "Client quá cũ chặn ghi nhưng bảo toàn nháp; không dùng một executable cho ba OS.",
+    "postcondition": "Nâng cấp không mất pending operations; server hỗ trợ N/N-1 đã test.",
+    "tables": "client_release + local SQLite",
+    "test": "T23",
+    "status": "DRAFT - chờ thẩm định nghiệp vụ",
+    "priority": "Must",
+    "source": "Hồ sơ WMS 1.1; cần stakeholder xác nhận",
+    "summary": "Nâng cấp không mất pending operations; server hỗ trợ N/N-1 đã test.",
+    "trigger": "Tác nhân chọn chức năng cập nhật app đa hệ điều hành",
+    "scope": "WMS desktop + API nội bộ",
+    "nfr": [
+      "NFR01",
+      "NFR03"
+    ],
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "basic_steps": [
+      "Quản trị chọn bản phát hành tương thích OS/kiến trúc và API.",
+      "Ứng dụng kiểm tra checksum/chính sách chữ ký trước khi cài.",
+      "Người dùng kết thúc thao tác đang chạy; nháp và mã pending được giữ bền vững.",
+      "Ứng dụng nâng cấp và migrate local store theo phiên bản.",
+      "Người dùng mở lại; hệ thống kiểm tra tương thích và tra cứu thao tác chưa rõ kết quả."
+    ],
+    "alternatives": [
+      {
+        "at": "Trước bước 1",
+        "condition": "Tác nhân chưa sẵn sàng thực hiện",
+        "response": "Thoát chức năng; không tạo hiệu ứng nghiệp vụ mới."
+      }
+    ],
+    "exceptions_detail": [
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "Client quá cũ chặn ghi nhưng bảo toàn nháp",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      },
+      {
+        "at": "Tại bước kiểm tra tương ứng",
+        "condition": "không dùng một executable cho ba OS",
+        "response": "Từ chối phần thao tác không hợp lệ; trả thông báo có mã; giữ dữ liệu nhập để sửa. Không báo hoàn tất nếu chưa xác nhận kết quả."
+      }
+    ],
+    "minimal_guarantee": "Bảo toàn dữ liệu đã xác nhận; lệnh thất bại không để lại thay đổi một phần. Lần thực hiện đã commit được tra cứu theo mã thao tác."
+  },
+  {
+    "id": "UC29",
+    "name": "Xác thực yếu tố thứ hai",
+    "actor": "Người dùng",
+    "parent": "UC01",
+    "priority": "Must",
+    "status": "DRAFT - phân rã chức năng cũ",
+    "source": "Phân rã WMS 1.1; Ch8 PDF 19-23,27-33",
+    "summary": "Tác vụ dùng chung được tách để làm rõ mô hình, không bổ sung phạm vi kinh doanh.",
+    "scope": "WMS desktop + API nội bộ",
+    "trigger": "Được gọi hoặc được tác nhân chọn theo điều kiện của use case.",
+    "precondition": "Chính sách yêu cầu MFA tại điểm mở rộng sau kiểm tra mật khẩu.",
+    "postcondition": "Kết quả có trạng thái rõ ràng; nhật ký theo policy.",
+    "minimal_guarantee": "Không tạo hiệu ứng trái phép hoặc báo thành công khi chưa hoàn tất.",
+    "basic_steps": [
+      "Hệ thống yêu cầu yếu tố thứ hai.",
+      "Người dùng cung cấp mã/xác nhận.",
+      "Hệ thống kiểm tra yếu tố và trả kết quả về UC01."
+    ],
+    "alternatives": [
+      {
+        "at": "Trước bước 1",
+        "condition": "Điều kiện chưa đáp ứng",
+        "response": "Không thực hiện; giữ trạng thái trước đó."
+      }
+    ],
+    "exceptions_detail": [
+      {
+        "at": "Bước kiểm tra",
+        "condition": "Yếu tố sai/hết hạn: không cấp phiên; áp dụng giới hạn thử.",
+        "response": "Từ chối có lý do; không tạo tác dụng nghiệp vụ trái phép."
+      }
+    ],
+    "permission": "Không cần phiên hoàn chỉnh; giới hạn thử",
+    "tables": "mfa_factor,auth_session",
+    "test": "T11",
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "nfr": [
+      "NFR01",
+      "NFR03"
+    ]
+  },
+  {
+    "id": "UC30",
+    "name": "Duyệt chứng từ",
+    "actor": "Người duyệt được phân quyền",
+    "parent": "UC05,UC06,UC08,UC14,UC15,UC18,UC20,UC23",
+    "priority": "Must",
+    "status": "DRAFT - phân rã chức năng cũ",
+    "source": "Phân rã WMS 1.1; Ch8 PDF 19-23,27-33",
+    "summary": "Tác vụ dùng chung được tách để làm rõ mô hình, không bổ sung phạm vi kinh doanh.",
+    "scope": "WMS desktop + API nội bộ",
+    "trigger": "Được gọi hoặc được tác nhân chọn theo điều kiện của use case.",
+    "precondition": "Phiếu SUBMITTED, policy và version được chốt.",
+    "postcondition": "Kết quả có trạng thái rõ ràng; nhật ký theo policy.",
+    "minimal_guarantee": "Không tạo hiệu ứng trái phép hoặc báo thành công khi chưa hoàn tất.",
+    "basic_steps": [
+      "Người duyệt mở phiếu được giao.",
+      "Hệ thống kiểm tra quyền đúng kho, bước, version và phân tách nhiệm vụ.",
+      "Người duyệt chọn duyệt hoặc từ chối, ghi lý do.",
+      "Hệ thống khóa bước, lưu quyết định; chỉ chuyển APPROVED khi đủ các bước."
+    ],
+    "alternatives": [
+      {
+        "at": "Trước bước 1",
+        "condition": "Điều kiện chưa đáp ứng",
+        "response": "Không thực hiện; giữ trạng thái trước đó."
+      }
+    ],
+    "exceptions_detail": [
+      {
+        "at": "Bước kiểm tra",
+        "condition": "Tự duyệt/sai version/hai quyết định đồng thời: từ chối quyết định không hợp lệ.",
+        "response": "Từ chối có lý do; không tạo tác dụng nghiệp vụ trái phép."
+      }
+    ],
+    "permission": "document.approve hoặc quyền duyệt chuyên biệt theo loại",
+    "tables": "approval_request,approval_step",
+    "test": "T14",
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "nfr": [
+      "NFR01",
+      "NFR03"
+    ]
+  },
+  {
+    "id": "UC31",
+    "name": "Kiểm tra file nhập",
+    "actor": "Người nhập dữ liệu",
+    "parent": "UC22",
+    "priority": "Must",
+    "status": "DRAFT - phân rã chức năng cũ",
+    "source": "Phân rã WMS 1.1; Ch8 PDF 19-23,27-33",
+    "summary": "Tác vụ dùng chung được tách để làm rõ mô hình, không bổ sung phạm vi kinh doanh.",
+    "scope": "WMS desktop + API nội bộ",
+    "trigger": "Được gọi hoặc được tác nhân chọn theo điều kiện của use case.",
+    "precondition": "File và phiên bản mẫu đã được chọn.",
+    "postcondition": "Kết quả có trạng thái rõ ràng; nhật ký theo policy.",
+    "minimal_guarantee": "Không tạo hiệu ứng trái phép hoặc báo thành công khi chưa hoàn tất.",
+    "basic_steps": [
+      "Hệ thống kiểm tra cấu trúc, hash và phiên bản mẫu.",
+      "Hệ thống kiểm tra từng dòng, quan hệ dữ liệu và phạm vi kho.",
+      "Hệ thống trả báo cáo lỗi hoặc xác nhận hợp lệ gắn hash; chưa commit dữ liệu nghiệp vụ."
+    ],
+    "alternatives": [
+      {
+        "at": "Trước bước 1",
+        "condition": "Điều kiện chưa đáp ứng",
+        "response": "Không thực hiện; giữ trạng thái trước đó."
+      }
+    ],
+    "exceptions_detail": [
+      {
+        "at": "Bước kiểm tra",
+        "condition": "File đổi hoặc quan hệ không hợp lệ: trả lỗi từng dòng, phải kiểm tra lại.",
+        "response": "Từ chối có lý do; không tạo tác dụng nghiệp vụ trái phép."
+      }
+    ],
+    "permission": "import.validate + quyền dữ liệu",
+    "tables": "import_job,import_row",
+    "test": "T12,T20",
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "nfr": [
+      "NFR01",
+      "NFR03"
+    ]
+  }
+]

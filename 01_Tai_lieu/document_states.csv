@@ -1,0 +1,12 @@
+﻿from,to,action,guard,effect
+DRAFT,SUBMITTED,submit,"Quyền kind.draft, đủ dòng và policy",Snapshot policy; không đổi tồn
+SUBMITTED,APPROVED,approve final,"Đúng step/role, khác creator/requester",Khóa nội dung đã duyệt
+SUBMITTED,REJECTED,reject,Đúng người duyệt; lý do,Lưu quyết định
+REJECTED,DRAFT,edit,"Người lập/được giao, expected_version",Tăng version
+APPROVED,DRAFT,revise,Chưa post; release giữ chỗ và invalidate approval,Trình duyệt lại
+APPROVED,PARTIAL,post partial,"Kỳ mở, đủ tồn/nguồn, quyền post",Append ledger
+APPROVED,COMPLETED,post full,Hoàn tất toàn lượng cần thực hiện,Append ledger
+PARTIAL,PARTIAL,post next,Chỉ phần còn mở,Append ledger
+PARTIAL,COMPLETED,finish or close remainder,Hoàn tất hoặc có quyền close thiếu với lý do,Giải phóng phần giữ còn lại
+DRAFT/SUBMITTED/REJECTED/APPROVED,CANCELLED,cancel,Chưa post; release giữ chỗ,Không xóa lịch sử
+COMPLETED,COMPLETED,reverse via new document,Phiếu REVERSAL mới được duyệt,Header gốc giữ; hiển thị net/reversed qua giao dịch

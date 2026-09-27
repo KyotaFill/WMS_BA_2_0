@@ -1,0 +1,29 @@
+﻿use_case,permissions,tables,tests
+UC01,Không cần phiên; rate limit,"app_user,auth_session,mfa_factor",T11
+UC02,role.manage,"user_role_grant,role_permission,audit_event",T07
+UC03,master.write,"product,product_uom,barcode",T12
+UC04,warehouse.configure,"warehouse,location",T13
+UC05,"po.draft,document.approve","document,document_line,approval_request,approval_step",T14
+UC06,"receipt.draft,receipt.post","document_line,inventory_transaction,stock_move,stock_balance","T01,T02"
+UC07,"quality.decide,move.post","quality_decision,document,stock_move",T01
+UC08,"so.draft,issue.draft","document,document_line,document_assignment",T14
+UC09,reservation.manage,"reservation,stock_balance,lot",T03
+UC10,pick.confirm,"pick_task,package,package_line",T15
+UC11,issue.post,"stock_move,reservation_consumption,document_line","T02,T03"
+UC12,transfer.dispatch,"document,inventory_transaction,stock_move",T04
+UC13,transfer.receive,"document,stock_move,stock_balance",T04
+UC14,"return.draft,return.post","document_line,document_link,stock_move",T10
+UC15,"return.draft,return.post","document_line,reservation,stock_move",T10
+UC16,count.create,"count_session,count_location_lock,count_line","T05,T16"
+UC17,count.enter,"count_line,count_observation",T05
+UC18,"count.submit,adjustment.approve,adjustment.post","count_session,document,approval_step,stock_move",T05
+UC19,document.cancel,"document,reservation,audit_event",T17
+UC20,"adjustment.approve,adjustment.post","inventory_transaction,stock_move,document_link","T10,T18"
+UC21,"period.close,period.reopen","stock_period,audit_event",T19
+UC22,"import.validate,import.commit + quyền dữ liệu","import_job,import_row,document","T12,T20"
+UC23,"opening.draft,opening.approve,opening.post","document,import_job,stock_move",T20
+UC24,"report.read,report.export,price.read nếu cần","stock_move,stock_balance,export_job","T07,T21"
+UC25,Quyền lệnh tương ứng tại server,idempotency_record + local SQLite,"T02,T08"
+UC26,"print.execute,document.read","export_job,stored_file,audit_event",T22
+UC27,backup.operate,Toàn DB + stored_file,T09
+UC28,config.manage,client_release + local SQLite,T23

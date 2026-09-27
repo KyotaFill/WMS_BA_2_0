@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1630" height="665" viewBox="0 0 1630 665">
+<rect x="0" y="0" width="1630" height="665" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="35" y="35" font-family="Tinos,Times New Roman,serif" font-size="24" text-anchor="start" fill="#19344b" font-weight="bold">ERD vật lý / master / location</text>
+<text x="35" y="62" font-family="Tinos,Times New Roman,serif" font-size="13" text-anchor="start" fill="#6b7b8c">WMS / BA 2.0 / 27-09-2026 / DRAFT</text>
+<path d="M650,339 L1130,339" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M650.0,332.0 L664.0,339.0 L650.0,346.0" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M650.0,339.0 L664.0,339.0" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<ellipse cx="674.0" cy="339.0" rx="4.0" ry="4.0" fill="#ffffff" stroke="#19344b" stroke-width="1"/>
+<path d="M1121.0,346.0 L1121.0,332.0" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<ellipse cx="1106.0" cy="339.0" rx="4.0" ry="4.0" fill="#ffffff" stroke="#19344b" stroke-width="1"/>
+<path d="M650,459 L1010,459 L1010,524 L650,524" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M650.0,452.0 L664.0,459.0 L650.0,466.0" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M650.0,459.0 L664.0,459.0" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<ellipse cx="674.0" cy="459.0" rx="4.0" ry="4.0" fill="#ffffff" stroke="#19344b" stroke-width="1"/>
+<path d="M659.0,517.0 L659.0,531.0" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<ellipse cx="674.0" cy="524.0" rx="4.0" ry="4.0" fill="#ffffff" stroke="#19344b" stroke-width="1"/>
+<rect x="45" y="95" width="605" height="485" rx="0" fill="#f8fafc" stroke="#879caf" stroke-width="1.3"/>
+<rect x="45" y="95" width="605" height="35" rx="0" fill="#19344b" stroke="#19344b" stroke-width="1.3"/>
+<text x="55" y="119" font-family="Tinos,Times New Roman,serif" font-size="18" text-anchor="start" fill="#ffffff" font-weight="bold">location</text>
+<text x="57" y="145" font-family="Tinos,Times New Roman,serif" font-size="16" text-anchor="start" fill="#19344b">PK id : uuid</text>
+<text x="57" y="172" font-family="Tinos,Times New Roman,serif" font-size="16" text-anchor="start" fill="#19344b">code : varchar(80)</text>
+<text x="57" y="199" font-family="Tinos,Times New Roman,serif" font-size="16" text-anchor="start" fill="#19344b">name : varchar(160)</text>
+<text x="57" y="226" font-family="Tinos,Times New Roman,serif" font-size="16" text-anchor="start" fill="#19344b">kind : varchar(20)</text>
+<text x="57" y="253" font-family="Tinos,Times New Roman,serif" font-size="16" text-anchor="start" fill="#19344b">is_active : boolean</text>
+<text x="57" y="335" font-family="Tinos,Times New Roman,serif" font-size="16" text-anchor="start" fill="#19344b">FK warehouse_id ? : uuid</text>
+<text x="57" y="455" font-family="Tinos,Times New Roman,serif" font-size="16" text-anchor="start" fill="#19344b">FK parent_id ? : uuid</text>
+<rect x="1130" y="280" width="440" height="110" rx="0" fill="#f8fafc" stroke="#879caf" stroke-width="1.3"/>
+<rect x="1130" y="280" width="440" height="35" rx="0" fill="#19344b" stroke="#19344b" stroke-width="1.3"/>
+<text x="1140" y="304" font-family="Tinos,Times New Roman,serif" font-size="18" text-anchor="start" fill="#ffffff" font-weight="bold">warehouse</text>
+<text x="1142" y="342" font-family="Tinos,Times New Roman,serif" font-size="16" text-anchor="start" fill="#19344b">id</text>
+<rect x="695" y="312" width="385" height="20" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="887.5" y="327" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">tham chiếu qua warehouse_id</text>
+<rect x="700" y="471" width="300" height="22" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="850.0" y="488" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">cấp cha / nguồn: parent_id</text>
+<text x="35" y="633" font-family="Tinos,Times New Roman,serif" font-size="13" text-anchor="start" fill="#6b7b8c">Ch8 PDF 35-61 | Mỗi entity xuất hiện một lần. ? = nullable. Bảng đích: cột liên quan; trang riêng có đầy đủ cột.</text>
+</svg>

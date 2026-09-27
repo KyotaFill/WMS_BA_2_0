@@ -1,0 +1,20 @@
+@startuml
+[*] --> DRAFT
+DRAFT --> SUBMITTED : submit
+SUBMITTED --> APPROVED : final approval
+SUBMITTED --> REJECTED : reject
+REJECTED --> DRAFT : edit
+APPROVED --> DRAFT : revise before posting / invalidate approval
+APPROVED --> PARTIAL : post partial
+APPROVED --> COMPLETED : post all
+PARTIAL --> PARTIAL : post next
+PARTIAL --> COMPLETED : finish or authorized close remainder
+DRAFT --> CANCELLED : cancel
+SUBMITTED --> CANCELLED : cancel
+APPROVED --> CANCELLED : cancel before posting
+note right of COMPLETED
+Reversal is a new document.
+Posted ledger is never edited.
+end note
+REJECTED --> CANCELLED : cancel before posting
+@enduml

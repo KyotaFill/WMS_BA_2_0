@@ -1,0 +1,68 @@
+@startuml
+class DocumentView {
+- widgets: WidgetSet
+--
++ render(state): void
++ readInput(): Input
+}
+class DocumentPresenter {
+- requestSequence: int
+--
++ load(): void
++ save(): void
++ post(): void
++ applyResult(seq, result): void
+}
+class WmsApiClient {
+- session: SessionContext
+--
++ send(cmd, key): Result
++ getOperation(key): Result
+}
+class BackgroundExecutor {
+- results: Queue<Result>
+--
++ submit(networkTask): Future
+}
+class UiDispatcher {
+- root: Tk
+--
++ poll(): void
+{UI thread only}
+}
+class DraftStore {
+- localDb: SQLiteConnection
+--
++ persistDraft(draft): void
++ persistOperation(op): void
+}
+interface PlatformServices {
+--
++ printPdf(path): void
++ secretVault(): Vault
++ userDataPath(): Path
+}
+class OSAdapter {
+- target: OSArchitecture
+--
++ printPdf(path): void
++ secretVault(): Vault
++ userDataPath(): Path
+}
+class SessionContext {
+- userId: UUID
+- scope: ScopeSet
+- apiUrl: URL
+- accessToken: Secret
+--
+}
+DocumentView -- DocumentPresenter : events
+DocumentPresenter ..> BackgroundExecutor : submits
+BackgroundExecutor ..> WmsApiClient : calls
+DocumentPresenter ..> DraftStore : saves
+BackgroundExecutor -- UiDispatcher : queue result
+UiDispatcher ..> DocumentView : render on main thread
+DocumentPresenter ..> PlatformServices : uses
+OSAdapter ..|> PlatformServices : implements
+WmsApiClient ..> SessionContext : auth
+@enduml

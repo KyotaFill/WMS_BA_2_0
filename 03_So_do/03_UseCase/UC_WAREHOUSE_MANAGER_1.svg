@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1220" height="950" viewBox="0 0 1220 950">
+<rect x="0" y="0" width="1220" height="950" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="35" y="35" font-family="Tinos,Times New Roman,serif" font-size="24" text-anchor="start" fill="#19344b" font-weight="bold">Quản lý kho / Use case</text>
+<text x="35" y="62" font-family="Tinos,Times New Roman,serif" font-size="13" text-anchor="start" fill="#6b7b8c">WMS / BA 2.0 / 27-09-2026 / DRAFT</text>
+<rect x="470" y="78" width="720" height="805" rx="0" fill="none" stroke="#405d75" stroke-width="1.3"/>
+<text x="485" y="103" font-family="Tinos,Times New Roman,serif" font-size="17" text-anchor="start" fill="#19344b" font-weight="bold">WMS - hệ thống quản lý kho</text>
+<path d="M335,475.0 L570,325" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M335,475.0 L570,475" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M335,475.0 L570,625" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M335,475.0 L570,775" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<ellipse cx="300.0" cy="418.0" rx="17.0" ry="17.0" fill="#ffffff" stroke="#19344b" stroke-width="2"/>
+<path d="M300,435.0 L300,497.0" stroke="#526d87" fill="none" stroke-width="2.5"/>
+<path d="M265,475.0 L300,452.0 L335,475.0" stroke="#526d87" fill="none" stroke-width="2.5"/>
+<path d="M270,539.0 L300,497.0 L330,539.0" stroke="#526d87" fill="none" stroke-width="2.5"/>
+<text x="150" y="457.0" font-family="Tinos,Times New Roman,serif" font-size="19" text-anchor="middle" fill="#19344b" font-weight="bold">Quản lý kho</text>
+<ellipse cx="865.0" cy="325.0" rx="295.0" ry="50.0" fill="#f4f8fc" stroke="#19344b" stroke-width="1.5"/>
+<text x="865.0" y="308" font-family="Tinos,Times New Roman,serif" font-size="18" text-anchor="middle" fill="#19344b" font-weight="bold">UC07</text>
+<text x="865.0" y="336" font-family="Tinos,Times New Roman,serif" font-size="18" text-anchor="middle" fill="#19344b">Kiểm tra và cất hàng</text>
+<ellipse cx="865.0" cy="475.0" rx="295.0" ry="50.0" fill="#f4f8fc" stroke="#19344b" stroke-width="1.5"/>
+<text x="865.0" y="458" font-family="Tinos,Times New Roman,serif" font-size="18" text-anchor="middle" fill="#19344b" font-weight="bold">UC08</text>
+<text x="865.0" y="486" font-family="Tinos,Times New Roman,serif" font-size="18" text-anchor="middle" fill="#19344b">Lập yêu cầu bán và phiếu xuất</text>
+<ellipse cx="865.0" cy="625.0" rx="295.0" ry="50.0" fill="#f4f8fc" stroke="#19344b" stroke-width="1.5"/>
+<text x="865.0" y="608" font-family="Tinos,Times New Roman,serif" font-size="18" text-anchor="middle" fill="#19344b" font-weight="bold">UC14</text>
+<text x="865.0" y="636" font-family="Tinos,Times New Roman,serif" font-size="18" text-anchor="middle" fill="#19344b">Khách trả hàng</text>
+<ellipse cx="865.0" cy="775.0" rx="295.0" ry="50.0" fill="#f4f8fc" stroke="#19344b" stroke-width="1.5"/>
+<text x="865.0" y="758" font-family="Tinos,Times New Roman,serif" font-size="18" text-anchor="middle" fill="#19344b" font-weight="bold">UC15</text>
+<text x="865.0" y="786" font-family="Tinos,Times New Roman,serif" font-size="18" text-anchor="middle" fill="#19344b">Trả nhà cung cấp</text>
+<text x="35" y="918" font-family="Tinos,Times New Roman,serif" font-size="13" text-anchor="start" fill="#6b7b8c">Ch8 PDF 7-15 | Actor ngoài boundary; association không chỉ thứ tự. Quyền và điều kiện: USE_CASES.md / RBAC.md.</text>
+</svg>

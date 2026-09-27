@@ -1,0 +1,12 @@
+@startuml
+left to right direction
+actor "Quản lý danh mục" as MASTER_DATA
+rectangle "WMS" {
+usecase "UC03 Nhập danh mục hàng và quy cách" as UC03
+usecase "UC04 Tạo kho và vị trí" as UC04
+usecase "UC22 Import danh mục và đơn mở" as UC22
+}
+MASTER_DATA -- UC03
+MASTER_DATA -- UC04
+MASTER_DATA -- UC22
+@enduml

@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1820" height="1110" viewBox="0 0 1820 1110">
+<rect x="0" y="0" width="1820" height="1110" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="35" y="35" font-family="Tinos,Times New Roman,serif" font-size="24" text-anchor="start" fill="#19344b" font-weight="bold">Class Desktop / UML implementation</text>
+<text x="35" y="62" font-family="Tinos,Times New Roman,serif" font-size="13" text-anchor="start" fill="#6b7b8c">WMS / BA 2.0 / 27-09-2026 / DRAFT</text>
+<path d="M400,475 L510,475" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M680,620 L680,720" stroke="#526d87" fill="none" stroke-width="1.6" stroke-dasharray="6 4"/>
+<path d="M674.0,708.0 L680,720 L686.0,708.0" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M850,815 L960,815" stroke="#526d87" fill="none" stroke-width="1.6" stroke-dasharray="6 4"/>
+<path d="M948.0,821.0 L960,815 L948.0,809.0" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M850,475 L960,475" stroke="#526d87" fill="none" stroke-width="1.6" stroke-dasharray="6 4"/>
+<path d="M948.0,481.0 L960,475 L948.0,469.0" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M510,815 L400,815" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M230,720 L230,620" stroke="#526d87" fill="none" stroke-width="1.6" stroke-dasharray="6 4"/>
+<path d="M236.0,632.0 L230,620 L224.0,632.0" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M680,380 L680,310" stroke="#526d87" fill="none" stroke-width="1.6" stroke-dasharray="6 4"/>
+<path d="M686.0,322.0 L680,310 L674.0,322.0" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M960,165 L850,165" stroke="#526d87" fill="none" stroke-width="1.6" stroke-dasharray="6 4"/>
+<path d="M850,165 L862.0,159.0 L862.0,171.0 Z" stroke="#526d87" fill="#ffffff" stroke-width="1.6"/>
+<path d="M1300,815 L1410,815" stroke="#526d87" fill="none" stroke-width="1.6" stroke-dasharray="6 4"/>
+<path d="M1398.0,821.0 L1410,815 L1398.0,809.0" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<rect x="60" y="380" width="340" height="240" rx="0" fill="#f8fafc" stroke="#879caf" stroke-width="1.3"/>
+<rect x="60" y="380" width="340" height="35" rx="0" fill="#19344b" stroke="#19344b" stroke-width="1.3"/>
+<text x="70" y="404" font-family="Tinos,Times New Roman,serif" font-size="18" text-anchor="start" fill="#ffffff" font-weight="bold">DocumentView</text>
+<text x="70" y="438" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">- widgets: WidgetSet</text>
+<path d="M60,453 L400,453" stroke="#879caf" fill="none" stroke-width="1.6"/>
+<text x="70" y="476" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ render(state): void</text>
+<text x="70" y="499" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ readInput(): Input</text>
+<rect x="510" y="380" width="340" height="240" rx="0" fill="#f8fafc" stroke="#879caf" stroke-width="1.3"/>
+<rect x="510" y="380" width="340" height="35" rx="0" fill="#19344b" stroke="#19344b" stroke-width="1.3"/>
+<text x="520" y="404" font-family="Tinos,Times New Roman,serif" font-size="18" text-anchor="start" fill="#ffffff" font-weight="bold">DocumentPresenter</text>
+<text x="520" y="438" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">- requestSequence: int</text>
+<path d="M510,453 L850,453" stroke="#879caf" fill="none" stroke-width="1.6"/>
+<text x="520" y="476" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ load(): void</text>
+<text x="520" y="499" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ save(): void</text>
+<text x="520" y="522" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ post(): void</text>
+<text x="520" y="545" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ applyResult(seq, result): void</text>
+<rect x="960" y="720" width="340" height="240" rx="0" fill="#f8fafc" stroke="#879caf" stroke-width="1.3"/>
+<rect x="960" y="720" width="340" height="35" rx="0" fill="#19344b" stroke="#19344b" stroke-width="1.3"/>
+<text x="970" y="744" font-family="Tinos,Times New Roman,serif" font-size="18" text-anchor="start" fill="#ffffff" font-weight="bold">WmsApiClient</text>
+<text x="970" y="778" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">- session: SessionContext</text>
+<path d="M960,793 L1300,793" stroke="#879caf" fill="none" stroke-width="1.6"/>
+<text x="970" y="816" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ send(cmd, key): Result</text>
+<text x="970" y="839" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ getOperation(key): Result</text>
+<rect x="510" y="720" width="340" height="240" rx="0" fill="#f8fafc" stroke="#879caf" stroke-width="1.3"/>
+<rect x="510" y="720" width="340" height="35" rx="0" fill="#19344b" stroke="#19344b" stroke-width="1.3"/>
+<text x="520" y="744" font-family="Tinos,Times New Roman,serif" font-size="18" text-anchor="start" fill="#ffffff" font-weight="bold">BackgroundExecutor</text>
+<text x="520" y="778" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">- results: Queue&lt;Result&gt;</text>
+<path d="M510,793 L850,793" stroke="#879caf" fill="none" stroke-width="1.6"/>
+<text x="520" y="816" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ submit(networkTask): Future</text>
+<rect x="60" y="720" width="340" height="240" rx="0" fill="#f8fafc" stroke="#879caf" stroke-width="1.3"/>
+<rect x="60" y="720" width="340" height="35" rx="0" fill="#19344b" stroke="#19344b" stroke-width="1.3"/>
+<text x="70" y="744" font-family="Tinos,Times New Roman,serif" font-size="18" text-anchor="start" fill="#ffffff" font-weight="bold">UiDispatcher</text>
+<text x="70" y="778" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">- root: Tk</text>
+<path d="M60,793 L400,793" stroke="#879caf" fill="none" stroke-width="1.6"/>
+<text x="70" y="816" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ poll(): void</text>
+<text x="70" y="839" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">{UI thread only}</text>
+<rect x="960" y="380" width="340" height="240" rx="0" fill="#f8fafc" stroke="#879caf" stroke-width="1.3"/>
+<rect x="960" y="380" width="340" height="35" rx="0" fill="#19344b" stroke="#19344b" stroke-width="1.3"/>
+<text x="970" y="404" font-family="Tinos,Times New Roman,serif" font-size="18" text-anchor="start" fill="#ffffff" font-weight="bold">DraftStore</text>
+<text x="970" y="438" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">- localDb: SQLiteConnection</text>
+<path d="M960,453 L1300,453" stroke="#879caf" fill="none" stroke-width="1.6"/>
+<text x="970" y="476" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ persistDraft(draft): void</text>
+<text x="970" y="499" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ persistOperation(op): void</text>
+<rect x="510" y="70" width="340" height="240" rx="0" fill="#f8fafc" stroke="#879caf" stroke-width="1.3"/>
+<rect x="510" y="70" width="340" height="35" rx="0" fill="#19344b" stroke="#19344b" stroke-width="1.3"/>
+<text x="520" y="94" font-family="Tinos,Times New Roman,serif" font-size="15" text-anchor="start" fill="#ffffff" font-weight="bold">&lt;&lt;interface&gt;&gt; PlatformServices</text>
+<path d="M510,120 L850,120" stroke="#879caf" fill="none" stroke-width="1.6"/>
+<text x="520" y="143" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ printPdf(path): void</text>
+<text x="520" y="166" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ secretVault(): Vault</text>
+<text x="520" y="189" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ userDataPath(): Path</text>
+<rect x="960" y="70" width="340" height="240" rx="0" fill="#f8fafc" stroke="#879caf" stroke-width="1.3"/>
+<rect x="960" y="70" width="340" height="35" rx="0" fill="#19344b" stroke="#19344b" stroke-width="1.3"/>
+<text x="970" y="94" font-family="Tinos,Times New Roman,serif" font-size="18" text-anchor="start" fill="#ffffff" font-weight="bold">OSAdapter</text>
+<text x="970" y="128" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">- target: OSArchitecture</text>
+<path d="M960,143 L1300,143" stroke="#879caf" fill="none" stroke-width="1.6"/>
+<text x="970" y="166" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ printPdf(path): void</text>
+<text x="970" y="189" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ secretVault(): Vault</text>
+<text x="970" y="212" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">+ userDataPath(): Path</text>
+<rect x="1410" y="720" width="340" height="240" rx="0" fill="#f8fafc" stroke="#879caf" stroke-width="1.3"/>
+<rect x="1410" y="720" width="340" height="35" rx="0" fill="#19344b" stroke="#19344b" stroke-width="1.3"/>
+<text x="1420" y="744" font-family="Tinos,Times New Roman,serif" font-size="18" text-anchor="start" fill="#ffffff" font-weight="bold">SessionContext</text>
+<text x="1420" y="778" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">- userId: UUID</text>
+<text x="1420" y="801" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">- scope: ScopeSet</text>
+<text x="1420" y="824" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">- apiUrl: URL</text>
+<text x="1420" y="847" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="start" fill="#19344b">- accessToken: Secret</text>
+<path d="M1410,862 L1750,862" stroke="#879caf" fill="none" stroke-width="1.6"/>
+<rect x="431.1171875" y="454.0" width="47.765625" height="20" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="455.0" y="469.0" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">events</text>
+<rect x="652.21728515625" y="624.0" width="55.5654296875" height="20" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="680.0" y="639.0" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">submits</text>
+<rect x="886.17236328125" y="794.0" width="37.6552734375" height="20" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="905.0" y="809.0" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">calls</text>
+<rect x="883.837890625" y="454.0" width="42.32421875" height="20" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="905.0" y="469.0" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">saves</text>
+<rect x="414.984375" y="794.0" width="80.03125" height="20" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="455.0" y="809.0" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">queue result</text>
+<rect x="162.3876953125" y="624.0" width="135.224609375" height="20" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="230.0" y="639.0" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">render on main thread</text>
+<rect x="702" y="338" width="55" height="22" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="729.5" y="355" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">uses</text>
+<rect x="866.337890625" y="144.0" width="77.32421875" height="20" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="905.0" y="159.0" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">implements</text>
+<rect x="1336.9482421875" y="794.0" width="36.103515625" height="20" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="1355.0" y="809.0" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">auth</text>
+<text x="35" y="1078" font-family="Tinos,Times New Roman,serif" font-size="13" text-anchor="start" fill="#6b7b8c">Ch8 PDF 64-71 | - private; + public. Nét liền: association; nét đứt mũi tên mở: dependency; tam giác rỗng: realization.</text>
+</svg>

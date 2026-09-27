@@ -1,0 +1,4 @@
+﻿sku,uom_code,factor,revision,is_active
+SKU001,CAI,1,1,True
+SKU001,THUNG,12,1,True
+SKU002,CAI,1,1,True

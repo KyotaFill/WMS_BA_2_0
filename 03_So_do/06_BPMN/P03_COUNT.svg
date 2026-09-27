@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1220" height="1460" viewBox="0 0 1220 1460">
+<rect x="0" y="0" width="1220" height="1460" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="35" y="35" font-family="Tinos,Times New Roman,serif" font-size="24" text-anchor="start" fill="#19344b" font-weight="bold">Kiểm kê</text>
+<text x="35" y="62" font-family="Tinos,Times New Roman,serif" font-size="13" text-anchor="start" fill="#6b7b8c">WMS / BA 2.0 / 27-09-2026 / DRAFT</text>
+<rect x="65" y="120" width="1090" height="1255" rx="0" fill="none" stroke="#879caf" stroke-width="1.3"/>
+<text x="75" y="142" font-family="Tinos,Times New Roman,serif" font-size="15" text-anchor="start" fill="#19344b" font-weight="bold">Doanh nghiệp / Kiểm kê</text>
+<text x="270.0" y="168" font-family="Tinos,Times New Roman,serif" font-size="16" text-anchor="middle" fill="#19344b" font-weight="bold">Quản lý/nhân viên kho</text>
+<text x="610.0" y="168" font-family="Tinos,Times New Roman,serif" font-size="16" text-anchor="middle" fill="#19344b" font-weight="bold">Kiểm soát</text>
+<path d="M440,150 L440,1375" stroke="#c4d1dc" fill="none" stroke-width="1.6"/>
+<text x="950.0" y="168" font-family="Tinos,Times New Roman,serif" font-size="16" text-anchor="middle" fill="#19344b" font-weight="bold">Hệ thống</text>
+<path d="M780,150 L780,1375" stroke="#c4d1dc" fill="none" stroke-width="1.6"/>
+<path d="M270.0,232 L270.0,335" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M270.0,335 L264.0,323.0 L276.0,323.0 Z" stroke="#526d87" fill="#526d87" stroke-width="1.6"/>
+<path d="M270.0,411 L270.0,445.5 L950.0,445.5 L950.0,480" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M950.0,480 L944.0,468.0 L956.0,468.0 Z" stroke="#526d87" fill="#526d87" stroke-width="1.6"/>
+<path d="M950.0,556 L950.0,590.5 L270.0,590.5 L270.0,625" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M270.0,625 L264.0,613.0 L276.0,613.0 Z" stroke="#526d87" fill="#526d87" stroke-width="1.6"/>
+<path d="M270.0,701 L270.0,735.5 L610.0,735.5 L610.0,770" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M610.0,770 L604.0,758.0 L616.0,758.0 Z" stroke="#526d87" fill="#526d87" stroke-width="1.6"/>
+<path d="M610.0,846 L610.0,915" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M610.0,915 L604.0,903.0 L616.0,903.0 Z" stroke="#526d87" fill="#526d87" stroke-width="1.6"/>
+<path d="M610.0,979 L610.0,1019.5 L950.0,1019.5 L950.0,1060" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M950.0,1060 L944.0,1048.0 L956.0,1048.0 Z" stroke="#526d87" fill="#526d87" stroke-width="1.6"/>
+<path d="M950.0,1136 L950.0,1205" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M950.0,1205 L944.0,1193.0 L956.0,1193.0 Z" stroke="#526d87" fill="#526d87" stroke-width="1.6"/>
+<path d="M642.0,947 L1035,947" stroke="#526d87" fill="none" stroke-width="1.6"/>
+<path d="M1035,947 L1023.0,953.0 L1023.0,941.0 Z" stroke="#526d87" fill="#526d87" stroke-width="1.6"/>
+<ellipse cx="270.0" cy="211.0" rx="21.0" ry="21.0" fill="#ffffff" stroke="#19344b" stroke-width="1.5"/>
+<text x="270.0" y="256" font-family="Tinos,Times New Roman,serif" font-size="15" text-anchor="middle" fill="#19344b">Kế hoạch kiểm kê</text>
+<rect x="155.0" y="335" width="230" height="76" rx="10" fill="#edf5f9" stroke="#879caf" stroke-width="1.3"/>
+<ellipse cx="171.0" cy="346.0" rx="4.0" ry="4.0" fill="#ffffff" stroke="#19344b" stroke-width="1"/>
+<path d="M171.0,350 L171.0,359 L165.0,365" stroke="#526d87" fill="none" stroke-width="1"/>
+<path d="M171.0,359 L177.0,365" stroke="#526d87" fill="none" stroke-width="1"/>
+<text x="270.0" y="373" font-family="Tinos,Times New Roman,serif" font-size="17" text-anchor="middle" fill="#19344b">Chọn phạm vi kiểm kê</text>
+<rect x="835.0" y="480" width="230" height="76" rx="10" fill="#edf5f9" stroke="#879caf" stroke-width="1.3"/>
+<path d="M860.0,498.0 L862.8078528040323,499.9509032201613 L862.2387953251128,501.82683432365087 L858.8202872861178,501.88899163113723 L857.9497474683059,502.9497474683058 L858.555702330196,506.31469612302544 L856.8268343236509,507.23879532511285 L854.3656322541129,504.8654969628226 L853.0,505.0 L851.0490967798387,507.8078528040323 L849.1731656763491,507.23879532511285 L849.1110083688628,503.82028728611783 L848.0502525316941,502.9497474683058 L844.6853038769746,503.555702330196 L843.7612046748872,501.82683432365087 L846.1345030371774,499.3656322541129 L846.0,498.0 L843.1921471959677,496.0490967798387 L843.7612046748872,494.17316567634913 L847.1797127138822,494.11100836886277 L848.0502525316941,493.0502525316942 L847.444297669804,489.68530387697456 L849.1731656763491,488.76120467488715 L851.6343677458871,491.1345030371774 L853.0,491.0 L854.9509032201613,488.1921471959677 L856.8268343236509,488.76120467488715 L856.8889916311372,492.17971271388217 L857.9497474683059,493.0502525316942 L861.3146961230254,492.444297669804 L862.2387953251128,494.1731656763491 L859.8654969628226,496.6343677458871 Z" stroke="#526d87" fill="#ffffff" stroke-width="1"/>
+<ellipse cx="853.0" cy="498.0" rx="3.0" ry="3.0" fill="#ffffff" stroke="#19344b" stroke-width="1"/>
+<text x="950.0" y="518" font-family="Tinos,Times New Roman,serif" font-size="17" text-anchor="middle" fill="#19344b">Freeze và chụp snapshot</text>
+<rect x="155.0" y="625" width="230" height="76" rx="10" fill="#edf5f9" stroke="#879caf" stroke-width="1.3"/>
+<ellipse cx="171.0" cy="636.0" rx="4.0" ry="4.0" fill="#ffffff" stroke="#19344b" stroke-width="1"/>
+<path d="M171.0,640 L171.0,649 L165.0,655" stroke="#526d87" fill="none" stroke-width="1"/>
+<path d="M171.0,649 L177.0,655" stroke="#526d87" fill="none" stroke-width="1"/>
+<text x="270.0" y="663" font-family="Tinos,Times New Roman,serif" font-size="17" text-anchor="middle" fill="#19344b">Đếm mù và chốt số đếm</text>
+<rect x="495.0" y="770" width="230" height="76" rx="10" fill="#edf5f9" stroke="#879caf" stroke-width="1.3"/>
+<ellipse cx="511.0" cy="781.0" rx="4.0" ry="4.0" fill="#ffffff" stroke="#19344b" stroke-width="1"/>
+<path d="M511.0,785 L511.0,794 L505.0,800" stroke="#526d87" fill="none" stroke-width="1"/>
+<path d="M511.0,794 L517.0,800" stroke="#526d87" fill="none" stroke-width="1"/>
+<text x="610.0" y="808" font-family="Tinos,Times New Roman,serif" font-size="17" text-anchor="middle" fill="#19344b">Xem xét chênh lệch</text>
+<path d="M610.0,915 L642.0,947.0 L610.0,979 L578.0,947.0 Z" stroke="#526d87" fill="#fff7e5" stroke-width="1.6"/>
+<text x="610.0" y="954.0" font-family="Tinos,Times New Roman,serif" font-size="22" text-anchor="middle" fill="#19344b" font-weight="bold">X</text>
+<text x="610.0" y="902" font-family="Tinos,Times New Roman,serif" font-size="15" text-anchor="middle" fill="#19344b" font-weight="bold">Duyệt điều chỉnh?</text>
+<rect x="835.0" y="1060" width="230" height="76" rx="10" fill="#edf5f9" stroke="#879caf" stroke-width="1.3"/>
+<path d="M860.0,1078.0 L862.8078528040323,1079.9509032201613 L862.2387953251128,1081.826834323651 L858.8202872861178,1081.8889916311373 L857.9497474683059,1082.9497474683058 L858.555702330196,1086.3146961230254 L856.8268343236509,1087.238795325113 L854.3656322541129,1084.8654969628226 L853.0,1085.0 L851.0490967798387,1087.8078528040323 L849.1731656763491,1087.238795325113 L849.1110083688628,1083.8202872861177 L848.0502525316941,1082.9497474683058 L844.6853038769746,1083.555702330196 L843.7612046748872,1081.826834323651 L846.1345030371774,1079.3656322541128 L846.0,1078.0 L843.1921471959677,1076.0490967798387 L843.7612046748872,1074.173165676349 L847.1797127138822,1074.1110083688627 L848.0502525316941,1073.0502525316942 L847.444297669804,1069.6853038769746 L849.1731656763491,1068.761204674887 L851.6343677458871,1071.1345030371774 L853.0,1071.0 L854.9509032201613,1068.1921471959677 L856.8268343236509,1068.761204674887 L856.8889916311372,1072.1797127138823 L857.9497474683059,1073.0502525316942 L861.3146961230254,1072.444297669804 L862.2387953251128,1074.173165676349 L859.8654969628226,1076.6343677458872 Z" stroke="#526d87" fill="#ffffff" stroke-width="1"/>
+<ellipse cx="853.0" cy="1078.0" rx="3.0" ry="3.0" fill="#ffffff" stroke="#19344b" stroke-width="1"/>
+<text x="950.0" y="1098" font-family="Tinos,Times New Roman,serif" font-size="17" text-anchor="middle" fill="#19344b">Post delta và mở khóa</text>
+<ellipse cx="950.0" cy="1226.0" rx="21.0" ry="21.0" fill="#ffffff" stroke="#19344b" stroke-width="4"/>
+<text x="950.0" y="1271" font-family="Tinos,Times New Roman,serif" font-size="15" text-anchor="middle" fill="#19344b">Phiên kiểm kê POSTED</text>
+<ellipse cx="1056.0" cy="948.0" rx="21.0" ry="21.0" fill="#ffffff" stroke="#19344b" stroke-width="4"/>
+<text x="1056.0" y="993" font-family="Tinos,Times New Roman,serif" font-size="15" text-anchor="middle" fill="#19344b">Chờ làm rõ; giữ khóa</text>
+<rect x="620.0" y="987" width="85" height="20" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="662.5" y="1002" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">Đạt</text>
+<rect x="662.0" y="890" width="180" height="22" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.3"/>
+<text x="752.0" y="907" font-family="Tinos,Times New Roman,serif" font-size="14" text-anchor="middle" fill="#19344b">Không đạt</text>
+<text x="35" y="1428" font-family="Tinos,Times New Roman,serif" font-size="13" text-anchor="start" fill="#6b7b8c">Ch6 PDF 9-37 | TO-BE ĐỀ XUẤT; task ghi sổ thực hiện BR03-BR05. isExecutable=false.</text>
+</svg>

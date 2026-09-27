@@ -1,0 +1,12 @@
+@startuml
+left to right direction
+actor "Nhân viên soạn/xuất" as PICKER
+rectangle "WMS" {
+usecase "UC17 Đếm mù và đếm lại" as UC17
+usecase "UC25 Nháp và phục hồi sau mất LAN" as UC25
+usecase "UC26 In tem và in lại chứng từ" as UC26
+}
+PICKER -- UC17
+PICKER -- UC25
+PICKER -- UC26
+@enduml

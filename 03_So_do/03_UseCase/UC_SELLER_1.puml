@@ -1,0 +1,8 @@
+@startuml
+left to right direction
+actor "Bán hàng" as SELLER
+rectangle "WMS" {
+usecase "UC08 Lập yêu cầu bán và phiếu xuất" as UC08
+}
+SELLER -- UC08
+@enduml

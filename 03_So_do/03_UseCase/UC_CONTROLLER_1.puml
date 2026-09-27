@@ -1,0 +1,16 @@
+@startuml
+left to right direction
+actor "Kiểm soát/kế toán" as CONTROLLER
+rectangle "WMS" {
+usecase "UC18 Duyệt kiểm kê và điều chỉnh" as UC18
+usecase "UC20 Đảo lần ghi sổ sai" as UC20
+usecase "UC21 Khóa/mở kỳ" as UC21
+usecase "UC22 Import danh mục và đơn mở" as UC22
+usecase "UC23 Nạp tồn đầu kỳ" as UC23
+}
+CONTROLLER -- UC18
+CONTROLLER -- UC20
+CONTROLLER -- UC21
+CONTROLLER -- UC22
+CONTROLLER -- UC23
+@enduml

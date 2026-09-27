@@ -1,0 +1,71 @@
+@startuml
+class Document {
+- id: UUID
+- version: int
+- status: DocumentStatus
+--
++ submit(): void
++ assertCanPost(): void
+}
+class DocumentLine {
+- productId: UUID
+- quantity: Decimal
+- factorSnapshot: Decimal
+--
++ remainingPosted(): Decimal
+}
+class InventoryService {
+--
++ post(cmd): PostingResult
++ reserve(cmd): Reservation
++ reverse(cmd): PostingResult
+}
+class StockItem {
+- productId: UUID
+- lotId: UUID [0..1]
+- serialId: UUID [0..1]
+--
++ validateTracking(): void
+}
+class StockMove {
+- source: Location
+- destination: Location
+- quantityBase: Decimal
+--
+{immutable after posting}
+}
+class Reservation {
+- quantity: Decimal
+- consumed: Decimal
+- released: Decimal
+--
++ remaining(): Decimal
++ consume(qty): void
++ release(qty): void
+}
+class ApprovalService {
+--
++ submit(document): Request
++ decide(request, actor): Decision
++ assertApproved(document): void
+}
+class AuthorizationPolicy {
+--
++ allows(actor, action, resource): bool
++ assertSeparationOfDuties(): void
+}
+class CountService {
+--
++ freeze(locations): CountSession
++ recordObservation(): void
++ postAdjustment(): PostingResult
+}
+Document *-- DocumentLine : gồm
+InventoryService ..> Document : validates
+InventoryService ..> StockMove : creates
+StockMove -- StockItem : ghi cho
+InventoryService ..> Reservation : consumes
+ApprovalService ..> Document : guards
+InventoryService ..> AuthorizationPolicy : checks
+CountService ..> InventoryService : posts delta
+@enduml

@@ -1,0 +1,68 @@
+[
+  {
+    "id": "E01",
+    "technique": "Interview sponsor",
+    "participant": "",
+    "observed_on": "",
+    "sample": "",
+    "finding": "",
+    "requirement_ids": [],
+    "validated_by": "",
+    "status": "PLANNED"
+  },
+  {
+    "id": "E02",
+    "technique": "Observation kho",
+    "participant": "",
+    "observed_on": "",
+    "sample": "",
+    "finding": "",
+    "requirement_ids": [],
+    "validated_by": "",
+    "status": "PLANNED"
+  },
+  {
+    "id": "E03",
+    "technique": "Document analysis",
+    "participant": "",
+    "observed_on": "",
+    "sample": "",
+    "finding": "",
+    "requirement_ids": [],
+    "validated_by": "",
+    "status": "PLANNED"
+  },
+  {
+    "id": "E04",
+    "technique": "Workshop quy tắc",
+    "participant": "",
+    "observed_on": "",
+    "sample": "",
+    "finding": "",
+    "requirement_ids": [],
+    "validated_by": "",
+    "status": "PLANNED"
+  },
+  {
+    "id": "E05",
+    "technique": "Interview IT",
+    "participant": "",
+    "observed_on": "",
+    "sample": "",
+    "finding": "",
+    "requirement_ids": [],
+    "validated_by": "",
+    "status": "PLANNED"
+  },
+  {
+    "id": "E06",
+    "technique": "Prototype review",
+    "participant": "",
+    "observed_on": "",
+    "sample": "",
+    "finding": "",
+    "requirement_ids": [],
+    "validated_by": "",
+    "status": "PLANNED"
+  }
+]

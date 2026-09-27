@@ -1,0 +1,2 @@
+# Tooling only: this repository does not contain the WMS application yet.
+openapi-spec-validator==0.9.0

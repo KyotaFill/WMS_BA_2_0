@@ -1,0 +1,16 @@
+@startuml
+left to right direction
+actor "Nhân viên soạn/xuất" as PICKER
+rectangle "WMS" {
+usecase "UC08 Lập yêu cầu bán và phiếu xuất" as UC08
+usecase "UC09 Giữ hàng theo lô/vị trí" as UC09
+usecase "UC10 Soạn và đóng kiện" as UC10
+usecase "UC11 Xuất hàng từng phần" as UC11
+usecase "UC12 Xuất chuyển kho" as UC12
+}
+PICKER -- UC08
+PICKER -- UC09
+PICKER -- UC10
+PICKER -- UC11
+PICKER -- UC12
+@enduml
