@@ -156,6 +156,8 @@ git status --short
 
 Lần rà soát ngày **27/09/2026**: 12 test CSV đạt; JSON/CSV/XML, OpenAPI và SQLite hợp lệ; PostgreSQL 16.15 nạp DDL/seed thành công, kiểm tra 17 trường hợp bị từ chối bởi FK/CHECK/UNIQUE/trigger, đối chiếu schema/quyền và đối soát DB rỗng đạt. Chi tiết và phạm vi xem [PROJECT_REVIEW.md](07_Kiem_tra/PROJECT_REVIEW.md); trạng thái CI mới nhất ở badge đầu trang.
 
+Lần push đầu tiên: [GitHub Actions](https://github.com/KyotaFill/WMS_BA_2_0/actions/runs/36304832406) bị chặn trước khi chạy job vì tài khoản bị khóa do vấn đề billing. Kết quả local ở trên không đồng nghĩa CI đã đạt. Chủ tài khoản cần xử lý billing rồi chạy lại workflow; cấu hình kiểm tra PostgreSQL 15 trên CI chưa được thực thi.
+
 Chưa triển khai hoặc nghiệm thu API/Tkinter, concurrency của posting service, benchmark, máy quét/in, backup/restore hay ba hệ điều hành đích. `acceptance_tests.csv` là **đặc tả T01–T26 chưa chạy ở mức ứng dụng**. Các báo cáo v1.x và BA trước đây là lịch sử; số liệu/trạng thái trong đó cần đọc theo phiên bản.
 
 Q01–Q08 còn mở: ngân sách/dự phòng, ngành hàng/tracking, As-Is, người duyệt, tải thực tế, OS/thiết bị, KPI/RPO/RTO và chính sách biểu mẫu/lưu hồ sơ. Những điểm này cần xác nhận trước baseline nghiệp vụ và triển khai production.

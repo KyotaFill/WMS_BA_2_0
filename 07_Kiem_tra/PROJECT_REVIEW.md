@@ -49,6 +49,12 @@ python scripts/check_postgres.py
 
 Lệnh cuối cần bộ công cụ server PostgreSQL 15+ trên Linux/macOS, chạy bằng user thường. CI dùng PostgreSQL service 15/16 riêng để chạy DDL, seed, SQL smoke test và đối soát. Trạng thái CI phải xem theo từng commit trên GitHub Actions; không suy ra kết quả CI từ kết quả local.
 
+## GitHub sau lần push đầu
+
+Repository public: [KyotaFill/WMS_BA_2_0](https://github.com/KyotaFill/WMS_BA_2_0), nhánh `main`. [Run 36304832406](https://github.com/KyotaFill/WMS_BA_2_0/actions/runs/36304832406) bị chặn trước khi bắt đầu các step. Annotation của GitHub: “The job was not started because your account is locked due to a billing issue.” Đây là giới hạn tài khoản Actions; không có log test từ runner để kết luận CI đạt hay phát hiện lỗi dự án.
+
+Chủ tài khoản cần xử lý billing trên GitHub rồi dùng **Re-run all jobs** hoặc **Run workflow**. Kiểm tra PostgreSQL 15 trong ma trận CI còn chưa chạy; PostgreSQL 16.15 đã kiểm tra local theo bảng trên.
+
 ## Các việc chưa hoàn thành
 
 - Chưa có mã backend/Tkinter, authorization, posting service, worker hoặc migration nâng cấp; API còn PARTIAL/MISSING theo `05_API/BA_COVERAGE.md`.
