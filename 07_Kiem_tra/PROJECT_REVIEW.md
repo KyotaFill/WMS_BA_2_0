@@ -51,9 +51,13 @@ Lệnh cuối cần bộ công cụ server PostgreSQL 15+ trên Linux/macOS, ch�
 
 ## GitHub sau lần push đầu
 
-Repository public: [KyotaFill/WMS_BA_2_0](https://github.com/KyotaFill/WMS_BA_2_0), nhánh `main`. [Run 36304832406](https://github.com/KyotaFill/WMS_BA_2_0/actions/runs/36304832406) bị chặn trước khi bắt đầu các step. Annotation của GitHub: “The job was not started because your account is locked due to a billing issue.” Đây là giới hạn tài khoản Actions; không có log test từ runner để kết luận CI đạt hay phát hiện lỗi dự án.
+Repository ban đầu thuộc `KyotaFill`, nhánh `main`, hiện được chuyển sang [TEAM-DEV-FIVE/WMS_BA_2_0](https://github.com/TEAM-DEV-FIVE/WMS_BA_2_0). [Run 36304832406](https://github.com/TEAM-DEV-FIVE/WMS_BA_2_0/actions/runs/36304832406) ở tài khoản cũ bị chặn trước khi bắt đầu các step. Annotation của GitHub: “The job was not started because your account is locked due to a billing issue.” Không có log test từ lần chạy đó để kết luận CI đạt hay phát hiện lỗi dự án.
 
-Chủ tài khoản cần xử lý billing trên GitHub rồi dùng **Re-run all jobs** hoặc **Run workflow**. Kiểm tra PostgreSQL 15 trong ma trận CI còn chưa chạy; PostgreSQL 16.15 đã kiểm tra local theo bảng trên.
+## CI sau khi chuyển repo sang team
+
+Ngày 27/09/2026, tài khoản `Kyoha2006` kích hoạt [run 36308545818](https://github.com/TEAM-DEV-FIVE/WMS_BA_2_0/actions/runs/36308545818) trên repo của team. Các job đã được cấp runner; lỗi billing cũ không còn chặn lần chạy này. Hai job PostgreSQL 15 và 16 đều đạt, bao gồm schema/seed, các ràng buộc/trigger và đối soát sau rollback fixture.
+
+Job artifact phát hiện `actions/setup-python` chưa tìm được file để tính cache key vì dự án dùng `requirements-dev.txt`. Workflow đã thêm `cache-dependency-path: requirements-dev.txt`. Theo dõi kết quả toàn bộ pipeline theo commit tại [GitHub Actions](https://github.com/TEAM-DEV-FIVE/WMS_BA_2_0/actions/workflows/validate.yml); kết quả local và kết quả trên runner được ghi riêng.
 
 ## Các việc chưa hoàn thành
 

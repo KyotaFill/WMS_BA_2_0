@@ -1,6 +1,6 @@
 # WMS — Hệ thống quản lý kho desktop qua LAN
 
-[![Validate WMS design](https://github.com/KyotaFill/WMS_BA_2_0/actions/workflows/validate.yml/badge.svg)](https://github.com/KyotaFill/WMS_BA_2_0/actions/workflows/validate.yml)
+[![Validate WMS design](https://github.com/TEAM-DEV-FIVE/WMS_BA_2_0/actions/workflows/validate.yml/badge.svg)](https://github.com/TEAM-DEV-FIVE/WMS_BA_2_0/actions/workflows/validate.yml)
 
 Bộ hồ sơ phân tích nghiệp vụ (BA) và thiết kế kỹ thuật cho hệ thống quản lý kho dùng **Python/Tkinter, FastAPI và PostgreSQL**, phiên bản hồ sơ **2.0**.
 
@@ -76,7 +76,7 @@ Chi tiết: [ARCHITECTURE.md](01_Tai_lieu/ARCHITECTURE.md), [INVARIANTS.md](01_T
 Yêu cầu: Git và Python **3.12+**. PostgreSQL chỉ cần cho kiểm tra SQL. Đọc PDF/SVG/Markdown không cần cài Python.
 
 ```bash
-git clone https://github.com/KyotaFill/WMS_BA_2_0.git
+git clone https://github.com/TEAM-DEV-FIVE/WMS_BA_2_0.git
 cd WMS_BA_2_0
 python3 -m venv .venv
 source .venv/bin/activate
@@ -156,7 +156,7 @@ git status --short
 
 Lần rà soát ngày **27/09/2026**: 12 test CSV đạt; JSON/CSV/XML, OpenAPI và SQLite hợp lệ; PostgreSQL 16.15 nạp DDL/seed thành công, kiểm tra 17 trường hợp bị từ chối bởi FK/CHECK/UNIQUE/trigger, đối chiếu schema/quyền và đối soát DB rỗng đạt. Chi tiết và phạm vi xem [PROJECT_REVIEW.md](07_Kiem_tra/PROJECT_REVIEW.md); trạng thái CI mới nhất ở badge đầu trang.
 
-Lần push đầu tiên: [GitHub Actions](https://github.com/KyotaFill/WMS_BA_2_0/actions/runs/36304832406) bị chặn trước khi chạy job vì tài khoản bị khóa do vấn đề billing. Kết quả local ở trên không đồng nghĩa CI đã đạt. Chủ tài khoản cần xử lý billing rồi chạy lại workflow; cấu hình kiểm tra PostgreSQL 15 trên CI chưa được thực thi.
+Repository hiện thuộc **TEAM-DEV-FIVE**. Sau khi chuyển repo, CI đã khởi chạy được; [lần chạy 36308545818](https://github.com/TEAM-DEV-FIVE/WMS_BA_2_0/actions/runs/36308545818) xác nhận hai job PostgreSQL 15/16 đạt và phát hiện thiếu đường dẫn cache cho `requirements-dev.txt`. Cấu hình cache đã được bổ sung; xem badge đầu trang để biết kết quả toàn bộ workflow trên commit mới nhất. Lỗi billing của lần push đầu tại tài khoản cũ được lưu trong báo cáo lịch sử.
 
 Chưa triển khai hoặc nghiệm thu API/Tkinter, concurrency của posting service, benchmark, máy quét/in, backup/restore hay ba hệ điều hành đích. `acceptance_tests.csv` là **đặc tả T01–T26 chưa chạy ở mức ứng dụng**. Các báo cáo v1.x và BA trước đây là lịch sử; số liệu/trạng thái trong đó cần đọc theo phiên bản.
 
