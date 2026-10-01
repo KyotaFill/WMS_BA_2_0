@@ -40,7 +40,7 @@ Có path không đồng nghĩa đủ luồng, authorization hoặc đã triển 
 
 | Bước | Contract | Phần chưa có / cần kiểm thử |
 |---|---|---|
-| Chọn PO và xem lượng còn lại | `GET /purchase-orders`, `GET /purchase-orders/{id}` | Chưa có server, truy vấn net posted và kiểm tra scope trên PostgreSQL. |
+| Chọn PO và xem lượng còn lại | `GET /purchase-orders`, `GET /purchase-orders/{id}` | Chưa có server, truy vấn net posted và kiểm tra scope trên PostgreSQL. Cần xác nhận ai giao PO cho RECEIVER: RBAC chỉ cho đọc phiếu của mình/được giao, còn UC06 chỉ nêu quyền kho. |
 | Tạo/sửa nháp receipt | `POST /receipts`, `GET/PATCH /receipts/{id}`, `POST /receipts/{id}/revise` | Chưa có server, chuyển đổi UOM chính xác, kiểm tra PO nguồn, invalidate approval và test version cạnh tranh T14. |
 | Gửi và duyệt | `POST /documents/{id}/submit`, `POST /approval-requests/{id}/decide` | Đã có path lõi nhưng chưa có workflow, snapshot policy, phân quyền và test tự duyệt. |
 | Quét lô/serial và chọn vị trí | DTO post có `stock_item_id` hoặc mã lô/serial và `destination_location_id`; server trả ID đã phân giải | Chưa có API tra cứu qua barcode, API gợi ý vị trí hoặc chỗ lưu snapshot tracking trước duyệt trong `document_line`; cần chốt thiết kế để approval gắn đúng nội dung được quét. |

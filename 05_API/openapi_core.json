@@ -20,7 +20,7 @@
       "get": {
         "operationId": "listReceivablePurchaseOrders",
         "summary": "UC06 list receivable purchase orders",
-        "description": "Only APPROVED or PARTIAL purchase orders in the caller's warehouse scope with positive remaining quantity. Remaining is derived from net posted receipts, not drafts. Cursor is tied to a server-maintained as_of snapshot and immutable (created_at,id) order so intervening edits cannot duplicate or skip rows.",
+        "description": "Only APPROVED or PARTIAL purchase orders with positive remaining quantity that the caller may read under document.read: assigned warehouse plus own/assigned document for RECEIVER. Return only the minimal fields in ReceivablePurchaseOrder. Remaining is derived from net posted receipts, not drafts. Cursor is tied to a server-maintained as_of snapshot and immutable (created_at,id) order so intervening edits cannot duplicate or skip rows.",
         "x-permission": "document.read",
         "x-use-case": "UC06",
         "parameters": [
@@ -40,7 +40,7 @@
       "get": {
         "operationId": "getReceivablePurchaseOrder",
         "summary": "UC06 get purchase order remaining quantities",
-        "description": "Read only in assigned warehouse scope. Return current net posted remaining per source line; recheck under lock when posting.",
+        "description": "Require document.read on this PO, including own/assigned document for RECEIVER and assigned warehouse. Return current net posted remaining per source line; recheck under lock when posting.",
         "x-permission": "document.read",
         "x-use-case": "UC06",
         "parameters": [{"$ref": "#/components/parameters/ResourceId"}],
@@ -74,7 +74,7 @@
       "post": {
         "operationId": "createReceiptDraft",
         "summary": "UC06 create receipt draft",
-        "description": "Server assigns id, number, line ids, factor snapshots and version=1. Each source_line_id must belong to an APPROVED or PARTIAL PO with positive remaining quantity for the same warehouse and product. No stock or PO remaining changes in DRAFT. Persist Idempotency-Key with payload hash atomically; same key and payload replays the same result.",
+        "description": "Server assigns id, number, line ids, factor snapshots and version=1. All source_line_id values must belong to one visible APPROVED or PARTIAL PO with positive remaining quantity for the same warehouse and product. Server derives partner_id from that PO; client cannot override it. No stock or PO remaining changes in DRAFT. Persist Idempotency-Key with payload hash atomically; same key and payload replays the same result.",
         "x-permission": "receipt.draft",
         "x-use-case": "UC06",
         "parameters": [{"$ref": "#/components/parameters/IdempotencyKey"}],
@@ -1883,7 +1883,6 @@
         "properties": {
           "warehouse_id": {"type": "string", "format": "uuid"},
           "business_date": {"type": "string", "format": "date"},
-          "partner_id": {"type": "string", "format": "uuid"},
           "reason": {"type": "string", "maxLength": 2000},
           "lines": {"type": "array", "minItems": 1, "maxItems": 200, "items": {"$ref": "#/components/schemas/ReceiptLineInput"}}
         }
@@ -1894,7 +1893,6 @@
         "properties": {
           "expected_version": {"type": "integer", "minimum": 1},
           "business_date": {"type": "string", "format": "date"},
-          "partner_id": {"type": "string", "format": "uuid"},
           "reason": {"type": "string", "maxLength": 2000},
           "lines": {"type": "array", "minItems": 1, "maxItems": 200, "items": {"$ref": "#/components/schemas/ReceiptLineInput"}}
         }
