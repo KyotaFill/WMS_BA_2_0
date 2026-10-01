@@ -7,7 +7,7 @@ T05,Kiểm kê100 thành98,"Đếm2 lượt, duyệt khác người, post",Một
 T06,Cùng serial nhập hai vị trí,Hai transaction cạnh tranh,Chỉ một serial_position; tổng tồn serial1
 T07,"Role A quản lý khoA, nhận khoB","DuyệtB, đọc/export khoC, tải file sau revoke",Đều từ chối; không lộ giá/kho khác
 T08,Offline draft và crash SENDING,Restart; query operation; thiếu tồn khi online,Giữ draft; không auto post; lỗi CONFLICT đúng
-T09,Restore base backup và WAL,Khôi phục máy khác; reconcile; login desktop,"Đo RPO/RTO, 0 lệch ledger/balance/serial"
+T09,Restore base backup và WAL,Khôi phục máy khác; reconcile; login desktop,"Đo RPO <1 giờ, RTO <4 giờ theo Q07; 0 lệch ledger/balance/serial; lưu bằng chứng"
 T10,Trả/đảo và retry,Trả vượt; đảo sau hàng đi tiếp; tự duyệt,Chặn sai; lịch sử gốc không đổi
 T11,Thu hồi phiên/MFA,Lock user khi client vẫn mở; refresh replay,Lệnh tiếp theo bị từ chối; token không vào log
 T12,Import sai FK/trùng barcode/decimal,Dry-run; đổi file sau validate; commit lại,Lỗi dòng rõ; không partial ngầm; hash mismatch
@@ -24,4 +24,4 @@ T22,Máy quét và in,"Code128/QR, tiếng Việt, scale100%, reprint",Quét đ�
 T23,Upgrade từng OS/arch,"Máy sạch, bản N-1 có nháp, mất mạng",Nháp/pending giữ nguyên; UI responsive; TLS đúng
 T24,Ràng buộc DB và transaction,NULL item duplicate; FK; fail giữa post,Unique/FK chặn; rollback toàn bộ
 T25,Dữ liệu lô hết hạn,Reserve hôm trước rồi post sau expiry,Chặn xuất; release có kiểm soát; không tồn available âm
-T26,Tải đại diện,5 kho/30 đồng thời/50k SKU/1m moves,Ghi p95/p99 theo endpoint/cấu hình; chưa gán kết quả đạt
+T26,Tải đại diện,1 kho/3 phân khu/15 CCU; ghi dataset và tăng trưởng tham chiếu 20GB/3 năm; bộ stress 50k SKU/1m moves báo cáo riêng,Ghi p95/p99 theo endpoint/cấu hình; chưa gán kết quả đạt; SLA quy trình phiếu <15 phút đo riêng theo Q07

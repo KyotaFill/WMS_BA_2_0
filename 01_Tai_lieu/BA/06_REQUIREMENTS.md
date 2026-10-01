@@ -1,6 +1,6 @@
 # Danh mục yêu cầu - 47 mục
 
-Nguồn chuẩn chỉnh sửa: requirements.json. Tất cả đang Draft, chưa baseline.
+Nguồn chuẩn chỉnh sửa: requirements.json. Vòng đời đặc tả vẫn Draft; đầu vào triển khai hiện hành theo [baseline TL01](../SCOPE_BASELINE.md). Việc tiếp nhận quyết định không tự xác nhận ứng dụng đã được triển khai/kiểm thử hoặc được doanh nghiệp phê duyệt.
 
 ## GR01 / GR / Must
 
@@ -276,11 +276,13 @@ Tiêu chí nghiệm thu: Bốn mẫu chứng từ và hai tem; quét lại đư�
 
 ## FR27 / FR / Must
 
+Cập nhật đầu vào TL01 ngày 02/10/2026; trạng thái triển khai chưa thay đổi.
+
 Hệ thống phải hỗ trợ: Sao lưu và khôi phục.
 
-Chủ trì: Chủ nghiệp vụ của UC27. Nguồn: Hồ sơ WMS 1.1; cần stakeholder xác nhận.
+Chủ trì: Chủ nghiệp vụ của UC27. Nguồn: Quyết định Q05/Q07 của tech lead, 02/10/2026; xem SCOPE_BASELINE.md.
 
-Tiêu chí nghiệm thu: Bằng chứng restore; mục tiêu RPO 15 phút/RTO 4 giờ cần đo. Kiểm tra T09.
+Tiêu chí nghiệm thu: Bằng chứng restore; mục tiêu Q07 RPO <1 giờ, RTO <4 giờ; phải đo thực tế. Kiểm tra T09.
 
 ## FR28 / FR / Must
 
@@ -340,19 +342,23 @@ Tiêu chí nghiệm thu: T08: ngắt LAN trước/sau commit; UI không hiện P
 
 ## NFR04 / NFR / Must
 
-Mục tiêu phục hồi giao dịch RPO <=15 phút, RTO <=4 giờ.
+Cập nhật đầu vào TL01 ngày 02/10/2026; trạng thái triển khai chưa thay đổi.
 
-Chủ trì: IT + chủ nghiệp vụ. Nguồn: Kiến trúc 1.1 hoặc mục tiêu đề xuất BA 2.0.
+Mục tiêu phục hồi giao dịch RPO <1 giờ, RTO <4 giờ theo Q07.
 
-Tiêu chí nghiệm thu: Diễn tập T09 trên môi trường riêng, đo cả dữ liệu và thời gian; đây là mục tiêu cần duyệt.
+Chủ trì: IT + chủ nghiệp vụ. Nguồn: Quyết định Q05/Q07 của tech lead, 02/10/2026; xem SCOPE_BASELINE.md.
+
+Tiêu chí nghiệm thu: Diễn tập T09 trên môi trường riêng; đo mất dữ liệu và thời gian phục hồi, đối soát ledger/balance/serial; lưu bằng chứng. Mục tiêu đã được tech lead xác nhận, chưa có kết quả đạt.
 
 ## NFR05 / NFR / Must
 
-Tải nghiệm thu đề xuất: 30 người đồng thời, 50.000 SKU, 1 triệu dòng sổ, 200 dòng/phiếu.
+Cập nhật đầu vào TL01 ngày 02/10/2026; trạng thái triển khai chưa thay đổi.
 
-Chủ trì: IT + chủ nghiệp vụ. Nguồn: Kiến trúc 1.1 hoặc mục tiêu đề xuất BA 2.0.
+Tải đại diện theo Q05: 1 kho trung tâm/3 phân khu, tối đa 15 CCU, khoảng 20 GB dữ liệu trong 3 năm.
 
-Tiêu chí nghiệm thu: Đo trên cấu hình được ghi rõ; mục tiêu đề xuất p95 tra cứu <=2s, ghi sổ phiếu 200 dòng <=5s, không tính in/xuất nền; cần chủ hệ thống duyệt.
+Chủ trì: IT + chủ nghiệp vụ. Nguồn: Quyết định Q05/Q07 của tech lead, 02/10/2026; xem SCOPE_BASELINE.md.
+
+Tiêu chí nghiệm thu: T26 ghi cấu hình, dữ liệu, p95/p99 và kết quả chạy 15 CCU. Bộ stress test 50.000 SKU/1 triệu moves tách khỏi số liệu thực tế. Ngưỡng latency API và dung lượng giữ hồ sơ 5 năm cần xác nhận riêng; không lấy SLA xử lý phiếu <15 phút làm latency API.
 
 ## NFR06 / NFR / Must
 

@@ -1219,7 +1219,7 @@ Theo Ch8 PDF 27-33; kế thừa 28 nhóm nghiệp vụ và bổ sung 3 UC phân 
 
 **Tác nhân:** SYSADMIN
 
-**Mô tả:** Bằng chứng restore; mục tiêu RPO 15 phút/RTO 4 giờ cần đo.
+**Mô tả:** Bằng chứng restore; mục tiêu Q07 RPO <1 giờ, RTO <4 giờ; phải đo thực tế.
 
 **Ưu tiên:** Must
 
@@ -1229,7 +1229,7 @@ Theo Ch8 PDF 27-33; kế thừa 28 nhóm nghiệp vụ và bổ sung 3 UC phân 
 
 **Tiền điều kiện:** Runbook, bản backup và khóa giải mã tách biệt
 
-**Hậu điều kiện thành công:** Bằng chứng restore; mục tiêu RPO 15 phút/RTO 4 giờ cần đo.
+**Hậu điều kiện thành công:** Bằng chứng restore; mục tiêu Q07 RPO <1 giờ, RTO <4 giờ; phải đo thực tế.
 
 **Bảo đảm tối thiểu:** Bảo toàn dữ liệu đã xác nhận; lệnh thất bại không để lại thay đổi một phần. Lần thực hiện đã commit được tra cứu theo mã thao tác.
 

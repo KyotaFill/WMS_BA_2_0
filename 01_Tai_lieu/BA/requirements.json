@@ -480,14 +480,15 @@
     "type": "FR",
     "statement": "Hệ thống phải hỗ trợ: Sao lưu và khôi phục.",
     "owner": "Chủ nghiệp vụ của UC27",
-    "source": "Hồ sơ WMS 1.1; cần stakeholder xác nhận",
+    "source": "Quyết định Q05/Q07 của tech lead, 02/10/2026; xem SCOPE_BASELINE.md",
     "priority": "Must",
     "status": "DRAFT - chưa baseline",
-    "acceptance": "Bằng chứng restore; mục tiêu RPO 15 phút/RTO 4 giờ cần đo. Kiểm tra T09.",
+    "acceptance": "Bằng chứng restore; mục tiêu Q07 RPO <1 giờ, RTO <4 giờ; phải đo thực tế. Kiểm tra T09.",
     "use_cases": "UC27",
     "version": "2.0",
-    "change_request": "",
-    "approval_evidence": ""
+    "change_request": "CR-TL01-20261002",
+    "approval_evidence": "",
+    "baseline_reference": "01_Tai_lieu/SCOPE_BASELINE.md"
   },
   {
     "id": "FR28",
@@ -590,30 +591,32 @@
   {
     "id": "NFR04",
     "type": "NFR",
-    "statement": "Mục tiêu phục hồi giao dịch RPO <=15 phút, RTO <=4 giờ.",
+    "statement": "Mục tiêu phục hồi giao dịch RPO <1 giờ, RTO <4 giờ theo Q07.",
     "owner": "IT + chủ nghiệp vụ",
-    "source": "Kiến trúc 1.1 hoặc mục tiêu đề xuất BA 2.0",
+    "source": "Quyết định Q05/Q07 của tech lead, 02/10/2026; xem SCOPE_BASELINE.md",
     "priority": "Must",
     "status": "DRAFT - chưa baseline",
-    "acceptance": "Diễn tập T09 trên môi trường riêng, đo cả dữ liệu và thời gian; đây là mục tiêu cần duyệt.",
+    "acceptance": "Diễn tập T09 trên môi trường riêng; đo mất dữ liệu và thời gian phục hồi, đối soát ledger/balance/serial; lưu bằng chứng. Mục tiêu đã được tech lead xác nhận, chưa có kết quả đạt.",
     "use_cases": "",
     "version": "2.0",
-    "change_request": "",
-    "approval_evidence": ""
+    "change_request": "CR-TL01-20261002",
+    "approval_evidence": "",
+    "baseline_reference": "01_Tai_lieu/SCOPE_BASELINE.md"
   },
   {
     "id": "NFR05",
     "type": "NFR",
-    "statement": "Tải nghiệm thu đề xuất: 30 người đồng thời, 50.000 SKU, 1 triệu dòng sổ, 200 dòng/phiếu.",
+    "statement": "Tải đại diện theo Q05: 1 kho trung tâm/3 phân khu, tối đa 15 CCU, khoảng 20 GB dữ liệu trong 3 năm.",
     "owner": "IT + chủ nghiệp vụ",
-    "source": "Kiến trúc 1.1 hoặc mục tiêu đề xuất BA 2.0",
+    "source": "Quyết định Q05/Q07 của tech lead, 02/10/2026; xem SCOPE_BASELINE.md",
     "priority": "Must",
     "status": "DRAFT - chưa baseline",
-    "acceptance": "Đo trên cấu hình được ghi rõ; mục tiêu đề xuất p95 tra cứu <=2s, ghi sổ phiếu 200 dòng <=5s, không tính in/xuất nền; cần chủ hệ thống duyệt.",
+    "acceptance": "T26 ghi cấu hình, dữ liệu, p95/p99 và kết quả chạy 15 CCU. Bộ stress test 50.000 SKU/1 triệu moves tách khỏi số liệu thực tế. Ngưỡng latency API và dung lượng giữ hồ sơ 5 năm cần xác nhận riêng; không lấy SLA xử lý phiếu <15 phút làm latency API.",
     "use_cases": "",
     "version": "2.0",
-    "change_request": "",
-    "approval_evidence": ""
+    "change_request": "CR-TL01-20261002",
+    "approval_evidence": "",
+    "baseline_reference": "01_Tai_lieu/SCOPE_BASELINE.md"
   },
   {
     "id": "NFR06",
