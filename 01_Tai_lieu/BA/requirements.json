@@ -72,7 +72,7 @@
   {
     "id": "TR02",
     "type": "TR",
-    "statement": "Có phương án máy chủ Linux, Windows, macOS; nghiệm thu từng tổ hợp OS/arch được chọn.",
+    "statement": "Target bàn giao: server Ubuntu/Debian x64 và client Windows 10/11 x64; không bao gồm Mac. Distro/version cụ thể do QA07 chốt trước nghiệm thu.",
     "owner": "IT/Tech lead",
     "source": "Yêu cầu người dùng; kiến trúc 1.1",
     "priority": "Must",
@@ -80,7 +80,7 @@
     "acceptance": "Ma trận nền tảng được chốt và chạy kiểm thử restart, TLS, đường dẫn, backup trên từng target.",
     "use_cases": "",
     "version": "2.0",
-    "change_request": "",
+    "change_request": "CR-TL01-Q02-20261002",
     "approval_evidence": ""
   },
   {
@@ -498,10 +498,10 @@
     "source": "Hồ sơ WMS 1.1; cần stakeholder xác nhận",
     "priority": "Must",
     "status": "DRAFT - chưa baseline",
-    "acceptance": "Nâng cấp không mất pending operations; server hỗ trợ N/N-1 đã test. Kiểm tra T23.",
+    "acceptance": "Nâng cấp Windows 10/11 x64 không mất pending operations; Linux server hỗ trợ N/N-1 phải có contract test. Mac ngoài phạm vi đợt này. Kiểm tra T23.",
     "use_cases": "UC28",
     "version": "2.0",
-    "change_request": "",
+    "change_request": "CR-TL01-Q02-20261002",
     "approval_evidence": ""
   },
   {
@@ -659,5 +659,35 @@
     "version": "2.0",
     "change_request": "",
     "approval_evidence": ""
+  },
+  {
+    "id": "FR32",
+    "type": "FR",
+    "statement": "Hàng ký gửi nằm trong kho nhưng chưa thuộc sở hữu doanh nghiệp; số lượng và truy vết phải tách theo chủ sở hữu trong mọi luồng tồn.",
+    "owner": "Tech lead / Chủ kho",
+    "source": "Q02: xác nhận bổ sung của Trần Trung Kiên ngày 02/10/2026",
+    "priority": "Must",
+    "status": "DRAFT - phạm vi mới đã tiếp nhận, thiết kế chi tiết chưa hoàn tất",
+    "acceptance": "Cùng SKU/vị trí có 10 hàng doanh nghiệp và 5 ký gửi: vật lý 15, sở hữu 10, ký gửi 5; không hòa tồn; thiếu policy xuất/chuyển quyền thì từ chối có lý do.",
+    "use_cases": "UC32",
+    "version": "2.0-TL01",
+    "change_request": "CR-TL01-Q02-20261002",
+    "approval_evidence": "",
+    "baseline_reference": "01_Tai_lieu/SCOPE_BASELINE.md"
+  },
+  {
+    "id": "FR33",
+    "type": "FR",
+    "statement": "Tra serial của thiết bị để biết NCC, receipt, ngày nhập và tình trạng bảo hành dựa trên dữ liệu thời hạn có nguồn.",
+    "owner": "Tech lead / Chủ kho",
+    "source": "Q02: xác nhận bổ sung của Trần Trung Kiên ngày 02/10/2026",
+    "priority": "Must",
+    "status": "DRAFT - phạm vi mới đã tiếp nhận, thiết kế chi tiết chưa hoàn tất",
+    "acceptance": "Serial có dữ liệu bảo hành trả đúng trạng thái theo ngày tra cứu; thiếu mốc/thời hạn trả Chưa xác định; không tự suy thời hạn hoặc lộ dữ liệu ngoài quyền kho/giá.",
+    "use_cases": "UC33",
+    "version": "2.0-TL01",
+    "change_request": "CR-TL01-Q02-20261002",
+    "approval_evidence": "",
+    "baseline_reference": "01_Tai_lieu/SCOPE_BASELINE.md"
   }
 ]

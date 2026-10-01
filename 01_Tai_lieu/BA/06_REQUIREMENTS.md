@@ -1,4 +1,4 @@
-# Danh mục yêu cầu - 47 mục
+# Danh mục yêu cầu - 49 mục (bổ sung FR32–FR33 theo Q02/TL01)
 
 Nguồn chuẩn chỉnh sửa: requirements.json. Vòng đời đặc tả vẫn Draft; đầu vào triển khai hiện hành theo [baseline TL01](../SCOPE_BASELINE.md). Việc tiếp nhận quyết định không tự xác nhận ứng dụng đã được triển khai/kiểm thử hoặc được doanh nghiệp phê duyệt.
 
@@ -44,7 +44,7 @@ Tiêu chí nghiệm thu: Các nghiệp vụ lõi dùng API nội bộ; mất LAN
 
 ## TR02 / TR / Must
 
-Có phương án máy chủ Linux, Windows, macOS; nghiệm thu từng tổ hợp OS/arch được chọn.
+Target bàn giao: server Ubuntu/Debian x64 và client Windows 10/11 x64; không bao gồm Mac. Distro/version cụ thể do QA07 chốt trước nghiệm thu.
 
 Chủ trì: IT/Tech lead. Nguồn: Yêu cầu người dùng; kiến trúc 1.1.
 
@@ -290,7 +290,7 @@ Hệ thống phải hỗ trợ: Cập nhật app đa hệ điều hành.
 
 Chủ trì: Chủ nghiệp vụ của UC28. Nguồn: Hồ sơ WMS 1.1; cần stakeholder xác nhận.
 
-Tiêu chí nghiệm thu: Nâng cấp không mất pending operations; server hỗ trợ N/N-1 đã test. Kiểm tra T23.
+Tiêu chí nghiệm thu: Nâng cấp Windows 10/11 x64 không mất pending operations; Linux server hỗ trợ N/N-1 phải có contract test. Mac ngoài phạm vi đợt này. Kiểm tra T23.
 
 ## FR29 / FR / Must
 
@@ -383,3 +383,19 @@ Mọi thay đổi mô hình phải giữ truy vết yêu cầu và tương thíc
 Chủ trì: IT + chủ nghiệp vụ. Nguồn: Kiến trúc 1.1 hoặc mục tiêu đề xuất BA 2.0.
 
 Tiêu chí nghiệm thu: Migration dry-run + rollback/recovery plan; FR/UC/test không có tham chiếu mồ côi.
+
+## FR32 / FR / Must
+
+Hàng ký gửi nằm trong kho nhưng chưa thuộc sở hữu doanh nghiệp; số lượng và truy vết phải tách theo chủ sở hữu trong mọi luồng tồn.
+
+Chủ trì: Tech lead / Chủ kho. Nguồn: xác nhận Q02 bổ sung ngày 02/10/2026. Trạng thái: Draft, thiết kế chi tiết chưa hoàn tất.
+
+Tiêu chí nghiệm thu: Cùng SKU/vị trí có 10 hàng doanh nghiệp và 5 ký gửi: vật lý 15, sở hữu 10, ký gửi 5; không hòa tồn; thiếu policy xuất/chuyển quyền thì từ chối có lý do. Kiểm tra T27.
+
+## FR33 / FR / Must
+
+Tra serial của thiết bị để biết NCC, receipt, ngày nhập và tình trạng bảo hành dựa trên dữ liệu thời hạn có nguồn.
+
+Chủ trì: Tech lead / Chủ kho. Nguồn: xác nhận Q02 bổ sung ngày 02/10/2026. Trạng thái: Draft, thiết kế chi tiết chưa hoàn tất.
+
+Tiêu chí nghiệm thu: Serial có dữ liệu bảo hành trả đúng trạng thái theo ngày tra cứu; thiếu mốc/thời hạn trả Chưa xác định; không tự suy thời hạn hoặc lộ dữ liệu ngoài quyền kho/giá. Kiểm tra T28.

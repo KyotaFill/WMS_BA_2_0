@@ -35,3 +35,5 @@ Có path không đồng nghĩa đủ luồng, authorization hoặc đã triển 
 |UC29|Chưa có|MISSING - chưa đặc tả trong OpenAPI lõi|
 |UC30|/approval-requests/{id}/decide|PARTIAL - chưa đủ toàn luồng UC|
 |UC31|Chưa có|MISSING - chưa đặc tả trong OpenAPI lõi|
+|UC32|Chưa có|MISSING - phạm vi mới Q02; BE01 cần bổ sung contract|
+|UC33|Chưa có|MISSING - phạm vi mới Q02; BE01 cần bổ sung contract|

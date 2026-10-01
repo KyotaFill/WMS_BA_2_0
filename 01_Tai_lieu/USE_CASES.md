@@ -1433,3 +1433,23 @@ Theo Ch8 PDF 27-33; kế thừa 28 nhóm nghiệp vụ và bổ sung 3 UC phân 
 - Bước kiểm tra | File đổi hoặc quan hệ không hợp lệ: trả lỗi từng dòng, phải kiểm tra lại. => Từ chối có lý do; không tạo tác dụng nghiệp vụ trái phép.
 
 **Business rules:** BR01, BR02. **NFR:** NFR01, NFR03.
+
+## UC32 — Quản lý hàng ký gửi theo chủ sở hữu
+
+Phạm vi bổ sung Q02; **DRAFT**, schema/API/quyền chi tiết chưa hiện thực.
+
+Mô tả: Hàng ký gửi nằm trong kho nhưng chưa thuộc sở hữu doanh nghiệp; số lượng và truy vết phải tách theo chủ sở hữu trong mọi luồng tồn.
+
+Hậu điều kiện: Cùng SKU/vị trí có 10 hàng doanh nghiệp và 5 ký gửi: vật lý 15, sở hữu 10, ký gửi 5; không hòa tồn; thiếu policy xuất/chuyển quyền thì từ chối có lý do.
+
+Kiểm thử: T27. Cần quyền kho và dữ liệu có nguồn; không có quyền thì từ chối. Thiếu policy ký gửi thì chặn thao tác; thiếu dữ liệu bảo hành thì trả Chưa xác định. Xem [baseline TL01](SCOPE_BASELINE.md) và use_cases.json để phát triển contract/migration.
+
+## UC33 — Tra cứu nguồn nhập và bảo hành theo serial
+
+Phạm vi bổ sung Q02; **DRAFT**, schema/API/quyền chi tiết chưa hiện thực.
+
+Mô tả: Tra serial của thiết bị để biết NCC, receipt, ngày nhập và tình trạng bảo hành dựa trên dữ liệu thời hạn có nguồn.
+
+Hậu điều kiện: Serial có dữ liệu bảo hành trả đúng trạng thái theo ngày tra cứu; thiếu mốc/thời hạn trả Chưa xác định; không tự suy thời hạn hoặc lộ dữ liệu ngoài quyền kho/giá.
+
+Kiểm thử: T28. Cần quyền kho và dữ liệu có nguồn; không có quyền thì từ chối. Thiếu policy ký gửi thì chặn thao tác; thiếu dữ liệu bảo hành thì trả Chưa xác định. Xem [baseline TL01](SCOPE_BASELINE.md) và use_cases.json để phát triển contract/migration.

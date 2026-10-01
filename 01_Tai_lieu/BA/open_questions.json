@@ -20,16 +20,17 @@
     "question": "Ngành hàng, có hạn dùng/serial/quy đổi và hàng ký gửi không?",
     "owner": "Chủ kho",
     "impact": "Chốt tracking và rule.",
-    "answer": "có",
+    "answer": "Ngành hàng thiết bị điện tử / linh kiện IT / thiết bị văn phòng. Serial: laptop, màn hình, router, máy quét; Lot/Batch: RAM, SSD, dây cáp, linh kiện cùng đợt. Hạn sử dụng cho pin, keo tản nhiệt, hóa chất vệ sinh là phần muốn mở rộng. Tra serial để biết nhà cung cấp, ngày nhập và còn bảo hành không. Có hàng ký gửi: ở trong kho nhưng chưa thuộc sở hữu doanh nghiệp. Cấu trúc vị trí Kho → Zone → Rack → Bin.",
     "evidence": "https://docs.google.com/spreadsheets/d/13oUN2pNpxRxm3tEyf8EWpykZLxQFkltMYStt1NEpA_E/edit?gid=1173369520#gid=1173369520",
     "status": "ANSWERED - tech lead xác nhận; xem follow_up",
     "follow_up_owner": "Trần Trung Kiên",
     "follow_up_github": "KyotaFill",
     "follow_up_due": "2026-10-04",
-    "follow_up": "Làm rõ ngành hàng, ý nghĩa câu trả lời \"có\", hàng ký gửi và có cần LOT + SERIAL cùng sản phẩm hay không.",
+    "follow_up": "BE01/BE02/TL04 thiết kế phân biệt chủ sở hữu hàng ký gửi trước migration; BE05/UI04 bổ sung tra cứu bảo hành serial. Chốt dữ liệu hợp đồng/nguồn mốc bảo hành; không tự suy thời hạn. Theo dõi bằng CR-TL01-Q02-20261002.",
     "source_sheet_status": "Đã chốt",
     "recorded_on": "2026-10-02",
-    "confirmation_basis": "Tech lead xác nhận đã chốt qua trao đổi ngày 02/10/2026; không thay thế biên bản phê duyệt doanh nghiệp."
+    "confirmation_basis": "Câu trả lời bổ sung trực tiếp của Trần Trung Kiên ngày 02/10/2026; thay phần mơ hồ ở Google Sheets. Không đại diện phê duyệt doanh nghiệp.",
+    "source_sheet_answer": "có"
   },
   {
     "id": "Q03",
@@ -52,16 +53,17 @@
     "question": "Ai có quyền duyệt thay thế và hạn mức theo kho/loại chứng từ?",
     "owner": "Kiểm soát",
     "impact": "Chốt policy và RACI.",
-    "answer": "Thủ kho & Kế toán kho ký.",
+    "answer": "Thủ kho và Kế toán kho được duyệt thay phiên nhau, không giới hạn giá trị phiếu; không tự duyệt phiếu mình lập.",
     "evidence": "https://docs.google.com/spreadsheets/d/13oUN2pNpxRxm3tEyf8EWpykZLxQFkltMYStt1NEpA_E/edit?gid=1173369520#gid=1173369520",
     "status": "ANSWERED - tech lead xác nhận; xem follow_up",
     "follow_up_owner": "Trần Trung Kiên",
     "follow_up_github": "KyotaFill",
     "follow_up_due": "2026-10-04",
-    "follow_up": "Làm rõ duyệt thay thế, hạn mức, phạm vi kho và yêu cầu một hay hai chữ ký.",
+    "follow_up": "BE04/BE07 cấu hình hai vai trò có thể duyệt thay nhau khi được cấp quyền trong kho, không giới hạn giá trị và chặn tự duyệt; QA kiểm thử người lập khác người duyệt.",
     "source_sheet_status": "Đã chốt",
     "recorded_on": "2026-10-02",
-    "confirmation_basis": "Tech lead xác nhận đã chốt qua trao đổi ngày 02/10/2026; không thay thế biên bản phê duyệt doanh nghiệp."
+    "confirmation_basis": "Câu trả lời bổ sung trực tiếp của Trần Trung Kiên ngày 02/10/2026; thay phần mơ hồ ở Google Sheets. Không đại diện phê duyệt doanh nghiệp.",
+    "source_sheet_answer": "Thủ kho & Kế toán kho ký."
   },
   {
     "id": "Q05",
@@ -84,16 +86,17 @@
     "question": "Phiên bản/kiến trúc OS server/client, máy in và máy quét?",
     "owner": "IT",
     "impact": "Chốt ma trận kiểm thử.",
-    "answer": "Server Ubuntu/Debian x64;Mac, Client Windows 10/11 x64; máy in tem nhiệt USB/LAN; máy quét barcode 1D/2D HID",
+    "answer": "Bỏ Mac. Server Ubuntu/Debian x64; client Windows 10/11 x64; máy in tem nhiệt USB/LAN; máy quét barcode 1D/2D HID.",
     "evidence": "https://docs.google.com/spreadsheets/d/13oUN2pNpxRxm3tEyf8EWpykZLxQFkltMYStt1NEpA_E/edit?gid=1173369520#gid=1173369520",
     "status": "ANSWERED - tech lead xác nhận; xem follow_up",
     "follow_up_owner": "Lê Ngọc Quỳnh Khanh",
     "follow_up_github": "31251026017",
     "follow_up_due": "2026-10-04",
-    "follow_up": "Chốt OS/version/arch cụ thể, vai trò server/client của Mac và model/driver/khổ tem trước test thiết bị/đóng gói.",
+    "follow_up": "QA07/QA10 chọn chính xác bản Ubuntu hoặc Debian/version để triển khai và model/driver/khổ tem thực tế; chỉ nghiệm thu Linux server x64 và Windows 10/11 x64 client, không Mac.",
     "source_sheet_status": "Đã chốt",
     "recorded_on": "2026-10-02",
-    "confirmation_basis": "Tech lead xác nhận đã chốt qua trao đổi ngày 02/10/2026; không thay thế biên bản phê duyệt doanh nghiệp."
+    "confirmation_basis": "Câu trả lời bổ sung trực tiếp của Trần Trung Kiên ngày 02/10/2026; thay phần mơ hồ ở Google Sheets. Không đại diện phê duyệt doanh nghiệp.",
+    "source_sheet_answer": "Server Ubuntu/Debian x64;Mac, Client Windows 10/11 x64; máy in tem nhiệt USB/LAN; máy quét barcode 1D/2D HID"
   },
   {
     "id": "Q07",

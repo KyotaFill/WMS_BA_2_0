@@ -2,7 +2,7 @@
 
 WMS-DD-003 • Phiên bản 1.0 • 26/09/2026 • Bản thiết kế cơ sở để phát triển và thẩm định nghiệp vụ
 
-**Đầu vào hiện hành:** [baseline TL01 ngày 02/10/2026](SCOPE_BASELINE.md). Số liệu ngân sách/tải/RPO ở dưới đã được đồng bộ; các phương án đa OS vẫn phải được chọn và kiểm thử, không phải cam kết hỗ trợ mọi nền tảng.
+**Đầu vào hiện hành:** [baseline TL01 ngày 02/10/2026](SCOPE_BASELINE.md). Số liệu ngân sách/tải/RPO ở dưới đã được đồng bộ; target bàn giao được chốt là server Ubuntu/Debian x64 và client Windows 10/11 x64; bỏ Mac. Các phương án Windows server/macOS dưới đây là tham khảo lịch sử, không phải cam kết hỗ trợ trong đợt này.
 
 ## 1. Các điều chỉnh đã tiếp nhận
 
@@ -59,3 +59,7 @@ Mục tiêu Q07: RPO giao dịch <1 giờ, RTO <4 giờ. Tệp đính kèm RPO 2
 03_So_do/00_Tong_hop/WMS_Design.drawio: mở và sửa offline bằng diagrams.net Desktop, mỗi bảng một trang ERD chi tiết, cùng các trang class/usecase đã tách đường nối. SVG dùng xem trong trình duyệt. PlantUML .puml là nguồn class/usecase/state/sequence có thể sửa. 03_So_do/00_Tong_hop/Diagram_Atlas.pdf chứa các sơ đồ vector, có thể zoom. Tài liệu chính và USE_CASES/RBAC/INVARIANTS bổ sung ngữ nghĩa mà ERD không thể biểu diễn.
 
 Mau_nhap_lieu_WMS.xlsx và CSV templates dùng nhập dữ liệu. CSV examples chỉ minh họa. File API có thể import vào công cụ OpenAPI nhưng chưa đại diện server đang chạy. Bộ QA là acceptance specification, không phải báo cáo test ứng dụng đã pass.
+
+## 9. Khoảng trống mô hình theo Q02 ngày 02/10/2026
+
+Thiết bị điện tử/IT/văn phòng dùng serial hoặc lot theo SKU; thêm tra cứu bảo hành serial và hàng ký gửi theo FR32/FR33. Mô hình 56 bảng hiện tại chưa có chiều chủ sở hữu tồn kho; không thể phân biệt an toàn hàng doanh nghiệp và hàng ký gửi chỉ bằng ghi chú/JSONB. BE02/TL04 phải thiết kế migration, khóa và truy vấn theo chủ sở hữu, đảm bảo tất cả luồng reservation/post/count/import/report dùng cùng chiều. Contract quyền xuất và chuyển quyền ký gửi cần policy được chốt trước bật luồng. T27/T28 hiện là đặc tả chưa chạy. Không thay SQL trong TL01 để giả vờ đã hiện thực phần mới.

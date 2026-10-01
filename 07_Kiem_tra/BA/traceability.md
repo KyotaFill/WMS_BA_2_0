@@ -35,3 +35,5 @@ Không phải kết quả chạy test. API coverage chưa đầy đủ.
 |FR29|UC29|SRS - hỗ trợ/ngoại lệ|T11|
 |FR30|UC30|SRS - hỗ trợ/ngoại lệ|T14|
 |FR31|UC31|SRS - hỗ trợ/ngoại lệ|T12,T20|
+|FR32|UC32|SRS - bổ sung Q02/TL01|T27|
+|FR33|UC33|SRS - bổ sung Q02/TL01|T28|

@@ -2,7 +2,7 @@
 ## 1. Phạm vi và nguồn
 Áp dụng mô hình yêu cầu Ch7 PDF 6-21 và Ch8 PDF 5-33. Ranh giới WMS gồm desktop, API, dịch vụ nền và dữ liệu do ứng dụng quản lý. Con người và hệ thống ngoài là actor; DB và API bên trong ranh giới không vẽ như actor. Vai trò ngoài đời và grant quyền ứng dụng là hai khái niệm khác nhau.
 
-requirements.json là danh mục có mã ổn định: 4 GR, 4 TR, 31 FR, 8 NFR. Mỗi yêu cầu có nguồn, owner, priority, trạng thái, tiêu chí nghiệm thu, UC và phiên bản. Chủ nghiệp vụ hiện được định danh theo vai trò vì chưa có danh tính người phụ trách. Các mục tiêu hiệu năng/đo lợi ích là PROPOSED, chưa benchmark hay được ký.
+requirements.json là danh mục có mã ổn định: 4 GR, 4 TR, 33 FR, 8 NFR; FR32–FR33 là phạm vi bổ sung từ Q02 ngày 02/10/2026, chưa có schema/API hiện thực. Mỗi yêu cầu có nguồn, owner, priority, trạng thái, tiêu chí nghiệm thu, UC và phiên bản. Chủ nghiệp vụ hiện được định danh theo vai trò vì chưa có danh tính người phụ trách. Các mục tiêu hiệu năng/đo lợi ích là PROPOSED, chưa benchmark hay được ký.
 
 ## 2. Ưu tiên và trạng thái
 MoSCoW: Must - thiếu thì không hoàn thành mục tiêu cơ sở; Should - quan trọng nhưng có phương án tạm được chủ nghiệp vụ chấp nhận; Could - cải thiện tùy nguồn lực; Won't this release - ngoài đợt. Danh mục cơ sở đang ghi Must theo hồ sơ đã xây; workshop phải kiểm tra có thực sự cần trong đợt pilot. Không coi tất cả chức năng tương lai là Must. Danh mục ngoài phạm vi trong BRD là Won't ở đợt cơ sở.
@@ -31,3 +31,7 @@ Mỗi CR ghi lý do, người yêu cầu, ngày, yêu cầu bị ảnh hưởng,
 
 ## 7. Các điều kiện còn phải xác minh
 Q01–Q08 đã được tech lead trả lời trong bảng quyết định; trạng thái nguồn và follow-up được lưu trong open_questions.json. [Baseline TL01](../SCOPE_BASELINE.md) là căn cứ triển khai hiện hành. As-Is được vẽ như giả thuyết để phỏng vấn, To-Be là đề xuất. Schema, quyền và policy là thiết kế; acceptance_tests.csv là đặc tả test chứ chưa phải kết quả chạy PostgreSQL hoặc app. Bộ kiểm tra BA chỉ xác nhận tính nhất quán của hồ sơ và ký pháp đã dựng.
+
+## 8. Bổ sung Q02 trong TL01
+
+FR32/UC32 quản lý hàng ký gửi theo chủ sở hữu, FR33/UC33 tra cứu bảo hành theo serial. T27/T28 là đặc tả chưa chạy. Phần mô hình vật lý/permission/API mới chưa có; không coi các sơ đồ/56 bảng/53 quyền hiện tại đã bao phủ hai UC này. BE01/BE02/TL04 phải bổ sung trước nghiệm thu, tham chiếu CR-TL01-Q02-20261002.

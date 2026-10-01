@@ -25,3 +25,5 @@ T23,Upgrade từng OS/arch,"Máy sạch, bản N-1 có nháp, mất mạng",Nhá
 T24,Ràng buộc DB và transaction,NULL item duplicate; FK; fail giữa post,Unique/FK chặn; rollback toàn bộ
 T25,Dữ liệu lô hết hạn,Reserve hôm trước rồi post sau expiry,Chặn xuất; release có kiểm soát; không tồn available âm
 T26,Tải đại diện,1 kho/3 phân khu/15 CCU; ghi dataset và tăng trưởng tham chiếu 20GB/3 năm; bộ stress 50k SKU/1m moves báo cáo riêng,Ghi p95/p99 theo endpoint/cấu hình; chưa gán kết quả đạt; SLA quy trình phiếu <15 phút đo riêng theo Q07
+T27,Tách tồn ký gửi theo chủ sở hữu,Cùng SKU/vị trí: nhập 10 hàng doanh nghiệp và 5 ký gửi; đối soát báo cáo; thử xuất/chuyển quyền khi chưa có policy,"Vật lý 15, sở hữu 10, ký gửi 5; không hòa tồn; chặn thao tác chưa được phép; retry/rollback không thay sai chủ sở hữu"
+T28,Tra nguồn nhập và bảo hành serial,"Tra serial có receipt/NCC/ngày nhập; thử còn hạn, hết hạn, thiếu mốc bảo hành và người thiếu quyền",Truy vết đúng; trạng thái theo dữ liệu thời hạn có nguồn; thiếu dữ liệu trả Chưa xác định; không lộ kho/giá trái quyền
