@@ -62,7 +62,7 @@ Job artifact phát hiện `actions/setup-python` chưa tìm được file để 
 ## Các việc chưa hoàn thành
 
 - Chưa có mã backend/Tkinter, authorization, posting service, worker hoặc migration nâng cấp; API còn PARTIAL/MISSING theo `05_API/BA_COVERAGE.md`.
-- Chưa chạy T01–T26 ở mức ứng dụng, kiểm thử đồng thời, thiết bị, hiệu năng, phục hồi hoặc nghiệm thu Windows/macOS.
+- Chưa chạy T01–T28 ở mức ứng dụng, kiểm thử đồng thời, thiết bị, hiệu năng, phục hồi hoặc nghiệm thu Windows (kế hoạch và fixtures tái lập tại [KE_HOACH_NGHIEM_THU.md](KE_HOACH_NGHIEM_THU.md)).
 - Chưa kiểm tra sơ đồ bằng GUI diagrams.net/BPMN engine, XSD BPMN hoặc parser DBML chính thức; kiểm tra XML/tham chiếu không thay thế các bước này.
 - Q01–Q08 vẫn OPEN; không tự điền giả định thành quyết định đã duyệt.
 
