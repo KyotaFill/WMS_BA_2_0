@@ -1,6 +1,6 @@
 # BRD - Bối cảnh và mục tiêu thay đổi
 ## 1. Business need và phạm vi
-Doanh nghiệp cần một hệ thống quản lý kho nội bộ, có nhiều nghiệp vụ hơn nhập/xuất cơ bản và có thể mở rộng. Người dùng chốt LAN, Linux server/Windows client (bỏ Mac theo Q06 ngày 02/10) và dự phòng 50 triệu. Theo Q01 được tech lead xác nhận ngày 02/10/2026, 200 triệu chưa bao gồm dự phòng 50 triệu; tổng số học là 250 triệu. Chưa có bằng chứng phân bổ/khoản chi do sponsor phê duyệt. Không tự suy diễn khoản dự phòng thành ngân sách tính năng mới.
+Doanh nghiệp cần một hệ thống quản lý kho nội bộ, có nhiều nghiệp vụ hơn nhập/xuất cơ bản và có thể mở rộng. Người dùng chốt LAN, Linux server/Windows client (bỏ Mac theo Q06 ngày 02/10) và dự phòng 50 triệu. Theo Q01 được tech lead xác nhận ngày 02/10/2026, 200 triệu chưa bao gồm dự phòng 50 triệu; tổng số học là 250 triệu.
 
 Phạm vi cơ sở kế thừa gồm danh mục, mua/bán phục vụ kho, nhận/cất/giữ/soạn/xuất, chuyển kho, trả hàng, kiểm kê, điều chỉnh, kỳ, báo cáo, import, in, quyền và vận hành. Q05 xác nhận 1 kho trung tâm/3 phân khu, tối đa 15 CCU và khoảng 20 GB/3 năm; dữ liệu thử sức tải lớn hơn phải ghi là giả lập. Ngoài cơ sở: giá vốn kế toán chuẩn, công nợ, sản xuất đầy đủ, đa pháp nhân/3PL, mobile native, RFID và ghi sổ offline độc lập.
 
