@@ -15,5 +15,51 @@
     "decision": "",
     "approved_by": "",
     "status": "TEMPLATE"
+  },
+  {
+    "id": "CR-TL01-20261002",
+    "requested_by": "Trần Trung Kiên / KyotaFill",
+    "date": "2026-10-02",
+    "reason": "Đồng bộ câu trả lời Q01–Q08 từ Google Sheets và xác nhận đã chốt của tech lead vào baseline triển khai.",
+    "affected_requirements": [
+      "FR27",
+      "NFR04",
+      "NFR05"
+    ],
+    "process_impact": "Ghi nhận Thủ kho/Kế toán kho ký và mục tiêu xử lý phiếu <15 phút; flow/hạn mức cần follow-up.",
+    "data_impact": "1 kho/3 phân khu, 15 CCU, khoảng 20 GB/3 năm, lưu tối thiểu 5 năm; Q02 tracking/ký gửi còn cần chi tiết.",
+    "permission_impact": "Ẩn dữ liệu giá; vẫn không tự duyệt. Chưa tự cấp quyền/hạn mức từ tên vai trò ký.",
+    "api_impact": "Không đổi contract trong TL01; BE01 phải dùng đầu vào và ghi phần chưa rõ.",
+    "test_impact": "T09 dùng RPO <1 giờ/RTO <4 giờ; T26 workload 15 CCU, tách stress dataset khỏi số liệu thực tế.",
+    "cost_impact": "200 triệu chưa gồm 50 triệu dự phòng; tổng số học 250 triệu, chưa có phân bổ hoặc phê duyệt chi.",
+    "schedule_impact": "Hạn 22/10/2026 theo tech lead; chi tiết target/thiết bị cần làm rõ trước nghiệm thu.",
+    "decision": "Tiếp nhận các câu trả lời làm đầu vào nhóm; giữ follow-up và không tạo kết quả test/biên bản doanh nghiệp giả.",
+    "approved_by": "Trần Trung Kiên — xác nhận đầu vào nhóm qua trao đổi; không đại diện phê duyệt doanh nghiệp",
+    "evidence": "https://docs.google.com/spreadsheets/d/13oUN2pNpxRxm3tEyf8EWpykZLxQFkltMYStt1NEpA_E/edit?gid=1173369520#gid=1173369520",
+    "status": "TECH_LEAD_CONFIRMED - tài liệu chờ review"
+  },
+  {
+    "id": "CR-TL01-Q02-20261002",
+    "requested_by": "Trần Trung Kiên / KyotaFill",
+    "date": "2026-10-02",
+    "reason": "Tech lead làm rõ Q02 có hàng ký gửi và tra cứu bảo hành serial; Q04 cho duyệt thay không hạn mức; Q06 bỏ Mac.",
+    "affected_requirements": [
+      "FR32",
+      "FR33",
+      "TR02",
+      "FR28",
+      "FR30"
+    ],
+    "process_impact": "Thêm tách quyền sở hữu hàng ký gửi và tra cứu bảo hành; không tự duyệt, Thủ kho/Kế toán kho được thay nhau.",
+    "data_impact": "Cần thiết kế chiều chủ sở hữu và nguồn thời hạn bảo hành; schema chưa đáp ứng; không dùng ghi chú để thay dimension.",
+    "permission_impact": "Quyền ký gửi/tra bảo hành cần BE04 thiết kế; không gán mặc định từ danh sách quyền trống.",
+    "api_impact": "UC32/UC33 coverage MISSING; BE01 phải thêm contract.",
+    "test_impact": "Thêm T27/T28; bỏ Mac khỏi target bàn giao, vẫn test Linux server/Windows client.",
+    "cost_impact": "Chưa có ước lượng phần tăng thêm; không tự coi nằm trọn trong 780 giờ cũ.",
+    "schedule_impact": "Hạn 22/10 theo tech lead; BE01/BE02/TL04/QA01 đánh giá phần thêm trước khóa lịch.",
+    "decision": "Tiếp nhận vào phạm vi, ghi rõ khoảng trống thiết kế và kiểm thử; không tuyên bố đã hiện thực.",
+    "approved_by": "Trần Trung Kiên — xác nhận phạm vi trong trao đổi 02/10/2026",
+    "evidence": "Câu trả lời làm rõ Q02/Q04/Q06 của người dùng trong phiên làm việc; nguồn ô ban đầu giữ trong open_questions.json.",
+    "status": "TECH_LEAD_CONFIRMED - thiết kế chi tiết chờ thực hiện"
   }
 ]

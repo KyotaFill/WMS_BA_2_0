@@ -564,5 +564,37 @@
     "test_execution": "NOT_RUN",
     "approval": "PENDING",
     "api_paths": []
+  },
+  {
+    "requirement": "FR32",
+    "use_case": "UC32",
+    "process": "SRS - bổ sung Q02/TL01",
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "permissions": "PENDING - chốt quyền trước hiện thực",
+    "tables": "PENDING - migration Q02",
+    "tests": "T27",
+    "api_coverage": "MISSING - phạm vi mới Q02, BE01 cần contract",
+    "test_execution": "NOT_RUN",
+    "approval": "PENDING",
+    "api_paths": []
+  },
+  {
+    "requirement": "FR33",
+    "use_case": "UC33",
+    "process": "SRS - bổ sung Q02/TL01",
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "permissions": "PENDING - chốt quyền trước hiện thực",
+    "tables": "PENDING - migration Q02",
+    "tests": "T28",
+    "api_coverage": "MISSING - phạm vi mới Q02, BE01 cần contract",
+    "test_execution": "NOT_RUN",
+    "approval": "PENDING",
+    "api_paths": []
   }
 ]

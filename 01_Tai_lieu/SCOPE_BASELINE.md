@@ -1,0 +1,115 @@
+# Phạm vi và baseline triển khai — TL01
+
+Phiên bản TL01-2026-10-02 · Hạn bàn giao đồ án: **22/10/2026**.
+
+Owner: **Trần Trung Kiên / KyotaFill**. Reviewer: **Lê Ngọc Quỳnh Khanh / 31251026017**. Theo dõi tại [issue TL01](https://github.com/TEAM-DEV-FIVE/WMS_BA_2_0/issues/1).
+
+## 1. Căn cứ và thẩm quyền
+
+- Tech lead xác nhận đã chốt quyết định trong [Google Sheets — QUYET_DINH, Q01–Q08](https://docs.google.com/spreadsheets/d/13oUN2pNpxRxm3tEyf8EWpykZLxQFkltMYStt1NEpA_E/edit?gid=1173369520#gid=1173369520), được đối chiếu ngày 02/10/2026.
+- Các giá trị đã trả lời là đầu vào của nhóm đồ án. Bảng chưa có bằng chứng phê duyệt riêng của sponsor/chủ kho/IT và chưa điền ngày ký; không suy ra đã có biên bản doanh nghiệp hoặc kết quả nghiệm thu ứng dụng.
+- [open_questions.json](BA/open_questions.json) lưu nguyên văn câu trả lời, trạng thái ô trên Sheets, người theo dõi nội bộ, nguồn và chi tiết còn cần làm rõ. Q05 có câu trả lời nhưng ô trạng thái còn “Chờ chốt”; xác nhận “mình chốt xong rồi” của tech lead là căn cứ tiếp nhận câu trả lời, không giả ghi rằng ô đã đổi.
+- Tài liệu này là baseline làm việc hiện hành cho TL01. Khi số liệu khác hồ sơ 1.x/BA 2.0 trước ngày 02/10, dùng quyết định tại đây và bản ghi thay đổi liên quan. Các PDF/sơ đồ lịch sử không phải bằng chứng đã triển khai hoặc đã được doanh nghiệp ký duyệt.
+
+## 2. Phạm vi MVP của đồ án
+
+Giữ nghiệp vụ cơ sở FR01–FR31 và tiếp nhận bổ sung **FR32/UC32: hàng ký gửi** cùng **FR33/UC33: tra cứu bảo hành serial** theo xác nhận Q02. Kế hoạch hiện có 38 đầu việc; phần bổ sung cần được các owner BE01/BE02/BE05/TL04/QA01 đánh giá lại ước lượng, không coi tổng 780 giờ cũ đã bao gồm chi phí thay mô hình. **M2 là lát cắt nhận hàng đầu tiên**, không phải toàn bộ MVP bàn giao. BE09 (trường mở rộng) vẫn trong backlog nhưng là P3, không được ưu tiên trước an toàn tồn kho và nghiệm thu lõi; chỉ được hoãn/bỏ khi tech lead ghi quyết định thay đổi.
+
+| Nhóm bàn giao bắt buộc | Yêu cầu / use case | Đầu việc chịu trách nhiệm | Bằng chứng nghiệm thu |
+| --- | --- | --- | --- |
+| Đăng nhập, phiên, MFA, quyền kho, phân tách người lập/duyệt | FR01–02, FR29–30; UC01–02, UC29–30 | BE03, BE04, BE07, UI03, UI05 | T07, T11, T14; thử quyền bị thu hồi, chéo kho, tự duyệt |
+| Danh mục, UOM, barcode, kho/vị trí, đối tác | FR03–04; UC03–04 | BE05, UI04 | T12–T13; kiểm tra mã trùng, quy đổi, cây vị trí |
+| PO, nhận từng phần, kiểm tra/cất hàng, tồn đầu kỳ | FR05–07, FR23; UC05–07, UC23 | BE06–08, TL03–05, UI05–06, QA04 | T01–02, T06, T14, T20, T24–25; đối soát sau post |
+| SO, giữ/soạn/đóng kiện/xuất, hủy phần còn lại | FR08–11, FR19; UC08–11, UC19 | BE06–08, TL06, UI05–06 | T03, T14–15, T17, T25; không xuất âm/chiếm giữ chỗ của phiếu khác |
+| Chuyển kho/move, trả hàng, đảo giao dịch | FR12–15, FR20; UC12–15, UC20 | TL07–08, UI06 | T04, T10, T18, T21; bảo toàn transit và lịch sử |
+| Kiểm kê, điều chỉnh, khóa/mở kỳ | FR16–18, FR21; UC16–18, UC21 | TL09, UI07, QA08 | T05, T16, T19; freeze/post và close/post cạnh tranh |
+| Tệp/import, báo cáo/export, in/tem | FR22, FR24, FR26, FR31; UC22, UC24, UC26, UC31 | QA04–06, UI09 | T07, T12, T20–22; quyền tải, hash file, reprint không post lại |
+| Nháp, phục hồi mất LAN, nâng cấp client | FR25, FR28; UC25, UC28 | UI02, UI08, QA10 | T02, T08, T23; giữ key/pending, không báo POSTED giả |
+| Triển khai, backup/restore, tải và bàn giao | FR27; UC27; TR01–04, NFR01–08 | QA02–03, QA07–11; TL review | T09, T23–24, T26; bộ cài/runbook và bằng chứng trên target đã chốt |
+| Hàng ký gửi và tra cứu bảo hành serial | FR32–33; UC32–33 | BE01–02, BE05, TL04–05, UI04, QA04–05; QA01 lập test | T27–T28; phân biệt chủ sở hữu, không hòa tồn, không tự suy bảo hành |
+
+GR01–GR04 áp dụng xuyên suốt. Audit/outbox là thành phần giao dịch, không phải phần có thể tắt để rút ngắn tiến độ. 8 báo cáo R01–R08, 4 mẫu chứng từ và 2 loại tem giữ theo [kiến trúc](ARCHITECTURE.md); Q08 quyết định mẫu tham chiếu và quyền giá.
+
+### Ngoài phạm vi cơ sở
+
+Giá vốn kế toán, công nợ/kế toán tổng hợp, sản xuất đầy đủ, đa pháp nhân/3PL, RFID, PDA/mobile native và ghi sổ offline độc lập. “Ẩn giá vốn” trong Q08 là yêu cầu che dữ liệu giá theo quyền; không tự mở rộng thành tính giá vốn kế toán. Hàng ký gửi đã được xác nhận thuộc phạm vi; schema hiện tại chưa có chiều chủ sở hữu tồn kho, vì vậy **không được dùng JSONB/ghi chú để thay kiểm soát quyền sở hữu**. CR-TL01-Q02-20261002 yêu cầu thiết kế/migration và test trước khi nhận ký gửi thật. Dịch vụ sửa chữa/bảo hành/RMA và mô hình 3PL đa khách hàng chưa được yêu cầu.
+
+Chuyển kho vẫn được giữ để kiểm thử nghiệp vụ bằng dữ liệu giả có kho nguồn/đích, dù cấu hình vận hành được chốt là một kho trung tâm. Không khai báo có hai kho thực tế chỉ để đáp ứng test.
+
+## 3. Quyết định hiện hành và giới hạn diễn giải
+
+| ID | Nội dung tiếp nhận | Hệ quả triển khai / việc còn cần làm rõ |
+| --- | --- | --- |
+| Q01 | 200 triệu **chưa bao gồm** dự phòng 50 triệu | Tổng số học 250 triệu; không coi đây là bằng chứng khoản chi đã được doanh nghiệp phê duyệt. Chưa có phân bổ thiết bị, OS, bảo hành hoặc đơn giá. |
+| Q02 | Điện tử/linh kiện IT/thiết bị văn phòng; serial cho thiết bị, lot cho linh kiện theo đợt; có hàng ký gửi; tra bảo hành theo serial; Kho → Zone → Rack → Bin | NONE/LOT/SERIAL được chọn theo SKU; không có yêu cầu đã xác nhận về lot + serial đồng thời trên một SKU. Hạn dùng cho pin/keo/hóa chất là phần mở rộng tùy sản phẩm, không bắt mọi SKU có expiry. Thêm FR32–33/T27–28; dữ liệu bảo hành phải có nguồn. |
+| Q03 | “Thủ kho & Kế toán kho ký” | Có hai vai trò ký; trình tự As-Is, phân công từng loại phiếu, người thực hiện cụ thể chưa được mô tả. Giữ kiểm soát không tự duyệt. |
+| Q04 | Thủ kho và Kế toán kho được duyệt thay phiên, không giới hạn giá trị phiếu, không tự duyệt | Một người được cấp quyền phù hợp trong kho có thể duyệt thay người kia; không yêu cầu cả hai ký chỉ từ tên hai vai trò. Vẫn kiểm tra scope, trạng thái grant, người lập khác người duyệt và version chứng từ. |
+| Q05 | 1 kho trung tâm, 3 phân khu; tối đa 15 CCU; khoảng 20 GB trong 3 năm | Đổi cấu hình đại diện từ 5 kho/30 CCU sang số mới. 50k SKU/1m moves trong hồ sơ cũ chỉ có thể dùng như bộ stress test, không phải dung lượng thực tế đã xác nhận. |
+| Q06 | Server Ubuntu/Debian x64; client Windows 10/11 x64; in tem nhiệt USB/LAN; scanner 1D/2D HID; **bỏ Mac** | QA07/QA10 chọn distro/version và model/driver/khổ tem thực tế để test. Mac và Windows server không nằm trong target bàn giao này; phương án cũ chỉ là tài liệu tham khảo. |
+| Q07 | Sai lệch tồn <0,5%; xử lý phiếu <15 phút; RPO <1 giờ, RTO <4 giờ | Là mục tiêu, chưa phải số đo. RPO mới thay mục tiêu đề xuất 15 phút của hồ sơ cũ. 15 phút là thời gian quy trình phiếu, không phải ngân sách latency của một API. |
+| Q08 | Mẫu chuẩn TT 133/200; lưu dữ liệu tối thiểu 5 năm; phân quyền ẩn giá vốn | Lưu nguyên yêu cầu tham chiếu; kế toán cần chọn bộ mẫu cụ thể và cung cấp mẫu duyệt. Không coi TL01 là xác nhận pháp lý. 20 GB/3 năm chưa chứng minh đủ lưu 5 năm; QA07 phải sizing và phân biệt hồ sơ nghiệp vụ với chu kỳ backup. |
+
+Q02/Q04/Q06 đã được tech lead làm rõ trực tiếp ngày 02/10; JSON giữ cả câu trả lời ô nguồn và phần bổ sung. Các chi tiết triển khai còn lại (version/thiết bị, dữ liệu hợp đồng ký gửi, mốc bảo hành) là follow-up có owner, không phải quyết định tự suy của nhóm.
+
+## 4. Giả định phát triển và điểm dừng
+
+| Mã | Giả định để bắt đầu | Kiểm soát / điểm cần quyết định |
+| --- | --- | --- |
+| A01 | Một doanh nghiệp, một server active, PostgreSQL trung tâm; desktop Tkinter gọi FastAPI qua HTTPS LAN | Client không có DB credential; không dùng SQLite/SMB như DB dùng chung. HA/đa chủ hàng cần CR riêng. |
+| A02 | NONE, LOT hoặc SERIAL theo mô hình hiện có; LOT và SERIAL loại trừ nhau | Ví dụ Q02 dùng serial và lot cho các nhóm SKU khác nhau. Nếu phát sinh yêu cầu một SKU đồng thời lot + serial phải có CR; thiết kế chủ sở hữu hàng ký gửi ở BE02/TL04 trước khi khóa migration. |
+| A03 | Không xuất âm, không vượt nguồn, không tự duyệt; Q04 cho phép Thủ kho/Kế toán kho duyệt thay nhau không giới hạn giá trị | Q04 phải trở thành policy/fixture cụ thể trong BE04/BE07; người duyệt vẫn cần grant đúng kho. Không dùng SYSADMIN hoặc tên vai trò để bỏ kiểm tra quyền. |
+| A04 | Contract/mock cho phép phát triển song song TL03–BE04, BE05–BE04 và TL05–BE07 | Mặc định từ chối truy cập khi quyền chưa tích hợp. M2 phải chạy RBAC/approval thật; mock không phải bằng chứng nghiệm thu tích hợp. |
+| A05 | Bộ dữ liệu giả được dùng để phát triển và kiểm thử | Không mô tả thành quan sát As-Is hoặc dữ liệu sản xuất. Seed không chứa tài khoản/mật khẩu thật. |
+| A06 | Agent hỗ trợ từng thành viên; ước lượng task là dự kiến | Owner chịu trách nhiệm review/test. Không tự đổi tiến độ hoặc ghi giờ thực tế từ ước lượng. |
+
+Bất biến bắt buộc theo [INVARIANTS.md](INVARIANTS.md): decimal chính xác; ledger/balance/reservation/serial/audit/outbox/idempotency nguyên tử; cùng key không post hai lần; thứ tự khóa thống nhất; lịch sử sổ không sửa/xóa; kiểm tra quyền, kỳ, hạn dùng và approval ở server. Mọi đề nghị thay đổi các bất biến phải được tech lead review trước khi triển khai.
+
+## 5. Người theo dõi Q01–Q08
+
+Giữ owner nội bộ như bảng quản lý đã có. **Owner nội bộ thu thập và cập nhật câu trả lời; không thay người có thẩm quyền nghiệp vụ.** Hạn follow-up 04/10/2026 là hạn theo dõi của nhóm, không phải ngày doanh nghiệp cam kết trả lời.
+
+| Câu hỏi | Owner nội bộ | Người cần xác nhận / bằng chứng phải có |
+| --- | --- | --- |
+| Q01 | Trần Trung Kiên / KyotaFill | Sponsor: trần chi phí, phần dự phòng và bảng phân bổ đã duyệt |
+| Q02 | Trần Trung Kiên / KyotaFill | Chủ kho: ngành hàng, mẫu SKU/UOM/tracking và cách quản lý hàng ký gửi |
+| Q03 | Trần Trung Kiên / KyotaFill | Chủ kho: flow As-Is và người ký theo từng loại phiếu |
+| Q04 | Trần Trung Kiên / KyotaFill | Kiểm soát: ma trận duyệt/chữ ký, người thay thế, hạn mức, phạm vi kho |
+| Q05 | Trần Trung Kiên / KyotaFill | IT/Chủ kho: cơ cấu 3 phân khu, dữ liệu khởi điểm/tăng trưởng và workload 15 CCU |
+| Q06 | Lê Ngọc Quỳnh Khanh / 31251026017 | IT: ma trận OS/version/arch và thiết bị có thể chạy test thực tế |
+| Q07 | Trần Trung Kiên / KyotaFill | Sponsor/IT: cách đo sai lệch, start/end xử lý phiếu và kết quả restore |
+| Q08 | Lê Ngọc Quỳnh Khanh / 31251026017 | Kiểm soát: file mẫu, phân loại dữ liệu, người được xem giá, chính sách giữ/xóa hồ sơ |
+
+Trực phối hợp Q02/Q04/Q05 về API/dữ liệu; Thảo phối hợp Q03/Q06/Q08 về luồng UI, scan/in; Khanh chuẩn bị bằng chứng test và môi trường. Chi tiết chưa rõ được theo dõi trong `follow_up` của JSON, tách khỏi câu trả lời nguyên văn.
+
+## 6. Tiêu chí hoàn thành
+
+### TL01 — hồ sơ phạm vi
+
+1. Có phạm vi trong/ngoài, giả định, liên kết FR/UC/task/test và cổng nghiệm thu như trên.
+2. Q01–Q08 có owner nội bộ, nguồn câu trả lời và follow-up cụ thể; không gán phê duyệt sponsor hoặc đáp án chưa được cung cấp.
+3. Các thay đổi ngân sách, tải và mục tiêu phục hồi được đồng bộ vào tài liệu hiện hành; yêu cầu chưa được triển khai vẫn không mang trạng thái Implemented/Verified.
+4. PR liên kết TL01, kiểm tra artifact/checksum đạt, reviewer Khanh kiểm tra phạm vi và nguồn. Chỉ ghi nhận review hoặc đóng issue khi có bằng chứng thực tế.
+
+### MVP — nghiệm thu sản phẩm sau triển khai
+
+- M0 (02/10): phạm vi, contract, flow UI và kế hoạch test có đầu ra review được; không cần làm giả câu trả lời còn thiếu để “đạt” mốc.
+- M1/M2 (13/10): migrations, phiên/quyền, nền server/desktop và luồng nhận hàng chạy bằng API thật. Người lập khác người duyệt; nhận từng phần tăng tồn đúng một lần; retry, stale version và thiếu quyền bị xử lý đúng. Có bằng chứng T01/T02/T07/T11/T14/T24 tương ứng.
+- M3 (16/10): nghiệp vụ kho, dữ liệu, báo cáo và in theo phạm vi; mock được theo dõi và phải thay bằng tích hợp thật trước nghiệm thu cuối.
+- M4 (20/10): concurrency, đối soát, restore, đóng gói trên target đã chốt có log/bằng chứng; không dùng test trên một OS làm bằng chứng cho OS khác.
+- M5 (22/10): T01–T28 có kết quả, môi trường/commit/dữ liệu và bằng chứng; không còn lỗi chặn. Test bắt buộc chưa chạy hoặc chỉ chạy mock không được ghi Đạt. Ngoại lệ/defer phải ghi CR, phạm vi ảnh hưởng và người duyệt.
+- Bàn giao source/tag, migration/seed mẫu, bộ cài hoặc hướng dẫn chạy tái lập, cấu hình mẫu, runbook LAN/backup/restore, hướng dẫn sử dụng và biên bản UAT. Không giao secret trong Git.
+
+QA01 quy định cách đo trước khi test: sai lệch tồn <0,5% cần mẫu số được chốt; thời gian xử lý phiếu <15 phút cần điểm bắt đầu/kết thúc và trường hợp chờ duyệt; RPO <1 giờ và RTO <4 giờ phải đo bằng restore thật. T26 chạy workload 15 CCU trên cấu hình được ghi lại; latency p95/p99 được báo cáo, không gán ngưỡng cũ chưa xác nhận thành SLA mới.
+
+## 7. Kiểm soát thay đổi
+
+Mọi thay đổi scope, quy tắc quyền/tồn, nền tảng, dữ liệu hoặc deadline phải ghi [change_requests.json](BA/change_requests.json): lý do, requirement/task/test chịu ảnh hưởng, chi phí/lịch, người quyết định và bằng chứng. Tech lead chốt ưu tiên nội bộ; quyết định doanh nghiệp do đúng vai trò trong Q01–Q08 xác nhận. Không giảm kiểm soát tồn/quyền để bù tiến độ; phần mở rộng chỉ được đổi lịch khi có quyết định rõ.
+
+Google Sheets là bảng điều hành của nhóm; Git lưu phiên bản hồ sơ và bằng chứng review. Hai nơi không tự đồng bộ. Khi có quyết định mới, cập nhật JSON, tài liệu chịu ảnh hưởng, issue/PR và kiểm tra lại checksum.
+
+## 8. Phân rã phần bổ sung Q02
+
+- **Hàng ký gửi (FR32/UC32/T27):** phải nhận diện chủ sở hữu/nguồn hợp đồng, tách số lượng sở hữu doanh nghiệp và ký gửi trong nhập, giữ chỗ, xuất, chuyển, kiểm kê, import và báo cáo. Fixture: 10 đơn vị doanh nghiệp + 5 đơn vị ký gửi của cùng SKU/vị trí phải hiển thị vật lý 15, sở hữu 10, ký gửi 5; không nhập nhằng quyền xuất/định giá. Luồng xuất/chuyển quyền ký gửi chỉ được bật sau khi có policy và hợp đồng; trước đó từ chối có lý do, không âm thầm coi là hàng thuộc doanh nghiệp. Đây là thiết kế mới phải thực hiện, không phải khả năng sẵn có của 56 bảng hiện tại.
+- **Bảo hành serial (FR33/UC33/T28):** từ serial truy được receipt, NCC và ngày nhập; trạng thái còn/hết bảo hành phải dựa trên nguồn thời hạn/điểm bắt đầu được nhập và xác nhận. Khi thiếu dữ liệu trả “Chưa xác định”, không tự dùng ngày nhập cộng một số tháng tùy ý. Không bao gồm sửa chữa/RMA, công nợ hay kế toán giá vốn.
+- BE01 mở rộng contract/coverage; BE02/TL04 đề xuất mô hình, migration và bất biến chủ sở hữu; BE05/TL05 xử lý dữ liệu/nhập; UI04 hiển thị truy vết; QA04/QA05 kiểm tra import/báo cáo; QA01 thêm T27/T28. Không bỏ kiểm thử tương tranh/idempotency khi thêm chiều tồn.
+- Hạn 22/10 giữ theo tech lead; 38 issue và 780 giờ là kế hoạch trước phần làm rõ này. Owner đánh giá phần tăng thêm qua CR, không tự tuyên bố phần bổ sung không tốn công hoặc đã được kiểm thử.

@@ -589,5 +589,17 @@
       }
     ],
     "note": "Vai trò trong UC chỉ làm bước có quyền tương ứng; mọi grant còn phải đúng kho, thời hạn, version và SOD."
+  },
+  {
+    "use_case": "UC32",
+    "actors": "Người vận hành kho / Kiểm soát",
+    "actions": [],
+    "note": "DRAFT: chưa thiết kế quyền mới; BE01/BE04 phải bổ sung mapping và kiểm thử trước bật chức năng. Danh sách trống không có nghĩa cho phép mọi người."
+  },
+  {
+    "use_case": "UC33",
+    "actors": "Người vận hành kho / Kiểm soát",
+    "actions": [],
+    "note": "DRAFT: chưa thiết kế quyền mới; BE01/BE04 phải bổ sung mapping và kiểm thử trước bật chức năng. Danh sách trống không có nghĩa cho phép mọi người."
   }
 ]

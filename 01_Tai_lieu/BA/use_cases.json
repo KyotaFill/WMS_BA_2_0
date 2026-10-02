@@ -1536,13 +1536,13 @@
     "precondition": "Runbook, bản backup và khóa giải mã tách biệt",
     "main_flow": "Base backup + WAL; kiểm tra thành công; khôi phục môi trường khác; đối chiếu ledger/balance/serial; thử client; đo RPO/RTO.",
     "exceptions": "Thiếu WAL hoặc file đính kèm phải báo; sau phát sinh mới không restore mù snapshot cũ.",
-    "postcondition": "Bằng chứng restore; mục tiêu RPO 15 phút/RTO 4 giờ cần đo.",
+    "postcondition": "Bằng chứng restore; mục tiêu Q07 RPO <1 giờ, RTO <4 giờ; phải đo thực tế.",
     "tables": "Toàn DB + stored_file",
     "test": "T09",
     "status": "DRAFT - chờ thẩm định nghiệp vụ",
     "priority": "Must",
     "source": "Hồ sơ WMS 1.1; cần stakeholder xác nhận",
-    "summary": "Bằng chứng restore; mục tiêu RPO 15 phút/RTO 4 giờ cần đo.",
+    "summary": "Bằng chứng restore; mục tiêu Q07 RPO <1 giờ, RTO <4 giờ; phải đo thực tế.",
     "trigger": "Tác nhân chọn chức năng sao lưu và khôi phục",
     "scope": "WMS desktop + API nội bộ",
     "nfr": [
@@ -1768,6 +1768,94 @@
     "nfr": [
       "NFR01",
       "NFR03"
+    ]
+  },
+  {
+    "id": "UC32",
+    "name": "Quản lý hàng ký gửi theo chủ sở hữu",
+    "actor": "Người vận hành kho / Kiểm soát",
+    "priority": "Must",
+    "status": "DRAFT - bổ sung theo Q02; cần thiết kế chi tiết",
+    "source": "Tech lead xác nhận Q02 ngày 02/10/2026",
+    "summary": "Hàng ký gửi nằm trong kho nhưng chưa thuộc sở hữu doanh nghiệp; số lượng và truy vết phải tách theo chủ sở hữu trong mọi luồng tồn.",
+    "scope": "WMS desktop + API nội bộ",
+    "trigger": "Người dùng chọn thao tác hoặc tra cứu liên quan",
+    "precondition": "Đã đăng nhập, có quyền kho; dữ liệu chủ sở hữu hoặc bảo hành có nguồn theo schema/contract mới.",
+    "postcondition": "Cùng SKU/vị trí có 10 hàng doanh nghiệp và 5 ký gửi: vật lý 15, sở hữu 10, ký gửi 5; không hòa tồn; thiếu policy xuất/chuyển quyền thì từ chối có lý do.",
+    "minimal_guarantee": "Không hòa tồn/chủ sở hữu, không làm lộ dữ liệu hoặc bịa thời hạn bảo hành; lỗi rollback toàn bộ.",
+    "basic_steps": [
+      "Xác thực người dùng và kiểm tra quyền kho/dữ liệu.",
+      "Đọc dữ liệu có nguồn và kiểm tra điều kiện nghiệp vụ theo contract được chốt.",
+      "Trả kết quả phân biệt rõ các trạng thái; thao tác làm đổi tồn phải dùng application service và transaction có audit/idempotency."
+    ],
+    "alternatives": [
+      {
+        "at": "Kiểm tra dữ liệu",
+        "condition": "Thiếu policy ký gửi hoặc thời hạn bảo hành",
+        "response": "Chặn thao tác ký gửi chưa được phép; bảo hành trả Chưa xác định."
+      }
+    ],
+    "exceptions_detail": [
+      {
+        "at": "Kiểm tra quyền",
+        "condition": "Không có grant hoặc grant đã thu hồi",
+        "response": "Từ chối; không trả dữ liệu ngoài scope."
+      }
+    ],
+    "permission": "PENDING - BE04/BE01 phải đặc tả quyền, không mặc định cấp quyền mới",
+    "tables": "PENDING - BE02/TL04 cần thiết kế migration, không coi schema hiện tại đã đáp ứng",
+    "test": "T27",
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "nfr": [
+      "NFR01",
+      "NFR08"
+    ]
+  },
+  {
+    "id": "UC33",
+    "name": "Tra cứu nguồn nhập và bảo hành theo serial",
+    "actor": "Người vận hành kho / Kiểm soát",
+    "priority": "Must",
+    "status": "DRAFT - bổ sung theo Q02; cần thiết kế chi tiết",
+    "source": "Tech lead xác nhận Q02 ngày 02/10/2026",
+    "summary": "Tra serial của thiết bị để biết NCC, receipt, ngày nhập và tình trạng bảo hành dựa trên dữ liệu thời hạn có nguồn.",
+    "scope": "WMS desktop + API nội bộ",
+    "trigger": "Người dùng chọn thao tác hoặc tra cứu liên quan",
+    "precondition": "Đã đăng nhập, có quyền kho; dữ liệu chủ sở hữu hoặc bảo hành có nguồn theo schema/contract mới.",
+    "postcondition": "Serial có dữ liệu bảo hành trả đúng trạng thái theo ngày tra cứu; thiếu mốc/thời hạn trả Chưa xác định; không tự suy thời hạn hoặc lộ dữ liệu ngoài quyền kho/giá.",
+    "minimal_guarantee": "Không hòa tồn/chủ sở hữu, không làm lộ dữ liệu hoặc bịa thời hạn bảo hành; lỗi rollback toàn bộ.",
+    "basic_steps": [
+      "Xác thực người dùng và kiểm tra quyền kho/dữ liệu.",
+      "Đọc dữ liệu có nguồn và kiểm tra điều kiện nghiệp vụ theo contract được chốt.",
+      "Trả kết quả phân biệt rõ các trạng thái; thao tác làm đổi tồn phải dùng application service và transaction có audit/idempotency."
+    ],
+    "alternatives": [
+      {
+        "at": "Kiểm tra dữ liệu",
+        "condition": "Thiếu policy ký gửi hoặc thời hạn bảo hành",
+        "response": "Chặn thao tác ký gửi chưa được phép; bảo hành trả Chưa xác định."
+      }
+    ],
+    "exceptions_detail": [
+      {
+        "at": "Kiểm tra quyền",
+        "condition": "Không có grant hoặc grant đã thu hồi",
+        "response": "Từ chối; không trả dữ liệu ngoài scope."
+      }
+    ],
+    "permission": "PENDING - BE04/BE01 phải đặc tả quyền, không mặc định cấp quyền mới",
+    "tables": "PENDING - BE02/TL04 cần thiết kế migration, không coi schema hiện tại đã đáp ứng",
+    "test": "T28",
+    "rules": [
+      "BR01",
+      "BR02"
+    ],
+    "nfr": [
+      "NFR01",
+      "NFR08"
     ]
   }
 ]

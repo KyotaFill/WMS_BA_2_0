@@ -1,6 +1,6 @@
-# Danh mục yêu cầu - 47 mục
+# Danh mục yêu cầu - 49 mục (bổ sung FR32–FR33 theo Q02/TL01)
 
-Nguồn chuẩn chỉnh sửa: requirements.json. Tất cả đang Draft, chưa baseline.
+Nguồn chuẩn chỉnh sửa: requirements.json. Vòng đời đặc tả vẫn Draft; đầu vào triển khai hiện hành theo [baseline TL01](../SCOPE_BASELINE.md). Việc tiếp nhận quyết định không tự xác nhận ứng dụng đã được triển khai/kiểm thử hoặc được doanh nghiệp phê duyệt.
 
 ## GR01 / GR / Must
 
@@ -44,7 +44,7 @@ Tiêu chí nghiệm thu: Các nghiệp vụ lõi dùng API nội bộ; mất LAN
 
 ## TR02 / TR / Must
 
-Có phương án máy chủ Linux, Windows, macOS; nghiệm thu từng tổ hợp OS/arch được chọn.
+Target bàn giao: server Ubuntu/Debian x64 và client Windows 10/11 x64; không bao gồm Mac. Distro/version cụ thể do QA07 chốt trước nghiệm thu.
 
 Chủ trì: IT/Tech lead. Nguồn: Yêu cầu người dùng; kiến trúc 1.1.
 
@@ -276,11 +276,13 @@ Tiêu chí nghiệm thu: Bốn mẫu chứng từ và hai tem; quét lại đư�
 
 ## FR27 / FR / Must
 
+Cập nhật đầu vào TL01 ngày 02/10/2026; trạng thái triển khai chưa thay đổi.
+
 Hệ thống phải hỗ trợ: Sao lưu và khôi phục.
 
-Chủ trì: Chủ nghiệp vụ của UC27. Nguồn: Hồ sơ WMS 1.1; cần stakeholder xác nhận.
+Chủ trì: Chủ nghiệp vụ của UC27. Nguồn: Quyết định Q05/Q07 của tech lead, 02/10/2026; xem SCOPE_BASELINE.md.
 
-Tiêu chí nghiệm thu: Bằng chứng restore; mục tiêu RPO 15 phút/RTO 4 giờ cần đo. Kiểm tra T09.
+Tiêu chí nghiệm thu: Bằng chứng restore; mục tiêu Q07 RPO <1 giờ, RTO <4 giờ; phải đo thực tế. Kiểm tra T09.
 
 ## FR28 / FR / Must
 
@@ -288,7 +290,7 @@ Hệ thống phải hỗ trợ: Cập nhật app đa hệ điều hành.
 
 Chủ trì: Chủ nghiệp vụ của UC28. Nguồn: Hồ sơ WMS 1.1; cần stakeholder xác nhận.
 
-Tiêu chí nghiệm thu: Nâng cấp không mất pending operations; server hỗ trợ N/N-1 đã test. Kiểm tra T23.
+Tiêu chí nghiệm thu: Nâng cấp Windows 10/11 x64 không mất pending operations; Linux server hỗ trợ N/N-1 phải có contract test. Mac ngoài phạm vi đợt này. Kiểm tra T23.
 
 ## FR29 / FR / Must
 
@@ -340,19 +342,23 @@ Tiêu chí nghiệm thu: T08: ngắt LAN trước/sau commit; UI không hiện P
 
 ## NFR04 / NFR / Must
 
-Mục tiêu phục hồi giao dịch RPO <=15 phút, RTO <=4 giờ.
+Cập nhật đầu vào TL01 ngày 02/10/2026; trạng thái triển khai chưa thay đổi.
 
-Chủ trì: IT + chủ nghiệp vụ. Nguồn: Kiến trúc 1.1 hoặc mục tiêu đề xuất BA 2.0.
+Mục tiêu phục hồi giao dịch RPO <1 giờ, RTO <4 giờ theo Q07.
 
-Tiêu chí nghiệm thu: Diễn tập T09 trên môi trường riêng, đo cả dữ liệu và thời gian; đây là mục tiêu cần duyệt.
+Chủ trì: IT + chủ nghiệp vụ. Nguồn: Quyết định Q05/Q07 của tech lead, 02/10/2026; xem SCOPE_BASELINE.md.
+
+Tiêu chí nghiệm thu: Diễn tập T09 trên môi trường riêng; đo mất dữ liệu và thời gian phục hồi, đối soát ledger/balance/serial; lưu bằng chứng. Mục tiêu đã được tech lead xác nhận, chưa có kết quả đạt.
 
 ## NFR05 / NFR / Must
 
-Tải nghiệm thu đề xuất: 30 người đồng thời, 50.000 SKU, 1 triệu dòng sổ, 200 dòng/phiếu.
+Cập nhật đầu vào TL01 ngày 02/10/2026; trạng thái triển khai chưa thay đổi.
 
-Chủ trì: IT + chủ nghiệp vụ. Nguồn: Kiến trúc 1.1 hoặc mục tiêu đề xuất BA 2.0.
+Tải đại diện theo Q05: 1 kho trung tâm/3 phân khu, tối đa 15 CCU, khoảng 20 GB dữ liệu trong 3 năm.
 
-Tiêu chí nghiệm thu: Đo trên cấu hình được ghi rõ; mục tiêu đề xuất p95 tra cứu <=2s, ghi sổ phiếu 200 dòng <=5s, không tính in/xuất nền; cần chủ hệ thống duyệt.
+Chủ trì: IT + chủ nghiệp vụ. Nguồn: Quyết định Q05/Q07 của tech lead, 02/10/2026; xem SCOPE_BASELINE.md.
+
+Tiêu chí nghiệm thu: T26 ghi cấu hình, dữ liệu, p95/p99 và kết quả chạy 15 CCU. Bộ stress test 50.000 SKU/1 triệu moves tách khỏi số liệu thực tế. Ngưỡng latency API và dung lượng giữ hồ sơ 5 năm cần xác nhận riêng; không lấy SLA xử lý phiếu <15 phút làm latency API.
 
 ## NFR06 / NFR / Must
 
@@ -377,3 +383,19 @@ Mọi thay đổi mô hình phải giữ truy vết yêu cầu và tương thíc
 Chủ trì: IT + chủ nghiệp vụ. Nguồn: Kiến trúc 1.1 hoặc mục tiêu đề xuất BA 2.0.
 
 Tiêu chí nghiệm thu: Migration dry-run + rollback/recovery plan; FR/UC/test không có tham chiếu mồ côi.
+
+## FR32 / FR / Must
+
+Hàng ký gửi nằm trong kho nhưng chưa thuộc sở hữu doanh nghiệp; số lượng và truy vết phải tách theo chủ sở hữu trong mọi luồng tồn.
+
+Chủ trì: Tech lead / Chủ kho. Nguồn: xác nhận Q02 bổ sung ngày 02/10/2026. Trạng thái: Draft, thiết kế chi tiết chưa hoàn tất.
+
+Tiêu chí nghiệm thu: Cùng SKU/vị trí có 10 hàng doanh nghiệp và 5 ký gửi: vật lý 15, sở hữu 10, ký gửi 5; không hòa tồn; thiếu policy xuất/chuyển quyền thì từ chối có lý do. Kiểm tra T27.
+
+## FR33 / FR / Must
+
+Tra serial của thiết bị để biết NCC, receipt, ngày nhập và tình trạng bảo hành dựa trên dữ liệu thời hạn có nguồn.
+
+Chủ trì: Tech lead / Chủ kho. Nguồn: xác nhận Q02 bổ sung ngày 02/10/2026. Trạng thái: Draft, thiết kế chi tiết chưa hoàn tất.
+
+Tiêu chí nghiệm thu: Serial có dữ liệu bảo hành trả đúng trạng thái theo ngày tra cứu; thiếu mốc/thời hạn trả Chưa xác định; không tự suy thời hạn hoặc lộ dữ liệu ngoài quyền kho/giá. Kiểm tra T28.
