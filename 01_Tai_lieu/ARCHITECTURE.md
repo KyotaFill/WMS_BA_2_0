@@ -2,13 +2,15 @@
 
 WMS-DD-003 • Phiên bản 1.0 • 26/09/2026 • Bản thiết kế cơ sở để phát triển và thẩm định nghiệp vụ
 
+**Đầu vào hiện hành:** [baseline TL01 ngày 02/10/2026](SCOPE_BASELINE.md). Số liệu ngân sách/tải/RPO ở dưới đã được đồng bộ; target bàn giao được chốt là server Ubuntu/Debian x64 và client Windows 10/11 x64; bỏ Mac. Các phương án Windows server/macOS dưới đây là tham khảo lịch sử, không phải cam kết hỗ trợ trong đợt này.
+
 ## 1. Các điều chỉnh đã tiếp nhận
 
 UI Tkinter/ttk; giao tiếp qua LAN; máy chủ có phương án Linux, Windows và macOS. Một PostgreSQL trung tâm là nguồn chính thức. Không đặt file SQLite hay thư mục dữ liệu PostgreSQL lên SMB/NFS để nhiều desktop cùng mở. Không thiết kế ba server độc lập cùng ghi rồi tự đồng bộ số tồn.
 
-Dự phòng khoảng 50 triệu được ghi riêng, thay mức dự phòng 20 triệu trong bản trước. Chưa có xác nhận đây là thay 20 triệu hay bổ sung ngoài trần 200 triệu: nếu giữ 180 triệu phần triển khai thì tổng cơ học 230 triệu; nếu 200 triệu là phần triển khai mới thì tổng 250 triệu. Thiết kế không tự coi toàn bộ 50 triệu là chi phí đã duyệt và không tự tăng phạm vi ERP.
+Q01 đã xác nhận 200 triệu chưa gồm dự phòng 50 triệu, tổng số học 250 triệu. Phân bổ và phê duyệt chi thực tế cần bằng chứng sponsor; không tự tăng phạm vi ERP từ dự phòng.
 
-Giữ phạm vi một doanh nghiệp, 5 kho, 100 tài khoản, 30 người đồng thời, 50.000 SKU, 1 triệu dòng sổ, 200 dòng/phiếu; đây là tải kiểm thử đề xuất, chưa là kết quả benchmark. Giữ 8 báo cáo, 4 mẫu in, 2 tem. Multi-company/3PL, giá vốn kế toán, RFID, PDA/native mobile và ghi sổ offline độc lập là hướng mở rộng riêng.
+Phạm vi vận hành Q05: một doanh nghiệp, một kho trung tâm/ba phân khu, tối đa 15 người đồng thời, khoảng 20 GB trong ba năm. Bộ dữ liệu cũ 5 kho/100 tài khoản/30 đồng thời/50.000 SKU/1 triệu dòng sổ/200 dòng mỗi phiếu chỉ là bộ thử sức tải riêng, chưa phải quy mô thực tế hoặc kết quả benchmark. Giữ 8 báo cáo, 4 mẫu in, 2 tem. Multi-company/3PL, giá vốn kế toán, RFID, PDA/native mobile và ghi sổ offline độc lập là hướng mở rộng riêng.
 
 ## 2. Kiến trúc triển khai qua LAN
 
@@ -48,7 +50,7 @@ R01 tồn theo vị trí: physical, eligible, reserved, available theo SKU/base 
 
 Chọn chính xác OS/version/arch server và client trước khi khóa lịch. Cùng một server được thử với client Windows/Linux/macOS nếu doanh nghiệp cần cả ba. Server mỗi OS được chạy bộ integration, service restart, backup/restore, đường dẫn Unicode, TLS/firewall và file permissions. Không chỉ thử app mở cửa sổ.
 
-Mục tiêu kế thừa: RPO giao dịch <=15 phút, RTO <=4 giờ, tệp đính kèm RPO 24 giờ, backup lưu 30 ngày là giả định. Base backup + WAL/PITR cần diễn tập trên môi trường khác. Không tuyên bố SLA hay HA từ một máy chủ. Tuần 24/240 ngày công không tự giữ nguyên khi thêm build/test ba OS; dùng dự phòng sau khi ước lượng hạng mục thực tế.
+Mục tiêu Q07: RPO giao dịch <1 giờ, RTO <4 giờ. Tệp đính kèm RPO 24 giờ và chu kỳ backup 30 ngày vẫn là giả định cần xác nhận riêng. Q08 yêu cầu giữ hồ sơ nghiệp vụ tối thiểu năm năm; chu kỳ backup không thay thế yêu cầu lưu hồ sơ. Base backup + WAL/PITR cần diễn tập trên môi trường khác. Không tuyên bố SLA hay HA từ một máy chủ. Tuần 24/240 ngày công không tự giữ nguyên khi thêm build/test ba OS; dùng dự phòng sau khi ước lượng hạng mục thực tế.
 
 ## 8. Cách dùng bộ file
 
@@ -57,3 +59,7 @@ Mục tiêu kế thừa: RPO giao dịch <=15 phút, RTO <=4 giờ, tệp đính
 03_So_do/00_Tong_hop/WMS_Design.drawio: mở và sửa offline bằng diagrams.net Desktop, mỗi bảng một trang ERD chi tiết, cùng các trang class/usecase đã tách đường nối. SVG dùng xem trong trình duyệt. PlantUML .puml là nguồn class/usecase/state/sequence có thể sửa. 03_So_do/00_Tong_hop/Diagram_Atlas.pdf chứa các sơ đồ vector, có thể zoom. Tài liệu chính và USE_CASES/RBAC/INVARIANTS bổ sung ngữ nghĩa mà ERD không thể biểu diễn.
 
 Mau_nhap_lieu_WMS.xlsx và CSV templates dùng nhập dữ liệu. CSV examples chỉ minh họa. File API có thể import vào công cụ OpenAPI nhưng chưa đại diện server đang chạy. Bộ QA là acceptance specification, không phải báo cáo test ứng dụng đã pass.
+
+## 9. Khoảng trống mô hình theo Q02 ngày 02/10/2026
+
+Thiết bị điện tử/IT/văn phòng dùng serial hoặc lot theo SKU; thêm tra cứu bảo hành serial và hàng ký gửi theo FR32/FR33. Mô hình 56 bảng hiện tại chưa có chiều chủ sở hữu tồn kho; không thể phân biệt an toàn hàng doanh nghiệp và hàng ký gửi chỉ bằng ghi chú/JSONB. BE02/TL04 phải thiết kế migration, khóa và truy vấn theo chủ sở hữu, đảm bảo tất cả luồng reservation/post/count/import/report dùng cùng chiều. Contract quyền xuất và chuyển quyền ký gửi cần policy được chốt trước bật luồng. T27/T28 hiện là đặc tả chưa chạy. Không thay SQL trong TL01 để giả vờ đã hiện thực phần mới.

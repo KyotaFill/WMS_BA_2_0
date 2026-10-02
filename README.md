@@ -6,6 +6,10 @@ Bộ hồ sơ phân tích nghiệp vụ (BA) và thiết kế kỹ thuật cho h
 
 **Trạng thái: DRAFT, chờ thẩm định nghiệp vụ.** Repository hiện có tài liệu, schema SQL, hợp đồng API, sơ đồ, mẫu nhập liệu và công cụ kiểm tra. **Chưa có backend FastAPI, ứng dụng Tkinter hoặc bộ cài WMS chạy được.** Các công nghệ trên là kiến trúc dự kiến; cài dependencies kiểm tra không khởi động ứng dụng.
 
+## Baseline triển khai hiện hành
+
+[Phạm vi và baseline TL01](01_Tai_lieu/SCOPE_BASELINE.md) tiếp nhận quyết định tech lead ngày 02/10/2026: hạn bàn giao 22/10/2026; 1 kho trung tâm/3 phân khu, 15 CCU; RPO <1 giờ, RTO <4 giờ. Q01–Q08 đã có câu trả lời và người theo dõi, đồng thời ghi rõ chi tiết cần làm rõ. Đây là baseline của nhóm đồ án, chưa phải biên bản nghiệm thu doanh nghiệp. Các số liệu khác trong hồ sơ lịch sử được xử lý theo baseline này.
+
 ## Mục lục
 
 - [Phạm vi nghiệp vụ](#phạm-vi-nghiệp-vụ)
@@ -29,7 +33,7 @@ Bộ hồ sơ phân tích nghiệp vụ (BA) và thiết kế kỹ thuật cho h
 - Phê duyệt, kiểm kê, khóa kỳ, audit và phân quyền theo kho.
 - Nhập liệu theo staging/preview/commit; 8 báo cáo, 4 mẫu in, 2 loại tem trong phạm vi thiết kế.
 
-Quy mô **đề xuất để kiểm thử**: một doanh nghiệp, 5 kho, 100 tài khoản, 30 người đồng thời, 50.000 SKU, 1 triệu dòng sổ và tối đa 200 dòng/phiếu. Đây chưa phải kết quả benchmark. Multi-company/3PL, giá vốn kế toán, RFID, mobile native và ghi sổ offline nằm ngoài phạm vi cơ sở.
+Quy mô được tech lead chốt: **1 kho trung tâm với 3 phân khu, tối đa 15 người đồng thời, khoảng 20 GB trong 3 năm**. Bộ tải cũ 5 kho/30 người/50.000 SKU/1 triệu dòng sổ/200 dòng mỗi phiếu là cấu hình thử sức tải, không phải quy mô thực tế đã xác nhận hoặc kết quả benchmark. Multi-company/3PL, giá vốn kế toán, RFID, mobile native và ghi sổ offline nằm ngoài phạm vi cơ sở.
 
 ## Kiến trúc dự kiến
 
@@ -51,13 +55,13 @@ Chi tiết: [ARCHITECTURE.md](01_Tai_lieu/ARCHITECTURE.md), [INVARIANTS.md](01_T
 
 | Đường dẫn | Nội dung |
 | --- | --- |
-| [01_Tai_lieu](01_Tai_lieu) | Tài liệu tổng 61 trang, BRD/SRS, 47 yêu cầu, 31 use case, quy tắc và hồ sơ kỹ thuật |
+| [01_Tai_lieu](01_Tai_lieu) | Tài liệu tổng 61 trang, BRD/SRS, 49 yêu cầu, 33 use case, quy tắc và hồ sơ kỹ thuật |
 | [02_CSDL](02_CSDL) | PostgreSQL DDL/seed, DBML, mô hình 56 bảng/355 cột/105 FK, SQLite local draft và truy vấn đối soát |
 | [03_So_do](03_So_do) | Atlas 91 trang, SVG, draw.io, PlantUML; ERD, class, use case, trạng thái, sequence, BPMN và mô hình khái niệm |
 | [04_Phan_quyen](04_Phan_quyen) | 10 vai trò, 53 quyền, 108 ánh xạ role-permission, policy và phạm vi quyền |
 | [05_API](05_API) | OpenAPI 3.0.3 gồm 16 paths lõi; bảng coverage theo use case |
 | [06_Nhap_lieu](06_Nhap_lieu) | Excel, 14 CSV templates, 22 dòng ví dụ và validator offline |
-| [07_Kiem_tra](07_Kiem_tra) | Báo cáo kiểm tra, truy vết và đặc tả acceptance T01–T26 |
+| [07_Kiem_tra](07_Kiem_tra) | Báo cáo kiểm tra, truy vết và đặc tả acceptance T01–T28 |
 | [scripts](scripts) | Kiểm tra artifact/PostgreSQL và cập nhật ZIP/checksum |
 | [tests](tests) | Test hồi quy CSV và SQL smoke test |
 | [.github/workflows/validate.yml](.github/workflows/validate.yml) | CI kiểm tra artifact, CSV và SQL trên PostgreSQL 15/16 |
@@ -158,9 +162,9 @@ Lần rà soát ngày **27/09/2026**: 12 test CSV đạt; JSON/CSV/XML, OpenAPI 
 
 Repository hiện thuộc **TEAM-DEV-FIVE**. Sau khi chuyển repo, CI đã khởi chạy được; [lần chạy 36308545818](https://github.com/TEAM-DEV-FIVE/WMS_BA_2_0/actions/runs/36308545818) xác nhận hai job PostgreSQL 15/16 đạt và phát hiện thiếu đường dẫn cache cho `requirements-dev.txt`. Cấu hình cache đã được bổ sung; xem badge đầu trang để biết kết quả toàn bộ workflow trên commit mới nhất. Lỗi billing của lần push đầu tại tài khoản cũ được lưu trong báo cáo lịch sử.
 
-Chưa triển khai hoặc nghiệm thu API/Tkinter, concurrency của posting service, benchmark, máy quét/in, backup/restore hay ba hệ điều hành đích. `acceptance_tests.csv` là **đặc tả T01–T26 chưa chạy ở mức ứng dụng**. Các báo cáo v1.x và BA trước đây là lịch sử; số liệu/trạng thái trong đó cần đọc theo phiên bản.
+Chưa triển khai hoặc nghiệm thu API/Tkinter, concurrency của posting service, benchmark, máy quét/in, backup/restore hay ba hệ điều hành đích. `acceptance_tests.csv` là **đặc tả T01–T28 chưa chạy ở mức ứng dụng**; T27/T28 bổ sung cho ký gửi và tra cứu bảo hành theo Q02. Các báo cáo v1.x và BA trước đây là lịch sử; số liệu/trạng thái trong đó cần đọc theo phiên bản.
 
-Q01–Q08 còn mở: ngân sách/dự phòng, ngành hàng/tracking, As-Is, người duyệt, tải thực tế, OS/thiết bị, KPI/RPO/RTO và chính sách biểu mẫu/lưu hồ sơ. Những điểm này cần xác nhận trước baseline nghiệp vụ và triển khai production.
+Q01–Q08 đã được tiếp nhận từ bảng quyết định của tech lead; xem [baseline TL01](01_Tai_lieu/SCOPE_BASELINE.md) và [sổ câu hỏi](01_Tai_lieu/BA/open_questions.json) để phân biệt câu trả lời, người theo dõi và chi tiết cần làm rõ trước triển khai/production.
 
 ## Lộ trình triển khai
 

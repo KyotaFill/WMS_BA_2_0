@@ -1,20 +1,23 @@
-# Quyết định và giả định cần xác nhận
+# Quyết định và giả định triển khai
 
-## Đã tiếp nhận
+Cập nhật 02/10/2026 theo [baseline TL01](SCOPE_BASELINE.md) và [sổ Q01–Q08](BA/open_questions.json). Nguồn là bảng quyết định do tech lead cung cấp; không ghi thay phê duyệt doanh nghiệp.
 
-Tkinter/ttk, server tập trung, dùng LAN, dự phòng khoảng 50 triệu, phương án triển khai Linux/Windows/macOS. Phạm vi nghiệp vụ giữ theo hai tài liệu trước. Bộ này thiết kế cả server portability và desktop portability để không bỏ sót cách hiểu, nhưng phiên bản/kiến trúc cụ thể chưa được xác nhận.
+## Đã tiếp nhận từ tech lead
 
-## Đề xuất mặc định để có thể bắt đầu
+- Q01: 200 triệu chưa gồm 50 triệu dự phòng; tổng số học 250 triệu, chưa có bảng phân bổ được sponsor duyệt.
+- Q03/Q04: Thủ kho và Kế toán kho ký, được duyệt thay phiên không giới hạn giá trị phiếu; vẫn chặn tự duyệt và kiểm tra grant theo kho.
+- Q05: một kho trung tâm/ba phân khu, tối đa 15 CCU, khoảng 20 GB trong ba năm.
+- Q06: server Ubuntu/Debian x64; client Windows 10/11 x64, máy in tem nhiệt USB/LAN, máy quét 1D/2D HID; tech lead đã bỏ Mac khỏi phạm vi. OS/version/arch và model thiết bị phải được chốt trước test target.
+- Q07: sai lệch tồn <0,5%, xử lý phiếu <15 phút; RPO <1 giờ, RTO <4 giờ. Đây là mục tiêu nghiệm thu, chưa có số đo.
+- Q08: tham chiếu mẫu TT 133/200, giữ dữ liệu tối thiểu năm năm, ẩn dữ liệu giá theo quyền. Cần file mẫu/policy được người phụ trách kế toán xác nhận; không mở rộng thành tính giá vốn kế toán.
+- Hạn bàn giao đồ án: 22/10/2026. Lịch chi tiết nằm ở các issue và bảng điều hành của nhóm.
 
-Không xuất âm; không nhận vượt nguồn; không ghi sổ offline; không tự duyệt; hai bước duyệt tối đa. LOT và SERIAL loại trừ nhau trong v1. Hạn dùng theo lô; serial số nguyên. Một dòng serial tương ứng một stock_item. Chuyển kho dùng transit theo lệnh. Kiểm kê khóa vị trí, yêu cầu xử lý hết giữ chỗ trước freeze. Backdate chỉ trong kỳ mở; user không được tự chọn ngày để xuất hàng đã hết hạn.
+## Giả định kỹ thuật kế thừa để phát triển
 
-## Cần doanh nghiệp chốt trước production
+Tkinter/ttk → HTTPS LAN → FastAPI → PostgreSQL trung tâm. Không xuất âm, không nhận vượt nguồn, không ghi sổ offline, không tự duyệt; tối đa hai bước duyệt theo thiết kế hiện có. LOT và SERIAL loại trừ nhau, hạn dùng theo lô, serial số nguyên. Một dòng serial ứng với một stock_item. Chuyển kho dùng transit; kiểm kê khóa vị trí sau khi xử lý giữ chỗ; backdate trong kỳ mở.
 
-- Dự phòng 50 thay 20 hay bổ sung ngoài 200; chi phí thiết bị/chứng thư/OS/hạ tầng/bảo hành tách thế nào.
-- Chính xác server OS/version/arch và client OS/version/arch; có máy Mac thật và Windows runner để nghiệm thu không.
-- Ngành hàng; độ lẻ mỗi UOM; có cần đồng thời lot + serial, trọng lượng biến thiên hoặc nhiều chủ hàng không.
-- Vai trò thực tế, người duyệt độc lập, ngưỡng đếm lại, quy trình cấp quyền và ngoại lệ hàng trả.
-- Các kho cùng mạng hay kết nối riêng; thiết bị HID, máy in/driver và khổ tem.
-- Thời điểm cutover, nguồn dữ liệu, người chịu trách nhiệm làm sạch, cửa sổ bảo trì và mục tiêu khôi phục.
+Q02 đã làm rõ ngành điện tử/IT/văn phòng, serial theo thiết bị và lot theo đợt linh kiện, có hàng ký gửi và tra cứu bảo hành serial. FR32/FR33 và T27/T28 mô tả phần bổ sung; schema chưa hỗ trợ quyền sở hữu hàng ký gửi và cần CR/migration. Các bất biến [INVARIANTS.md](INVARIANTS.md) tiếp tục áp dụng. Thay đổi tracking/owner hàng/quyền phải có CR và test, triển khai theo yêu cầu mới có truy vết.
 
-Các điểm chưa chốt là input cho cấu hình/ước lượng, không là lý do thiết kế bỏ kiểm soát đúng tồn.
+## Theo dõi chi tiết và bằng chứng
+
+Owner nội bộ Q01–Q05/Q07: Trần Trung Kiên; Q06/Q08: Lê Ngọc Quỳnh Khanh. Hạn theo dõi 04/10/2026; không phải ngày doanh nghiệp cam kết. Giữ nguyên câu trả lời và nguồn trong JSON; cập nhật follow-up khi có thông tin. Mọi quy mô, hiệu năng, restore, thiết bị và OS phải được kiểm thử, không suy ra đạt chỉ từ lựa chọn kiến trúc.

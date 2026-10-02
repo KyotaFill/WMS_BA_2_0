@@ -1,13 +1,13 @@
 # BRD - Bối cảnh và mục tiêu thay đổi
 ## 1. Business need và phạm vi
-Doanh nghiệp cần một hệ thống quản lý kho nội bộ, có nhiều nghiệp vụ hơn nhập/xuất cơ bản và có thể mở rộng. Người dùng đã nêu LAN, môi trường Linux/Windows/macOS và dự phòng khoảng 50 triệu. Mức dự án khoảng 200 triệu được kế thừa hồ sơ trước; cách cộng dự phòng vào tổng ngân sách chưa chốt. Không tự suy diễn khoản dự phòng thành ngân sách tính năng mới.
+Doanh nghiệp cần một hệ thống quản lý kho nội bộ, có nhiều nghiệp vụ hơn nhập/xuất cơ bản và có thể mở rộng. Người dùng chốt LAN, Linux server/Windows client (bỏ Mac theo Q06 ngày 02/10) và dự phòng 50 triệu. Theo Q01 được tech lead xác nhận ngày 02/10/2026, 200 triệu chưa bao gồm dự phòng 50 triệu; tổng số học là 250 triệu.
 
-Phạm vi cơ sở kế thừa gồm danh mục, mua/bán phục vụ kho, nhận/cất/giữ/soạn/xuất, chuyển kho, trả hàng, kiểm kê, điều chỉnh, kỳ, báo cáo, import, in, quyền và vận hành. Giới hạn kiểm thử 5 kho, 100 tài khoản, 30 đồng thời là đề xuất. Ngoài cơ sở: giá vốn kế toán chuẩn, công nợ, sản xuất đầy đủ, đa pháp nhân/3PL, mobile native, RFID và ghi sổ offline độc lập.
+Phạm vi cơ sở kế thừa gồm danh mục, mua/bán phục vụ kho, nhận/cất/giữ/soạn/xuất, chuyển kho, trả hàng, kiểm kê, điều chỉnh, kỳ, báo cáo, import, in, quyền và vận hành. Q05 xác nhận 1 kho trung tâm/3 phân khu, tối đa 15 CCU và khoảng 20 GB/3 năm; dữ liệu thử sức tải lớn hơn phải ghi là giả lập. Ngoài cơ sở: giá vốn kế toán chuẩn, công nợ, sản xuất đầy đủ, đa pháp nhân/3PL, mobile native, RFID và ghi sổ offline độc lập.
 
 ## 2. OSCAR (Ch3 PDF 6-9)
 - Objectives: tồn có truy vết, giảm sai lệch, xử lý giao dịch nhất quán, phân quyền rõ.
-- Scope: một doanh nghiệp và các nghiệp vụ trong 31 UC (28 nhóm cũ + 3 tác vụ phân rã).
-- Constraints: LAN; hỗ trợ đa nền tảng theo ma trận nghiệm thu; ngân sách cuối cùng và thời hạn còn cần chốt.
+- Scope: một doanh nghiệp, 31 UC cơ sở và UC32–UC33 bổ sung về hàng ký gửi/tra cứu bảo hành serial theo Q02.
+- Constraints: LAN; hỗ trợ đa nền tảng theo ma trận nghiệm thu; hạn đồ án 22/10/2026; ngân sách cơ sở/dự phòng theo Q01, phân bổ và phê duyệt chi thực tế còn cần bằng chứng.
 - Authority: sponsor duyệt phạm vi/chi phí; chủ kho duyệt quy trình; kiểm soát duyệt quy tắc sổ; IT duyệt vận hành. Tên người và ủy quyền chưa được cung cấp.
 - Resources: cần đại diện kho/mua/bán/kiểm soát/IT, dữ liệu mẫu, môi trường pilot, máy quét/máy in; chưa giả định thiết bị đã có.
 
@@ -15,8 +15,8 @@ Phạm vi cơ sở kế thừa gồm danh mục, mua/bán phục vụ kho, nhậ
 Vision đề xuất: vận hành kho có dữ liệu tin cậy và truy vết được. Mission: phục vụ nhận, lưu, cấp và kiểm soát hàng đúng phạm vi trách nhiệm. Objectives xem B01-B04 dưới đây. Strategy: thống nhất chứng từ và một nguồn sổ, triển khai pilot rồi mở rộng. Tactics: chuẩn hóa SKU/vị trí, nhập đầu kỳ có ký, đào tạo theo vai trò, đối soát và diễn tập phục hồi.
 
 ## 4. Lợi ích và đo lường (Ch1 PDF 27-32; Ch2 PDF 27)
-- B01 - Độ chính xác tồn: tỷ lệ dòng SKU/lô/vị trí khớp kiểm kê; baseline chưa đo. Đề xuất mục tiêu >=99% sau 30 ngày pilot; chủ đo: quản lý kho. Không cộng đơn vị hàng khác nhau.
-- B02 - Tốc độ xử lý: trung vị thời gian từ bắt đầu nhận đến receipt ghi sổ; baseline lấy từ quan sát. Đề xuất giảm 20% so baseline ở cùng loại phiếu; chủ đo: kho.
+- B01 - Độ chính xác tồn: tỷ lệ dòng SKU/lô/vị trí khớp kiểm kê; baseline chưa đo. Q07 chốt mục tiêu sai lệch <0,5%; mẫu số/cách đo cần được ghi trong kế hoạch nghiệm thu trước đo; chủ đo: quản lý kho. Không cộng đơn vị hàng khác nhau.
+- B02 - Tốc độ xử lý: trung vị thời gian từ bắt đầu nhận đến receipt ghi sổ; baseline lấy từ quan sát. Q07 chốt xử lý phiếu <15 phút; điểm bắt đầu/kết thúc, thời gian chờ duyệt và tập phiếu đo phải được thống nhất; chủ đo: kho.
 - B03 - Kiểm soát: 100% lần điều chỉnh có nguồn, lý do, người duyệt hợp lệ; nguồn đo audit và phiếu; chủ đo: kiểm soát.
 - B04 - Khôi phục: đo RPO/RTO trong diễn tập, mục tiêu NFR04; chủ đo IT.
 

@@ -3,6 +3,10 @@ Bản 2.0, ngày 27/09/2026. Căn cứ: 8 chương do người dùng cung cấp,
 
 Đây là bản thiết kế theo phương pháp và ký pháp trong giáo trình, trạng thái DRAFT để thẩm định. Không phải chứng nhận tuân thủ một tiêu chuẩn quốc tế và không phải biên bản khảo sát doanh nghiệp. Giáo trình mô tả nhiều kỹ thuật để lựa chọn theo tình huống; không yêu cầu nhét mọi kỹ thuật vào mọi dự án.
 
+## Baseline triển khai ngày 02/10/2026
+
+Đọc [SCOPE_BASELINE.md](../SCOPE_BASELINE.md) trước khi dùng số liệu cũ để triển khai. Tài liệu tiếp nhận câu trả lời Q01–Q08 của tech lead và tách phần còn cần làm rõ; không tự chuyển mọi requirement sang Implemented/Verified hoặc coi có phê duyệt doanh nghiệp.
+
 ## Phân tầng hồ sơ
 - BRD: lý do thay đổi, mục tiêu, phạm vi, stakeholder, lợi ích, lựa chọn và rủi ro.
 - SRS: GR/TR/FR/NFR, quy tắc nghiệp vụ, use case, dữ liệu, tiêu chí nghiệm thu và quản lý thay đổi.
