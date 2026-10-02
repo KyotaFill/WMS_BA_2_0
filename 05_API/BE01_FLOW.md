@@ -12,6 +12,43 @@ Tài liệu này ghép các payload đã có trong `openapi_core.json` thành m�
 | 6. Post | `POST /receipts/{id}/post` với `expected_version=3`, `execution_key`, dòng hàng và `quantity_base="80.000000"`; response version 4, transaction ID và PO remaining `"20.000000"`. | Ví dụ `existingItem` và `newExpiringLot` trong OpenAPI. Hàng vào RECEIVING/QUARANTINE, chưa tự thành hàng tốt tại STORAGE. |
 | 7. Tra tồn | `GET /stock-ownership` minh họa cùng SKU/vị trí vật lý 15, doanh nghiệp 10, ký gửi 5. | **PROVISIONAL:** dữ liệu chủ sở hữu/quyền chờ BE02/TL04/BE04; API tra tồn thường chưa có. Không dùng ví dụ này để khẳng định receipt đã cập nhật tồn. |
 
+## Payload mock ở ranh giới chưa có contract
+
+Ba cặp dưới đây chỉ giúp desktop và QA dựng **mock có gắn nhãn** cho luồng liên tục. Tên endpoint/field và giá trị token chưa được các owner tương ứng duyệt, nên không phải OpenAPI đã chốt hoặc bằng chứng API chạy. Khi BE03, BE05 và phần tra tồn giao contract thật, thay các mock này và chạy lại contract test với API thật.
+
+**Đăng nhập (BE03/#5, pending):**
+
+```json
+{
+  "request": {"method": "POST", "path": "/auth/login", "body": {"username": "receiver01", "password": "<mock-secret>"}},
+  "response_illustration": {"status": 200, "body": {"access_token": "<mock-token>", "token_type": "bearer", "expires_at": "2026-10-02T10:00:00+07:00"}}
+}
+```
+
+MFA challenge, refresh, revoke và mã lỗi do BE03 định nghĩa. Không ghi token thật vào fixture hoặc log.
+
+**Danh mục (BE05/#8, pending):**
+
+```json
+{
+  "request": {"method": "GET", "path_illustration": "/products?sku=SKU-001&limit=100"},
+  "response_illustration": {"status": 200, "body": {"items": [{"id": "30000000-0000-4000-8000-000000000001", "sku": "SKU-001", "base_uom_id": "40000000-0000-4000-8000-000000000001", "tracking": "LOT", "expiry_required": true}], "as_of": "2026-10-02T09:00:00+07:00", "next_cursor": null}}
+}
+```
+
+BE05 phải chốt tìm barcode, UOM revision, quyền và cursor. Client không được suy mã lô từ SKU.
+
+**Tra tồn thường sau post (API/chính sách đọc chưa chốt):**
+
+```json
+{
+  "request": {"method": "GET", "path_illustration": "<stock-read-endpoint>?stock_item_id=70000000-0000-4000-8000-000000000001"},
+  "response_illustration": {"status": 200, "body": {"stock_item_id": "70000000-0000-4000-8000-000000000001", "warehouse_id": "10000000-0000-4000-8000-000000000001", "physical_base": "80.000000", "available_base": "0.000000", "as_of": "2026-10-02T09:10:00+07:00"}}
+}
+```
+
+`available_base=0` ở ví dụ vì hàng vừa post còn ở RECEIVING/QUARANTINE, chưa có quality decision và move sang STORAGE. Giá trị thật phải do ledger/balance, quyền kho và trạng thái chất lượng quyết định; đây không phải API `/stock-ownership` của UC32.
+
 ## Lỗi và hồi phục
 
 - Nhập lô mới cho SKU yêu cầu hạn dùng: gửi `lot_code`, `manufactured_on`, `expires_on`. Thiếu `expires_on` trả `422 LOT_EXPIRY_REQUIRED`; metadata khác lô đã có trả `409 LOT_METADATA_CONFLICT`. Mẫu request và lỗi có tại `POST /receipts/{id}/post` trong OpenAPI.
