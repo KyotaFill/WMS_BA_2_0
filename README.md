@@ -73,7 +73,7 @@ Chi tiết: [ARCHITECTURE.md](01_Tai_lieu/ARCHITECTURE.md), [INVARIANTS.md](01_T
 2. [BRD](01_Tai_lieu/BA/01_BRD.md), [SRS](01_Tai_lieu/BA/03_SRS.md), [quy trình](01_Tai_lieu/BA/04_QUY_TRINH.md) và [use case](01_Tai_lieu/USE_CASES.md).
 3. [Kiến trúc](01_Tai_lieu/ARCHITECTURE.md), [bất biến giao dịch](01_Tai_lieu/INVARIANTS.md), [RBAC](04_Phan_quyen/RBAC.md) và [hợp đồng API](05_API/README.md).
 4. [Atlas sơ đồ PDF](03_So_do/00_Tong_hop/Diagram_Atlas.pdf), [mục lục sơ đồ](03_So_do/00_Tong_hop/diagram_index.md) và [từ điển dữ liệu](02_CSDL/data_dictionary.csv).
-5. [Báo cáo rà soát hiện tại](07_Kiem_tra/PROJECT_REVIEW.md) và [câu hỏi còn mở Q01–Q08](01_Tai_lieu/BA/open_questions.json).
+5. [Báo cáo rà soát hiện tại](07_Kiem_tra/PROJECT_REVIEW.md), [kế hoạch nghiệm thu](07_Kiem_tra/KE_HOACH_NGHIEM_THU.md) và [câu hỏi còn mở Q01–Q08](01_Tai_lieu/BA/open_questions.json).
 
 ## Thiết lập và kiểm tra nhanh
 
@@ -162,7 +162,7 @@ Lần rà soát ngày **27/09/2026**: 12 test CSV đạt; JSON/CSV/XML, OpenAPI 
 
 Repository hiện thuộc **TEAM-DEV-FIVE**. Sau khi chuyển repo, CI đã khởi chạy được; [lần chạy 36308545818](https://github.com/TEAM-DEV-FIVE/WMS_BA_2_0/actions/runs/36308545818) xác nhận hai job PostgreSQL 15/16 đạt và phát hiện thiếu đường dẫn cache cho `requirements-dev.txt`. Cấu hình cache đã được bổ sung; xem badge đầu trang để biết kết quả toàn bộ workflow trên commit mới nhất. Lỗi billing của lần push đầu tại tài khoản cũ được lưu trong báo cáo lịch sử.
 
-Chưa triển khai hoặc nghiệm thu API/Tkinter, concurrency của posting service, benchmark, máy quét/in, backup/restore hay ba hệ điều hành đích. `acceptance_tests.csv` là **đặc tả T01–T28 chưa chạy ở mức ứng dụng**; T27/T28 bổ sung cho ký gửi và tra cứu bảo hành theo Q02. Các báo cáo v1.x và BA trước đây là lịch sử; số liệu/trạng thái trong đó cần đọc theo phiên bản.
+Chưa triển khai hoặc nghiệm thu API/Tkinter, concurrency của posting service, benchmark, máy quét/in, backup/restore hay ba hệ điều hành đích. `acceptance_tests.csv` là **đặc tả T01–T28 chưa chạy ở mức ứng dụng**; T27/T28 bổ sung cho ký gửi và tra cứu bảo hành theo Q02; kế hoạch nghiệm thu chi tiết, metrics và fixtures tái lập được quy định tại [KE_HOACH_NGHIEM_THU.md](07_Kiem_tra/KE_HOACH_NGHIEM_THU.md). Các báo cáo v1.x và BA trước đây là lịch sử; số liệu/trạng thái trong đó cần đọc theo phiên bản.
 
 Q01–Q08 đã được tiếp nhận từ bảng quyết định của tech lead; xem [baseline TL01](01_Tai_lieu/SCOPE_BASELINE.md) và [sổ câu hỏi](01_Tai_lieu/BA/open_questions.json) để phân biệt câu trả lời, người theo dõi và chi tiết cần làm rõ trước triển khai/production.
 
